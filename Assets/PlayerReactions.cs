@@ -1,24 +1,30 @@
 using UnityEngine;
 
-public class Movement : MonoBehaviour
+public class PlayerReactions : MonoBehaviour
 {
     [SerializeField]
     private int speed = 5;
 
-    private PlayerController playerController;
     private CharacterController characterController;
     private Vector3 moveDirection = Vector3.zero;
 
     private void Awake()
     {
-        playerController = GetComponent<PlayerController>();
         characterController = GetComponent<CharacterController>();
     }
 
-    private void Update()
+    public void Move(Vector2 vector2)
     {
-        moveDirection = new Vector3(playerController.Move.x * speed, 0, playerController.Move.y * speed);
+        moveDirection = new Vector3(vector2.x * speed, 0, vector2.y * speed);
 
         characterController.Move(moveDirection * Time.deltaTime);
+    }
+
+    public void Fire(bool isFiring)
+    {
+        if (isFiring)
+        {
+            Debug.Log("BANG ur dead!");
+        }
     }
 }
