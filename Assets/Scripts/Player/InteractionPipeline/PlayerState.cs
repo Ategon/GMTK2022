@@ -20,6 +20,7 @@ public struct PlayerState : IData
     public MoveState MoveState;
     public float TimeLeftInCurrState;
 
+    public Vector3 dodgeDirection;
     public float LastDodgedTime;
 
     public Vector3 Velocity;

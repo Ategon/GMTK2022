@@ -35,31 +35,33 @@ public class PlayerMovementGenerator : IGenerator<PlayerInteractionState>
 
         // Modify the move speed based on the move state
         float moveSpeed;
+        Vector3 moveDirection;
         switch (data.PlayerState.MoveState)
         {
             case MoveState.Dodging:
-                // Lerp the dodge and walking speed based on the time left on the dodge
                 moveSpeed = data.EntityMovementSettings.DodgeSpeed;
+                moveDirection = data.PlayerState.dodgeDirection;
                 break;
             case MoveState.Crouch:
                 moveSpeed = data.EntityMovementSettings.CrouchSpeed;
+                moveDirection = new Vector3(data.PlayerState.Move.x, 0, data.PlayerState.Move.y);
                 break;
             case MoveState.Normal:
             default:
                 moveSpeed = data.EntityMovementSettings.WalkingSpeed;
+                moveDirection = new Vector3(data.PlayerState.Move.x, 0, data.PlayerState.Move.y);
                 break;
         }
 
-        data.PlayerState.MoveDirection = new Vector3(data.PlayerState.Move.x, 0, data.PlayerState.Move.y);
+        data.PlayerState.MoveDirection = moveDirection;
         data.PlayerState.MoveSpeed = moveSpeed;
     }
-
-
 
     private void HandleStates(ref PlayerInteractionState data)
     {
         if (data.PlayerState.Dodge && Time.time - data.PlayerState.LastDodgedTime >= data.EntityMovementSettings.DodgeCooldown)
         {
+            data.PlayerState.dodgeDirection = new Vector3(data.PlayerState.Move.x, 0, data.PlayerState.Move.y);
             data.PlayerState.MoveState = MoveState.Dodging;
             data.PlayerState.TimeLeftInCurrState = data.EntityMovementSettings.DodgeTime;
             data.PlayerState.LastDodgedTime = Time.time;
