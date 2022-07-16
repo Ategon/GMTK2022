@@ -51,7 +51,6 @@ public class ObjectPool
     // Called to get an instance of the prefab from the pool
     public GameObject Get()
     {
-        Debug.Log("Getting obj");
         // If no more inactive objects, add new objects to the stack and return the new object
         if (stack.Count == 0)
         {

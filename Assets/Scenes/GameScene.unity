@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 54947758}
   - component: {fileID: 54947761}
   - component: {fileID: 54947762}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -291,7 +291,7 @@ GameObject:
   - component: {fileID: 244168506}
   - component: {fileID: 244168505}
   - component: {fileID: 244168511}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -493,7 +493,28 @@ MonoBehaviour:
       VirtualCamera: {fileID: 0}
       CameraFollow: {fileID: 0}
       ScreenSize: {x: 0, y: 0}
-    PlayerTransform: {fileID: 244168510}
+    PlayerAttackState:
+      lastAttackedTime: 0
+      ShootDir: {x: 0, y: 0, z: 0}
+      equippedEffects: []
+    PlayerAttackSettings:
+      DicePrefab: {fileID: 797911412570339118, guid: 910f448e1605c4744ac08227079aed6e,
+        type: 3}
+      DiceEffects:
+      - {fileID: 11400000, guid: 4023b3cc14a5c284aaabc8988225d4b2, type: 2}
+      - {fileID: 11400000, guid: e9e093bac76a9a4449b6e21955288a15, type: 2}
+      - {fileID: 11400000, guid: 97df41b6d1cd6a542a17a6eed1a3f28a, type: 2}
+      StartingDiceEffectIndex: 0
+      AttackSpeed: 1
+    DiceAttackSettings:
+      AttackDamge: 5
+      Speed: 10
+      Lifetime: 1
+      Size: 1
+      CritChance: 10
+      CritDamageMultiplier: 1.5
+      SpinSpeedRange: {x: 0, y: 0}
+      SpinSlowDown: 0
 --- !u!1 &299506224
 GameObject:
   m_ObjectHideFlags: 0
@@ -698,7 +719,7 @@ GameObject:
   m_Component:
   - component: {fileID: 712311529}
   - component: {fileID: 712311530}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CinemachineVirtualCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1080,7 +1101,7 @@ GameObject:
   - component: {fileID: 1365628819}
   - component: {fileID: 1365628821}
   - component: {fileID: 1365628820}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: cm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1166,7 +1187,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1458417125}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1391,7 +1412,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1980182772}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CameraFollow
   m_TagString: Untagged
   m_Icon: {fileID: 0}

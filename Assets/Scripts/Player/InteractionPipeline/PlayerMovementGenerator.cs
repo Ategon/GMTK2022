@@ -76,5 +76,4 @@ public class PlayerMovementGenerator : IGenerator<PlayerInteractionState>
             data.PlayerState.MoveState = MoveState.Normal;
         }
     }
-
 }
