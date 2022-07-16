@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,6 +20,7 @@ public class MovementHandler : IHandler
     {
         HandleGravity();
         HandleStates();
+        HandlePause();
 
         // Modify the move speed based on the move state
         float moveSpeed;
@@ -40,6 +42,18 @@ public class MovementHandler : IHandler
         currState.moveDirection = new Vector3(inputData.Move.x, 0, inputData.Move.y);
 
         moveSettings.characterController.Move(currState.moveDirection * moveSpeed * Time.deltaTime + currState.velocity * Time.deltaTime);
+    }
+
+    private void HandlePause()
+    {
+        if (inputData.Pause)
+        {
+            GameObject canvas = GameObject.Find("Canvas");
+            if(canvas != null)
+            {
+                canvas.GetComponent<PauseMenu>().Pause();
+            }
+        }
     }
 
     private void HandleGravity()
