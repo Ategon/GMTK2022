@@ -18,7 +18,7 @@ public class TestInteractionPipeline : MonoBehaviour
         Generator gen0 = new Generator
         {
             NeverDone = false,
-            NotDoneTill = 1,
+            NotDoneTill = 0,
             TestString = "Test 0",
             TestInt = 0
         };
@@ -39,10 +39,11 @@ public class TestInteractionPipeline : MonoBehaviour
         };
         Handler handler = new Handler();
         Handler handerTwo = new Handler();
+        MaliciousHandler mHandler = new MaliciousHandler();
 
         gens.Add(gen0);
         gens.Add(gen1);
-        //gens.Add(gen2);
+        gens.Add(gen2);
 
         foreach (Generator gen in gens)
         {
@@ -51,6 +52,7 @@ public class TestInteractionPipeline : MonoBehaviour
 
         pipeline.AddHandler(handler);
         pipeline.AddHandler(handerTwo);
+        pipeline.AddHandler(mHandler);
     }
 
     private int lengthOfTest = 0;
