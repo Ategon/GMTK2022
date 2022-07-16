@@ -28,21 +28,6 @@ public class Dice : MonoBehaviour
         rb.angularVelocity = Vector3.zero;
     }
 
-    // To support the previous pipeline. Delete when deleting prev pipeline
-    public void Init(DiceSettingsOld _diceSettings, DiceEffectSettings[] _equippedDiceEffects, ObjectPool _dicePool, Vector3 throwDirection)
-    {
-        return;
-        //diceSettings = _diceSettings;
-        //equippedDiceEffects = _equippedDiceEffects;
-        //
-        //remainingLifetime = diceSettings.Lifetime;
-        //
-        //dicePool = _dicePool;
-        //
-        //rb.AddForce((throwDirection + Vector3.up * 0.5f) * diceSettings.Speed, ForceMode.VelocityChange);
-        //rb.angularVelocity = Random.onUnitSphere * Random.Range(diceSettings.SpinSpeedRange.x, diceSettings.SpinSpeedRange.y);
-    }
-
     public void Init(DiceAttackSettings _diceSettings, DiceEffectSettings[] _equippedDiceEffects, ObjectPool _dicePool, Vector3 throwDirection)
     {
         diceSettings = _diceSettings;
@@ -64,9 +49,9 @@ public class Dice : MonoBehaviour
 
         if (remainingLifetime < 0f)
         {
-            int chosenSide = Random.Range(0, DiceSettingsOld.numOfSides - 1);
-            print($"ChosenSide: {chosenSide}");
-            SpawnEffect(Random.Range(0, DiceSettingsOld.numOfSides - 1));
+            int chosenSide = Random.Range(0, DiceAttackSettings.numOfSides - 1);
+
+            SpawnEffect(Random.Range(0, DiceAttackSettings.numOfSides - 1));
 
             dicePool.Release(this.gameObject);
         }
