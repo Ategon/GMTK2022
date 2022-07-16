@@ -9,8 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3dc8ef67fe79dff4b80b45d88a2d700e, type: 3}
-  m_Name: TestDiceEffect
+  m_Script: {fileID: 11500000, guid: 240bb0df535b4fd4bb688e088f5aff71, type: 3}
+  m_Name: TestDiceEffect2
   m_EditorClassIdentifier: 
-  sprite: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
-  damage: 0
+  diceEffectPrefab: {fileID: 8472016150045437617, guid: d3b37bfe8ecaadc418bbd88976c98095,
+    type: 3}
+  damage: 20

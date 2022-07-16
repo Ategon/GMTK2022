@@ -11,11 +11,17 @@ public class PlayerAttackPipelineOld : IPipelineBehaviour
 
     private PlayerAttackHandlerOld attackHandler;
     private State currState;
+    private LoadoutState loadoutState;
 
+    // Attack state
     public class State : IInteractionData
     {
-        public DiceEffect[] effects = new DiceEffect[6];
         public float lastAttackedTime = 0f;
+    }
+
+    public class LoadoutState : IInteractionData
+    {
+        public DiceEffectSettings[] equippedEffects = new DiceEffectSettings[DiceSettingsOld.numOfSides];
     }
 
     private void Start()
@@ -25,10 +31,13 @@ public class PlayerAttackPipelineOld : IPipelineBehaviour
 
         inputPipeline = GetComponent<InputPipeline>();
 
+        settings.playerTransform = GetComponent<Transform>();
+
         data.Add("AttackSettings", settings); 
         data.Add("DiceSettings", diceSettings); 
         data.Add("InputData", inputPipeline.InputData);
         data.Add("CurrState", currState);
+        data.Add("LoadoutState", loadoutState);
 
         attackHandler.Init(data);
     }
