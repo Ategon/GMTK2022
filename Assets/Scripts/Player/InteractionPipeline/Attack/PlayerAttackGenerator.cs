@@ -28,6 +28,8 @@ public class PlayerAttackGenerator : IGenerator<PlayerInteractionState>
 
     public void Handle(ref PlayerInteractionState data)
     {
+        data.PlayerAttackState.throwTriggered = false;
+
         float timeBetweenAttacks = 1 / data.PlayerAttackSettings.AttackSpeed;
         if (data.PlayerState.Fire && Time.time - data.PlayerAttackState.lastAttackedTime >= timeBetweenAttacks)
         {
@@ -45,10 +47,13 @@ public class PlayerAttackGenerator : IGenerator<PlayerInteractionState>
 
                 data.PlayerAttackState.lastAttackedTime = Time.time;
 
+                data.PlayerAttackState.throwTriggered = true;
+
                 return;
             }
         }
 
         data.PlayerAttackState.ShootDir = Vector3.zero;
+
     }
 }

@@ -9,6 +9,8 @@ public struct PlayerAttackState
 
     public ObjectPool dicePool;
 
+    public bool throwTriggered;
+
     public DiceEffectSettings[] equippedEffects;
 }
 

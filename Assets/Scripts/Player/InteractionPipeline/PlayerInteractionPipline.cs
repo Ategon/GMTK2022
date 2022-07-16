@@ -38,6 +38,8 @@ public class PlayerInteractionPipline : MonoBehaviour
 
         InputReader inputReader = GetComponent<InputReader>();
 
+        PlayerVisuals playerVisuals = transform.Find("Visuals").GetComponent<PlayerVisuals>();
+
         pipeline.AddGenerator(inputReader);
         pipeline.AddGenerator(new GravityMovments());
         pipeline.AddGenerator(new PlayerMovementGenerator());
@@ -46,6 +48,7 @@ public class PlayerInteractionPipline : MonoBehaviour
         pipeline.AddHandler(new PlayerMovementHandler());
         pipeline.AddHandler(new PlayerCameraHandler());
         pipeline.AddHandler(new PlayerAttackHandler());
+        pipeline.AddHandler(playerVisuals.getHandler());
     }
 
     public void Update()
