@@ -21,7 +21,7 @@ public class PlayerDiceEffectLoadoutHandler : IHandler
 
     public void AddEffectToLoadout(DiceEffectSettings diceEffect, int diceNumber)
     {
-        if (loadoutState.equippedEffects[diceNumber] != null)
+        if (equippedEffects[diceNumber] != null)
             Debug.LogError($"Dice Number: {diceNumber} is already taken up by {diceEffect.diceEffectPrefab.name}");
         else
             loadoutState.equippedEffects[diceNumber] = diceEffect;

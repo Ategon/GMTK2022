@@ -10,6 +10,8 @@ public class PlayerAttackPipelineOld : IPipelineBehaviour
     private InputPipeline inputPipeline;
 
     private PlayerAttackHandlerOld attackHandler;
+    private PlayerDiceEffectLoadoutHandler loadoutHandler;
+
     private State currState;
     private LoadoutState loadoutState;
 
@@ -29,6 +31,8 @@ public class PlayerAttackPipelineOld : IPipelineBehaviour
     private void Start()
     {
         attackHandler = new PlayerAttackHandlerOld();
+        loadoutHandler = new PlayerDiceEffectLoadoutHandler();
+
         currState = new State();
         loadoutState = new LoadoutState();
 
@@ -43,10 +47,17 @@ public class PlayerAttackPipelineOld : IPipelineBehaviour
         data.Add("LoadoutState", loadoutState);
 
         attackHandler.Init(data);
+        loadoutHandler.Init(data);
     }
 
     private void Update()
     {
         attackHandler.Handle();
+    }
+
+    [ContextMenu("AddEffectTest")]
+    private void AddEffectTest()
+    {
+        loadoutHandler.AddEffectToLoadout(settings.DiceEffects[1], 3);
     }
 }
