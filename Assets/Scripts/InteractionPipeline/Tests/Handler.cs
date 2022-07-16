@@ -4,12 +4,12 @@ using UnityEngine;
 
 namespace DataPipeline.Test
 {
-    public class Handler : IHandler<TestData, TestDataReader>
+    public class Handler : IHandler<TestData>
     {
-        public void Handle(TestDataReader data)
+        public void Handle(in TestData data)
         {
-            Debug.Log("Test String: " + data.TestString);
-            Debug.Log("Test Int: " + data.TestInt);
+            Debug.Log("String: " + data.TestString);
+            Debug.Log("Int: " + data.TestInt);
         }
     }
 }
