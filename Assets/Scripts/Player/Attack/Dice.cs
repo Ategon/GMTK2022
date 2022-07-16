@@ -7,13 +7,17 @@ public class Dice : MonoBehaviour
     DiceSettingsOld diceSettings;
     float remainingLifetime;
     DiceEffectSettings[] equippedDiceEffects;
+
+    ObjectPool dicePool; // To return itself to the pool 
     
-    public void Init(DiceSettingsOld _diceSettings, DiceEffectSettings[] _equippedDiceEffects)
+    public void Init(DiceSettingsOld _diceSettings, DiceEffectSettings[] _equippedDiceEffects, ObjectPool _dicePool)
     {
         diceSettings = _diceSettings;
         equippedDiceEffects = _equippedDiceEffects;
 
         remainingLifetime = diceSettings.Lifetime;
+
+        dicePool = _dicePool;
     }
 
     private void Update()
@@ -26,7 +30,7 @@ public class Dice : MonoBehaviour
             print($"ChosenSide: {chosenSide}");
             SpawnEffect(Random.Range(0, DiceSettingsOld.numOfSides - 1));
 
-            Destroy(this.gameObject);
+            dicePool.Release(this.gameObject);
         }
     }
 
@@ -37,6 +41,7 @@ public class Dice : MonoBehaviour
         if (diceEffect == null)
             return;
 
+        
         // TODO (GnoxNahte): Replace with pool
         GameObject.Instantiate(diceEffect.diceEffectPrefab, transform.position, Quaternion.identity);
     }

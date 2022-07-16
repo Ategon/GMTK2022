@@ -17,6 +17,8 @@ public class PlayerAttackPipelineOld : IPipelineBehaviour
     public class State : IInteractionData
     {
         public float lastAttackedTime = 0f;
+
+        public ObjectPool dicePool;
     }
 
     public class LoadoutState : IInteractionData
@@ -28,6 +30,7 @@ public class PlayerAttackPipelineOld : IPipelineBehaviour
     {
         attackHandler = new PlayerAttackHandlerOld();
         currState = new State();
+        loadoutState = new LoadoutState();
 
         inputPipeline = GetComponent<InputPipeline>();
 

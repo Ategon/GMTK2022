@@ -18,6 +18,9 @@ public class PlayerAttackHandlerOld : IHandler
         loadoutState = (PlayerAttackPipelineOld.LoadoutState)data["LoadoutState"];
         inputData = (InputData)data["InputData"];
 
+        currState.dicePool = new ObjectPool();
+        currState.dicePool.InitPool("DicePool", attackSettings.DicePrefab, 30);
+
         loadoutState.equippedEffects[0] = attackSettings.DiceEffects[attackSettings.StartingDiceEffectIndex];
     }
 
@@ -26,10 +29,12 @@ public class PlayerAttackHandlerOld : IHandler
         float timeBetweenAttacks = 1 / attackSettings.AttackSpeed;
         if (inputData.Fire && Time.time - currState.lastAttackedTime >= timeBetweenAttacks)
         {
-            // TODO (GnoxNahte): Replace with pool
-            GameObject diceObj = GameObject.Instantiate(attackSettings.DicePrefab, attackSettings.playerTransform.position, Quaternion.identity);
+            GameObject diceObj = currState.dicePool.Get();
+            diceObj.SetActive(true);
+            diceObj.transform.position = attackSettings.playerTransform.position;
+            diceObj.transform.rotation = attackSettings.playerTransform.rotation;
             Dice dice = diceObj.GetComponent<Dice>();
-            dice.Init(diceSettings, loadoutState.equippedEffects);
+            dice.Init(diceSettings, loadoutState.equippedEffects, currState.dicePool);
             currState.lastAttackedTime = Time.time;
         }
     }
