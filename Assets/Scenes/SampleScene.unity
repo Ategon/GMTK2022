@@ -266,7 +266,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 794417300}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1980744312}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 06abda56fa5aa164d908c8266c2b90bd, type: 3}
@@ -1096,6 +1096,36 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1699442729}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1980744312 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7918230048587336569, guid: b6081640d2b130f448b8b4c788b86366,
+    type: 3}
+  m_PrefabInstance: {fileID: 794417300}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1980744319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1980744312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d101cfd22a3a579448f25409cd45646b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  settings:
+    DicePrefab: {fileID: 797911412570339118, guid: 910f448e1605c4744ac08227079aed6e,
+      type: 3}
+    DiceEffects: []
+    StartingDiceEffectIndex: 0
+    AttackSpeed: 0
+  diceSettings:
+    AttackDamge: 5
+    Lifetime: 1
+    Size: 1
+    CritChance: 10
+    CritDamageMultiplier: 1.5
 --- !u!1 &2070332401 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4705240731728215541, guid: b6081640d2b130f448b8b4c788b86366,
