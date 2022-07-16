@@ -505,16 +505,16 @@ MonoBehaviour:
       - {fileID: 11400000, guid: e9e093bac76a9a4449b6e21955288a15, type: 2}
       - {fileID: 11400000, guid: 97df41b6d1cd6a542a17a6eed1a3f28a, type: 2}
       StartingDiceEffectIndex: 0
-      AttackSpeed: 1
+      AttackSpeed: 3
     DiceAttackSettings:
       AttackDamge: 5
-      Speed: 10
+      Speed: 20
       Lifetime: 1
       Size: 1
       CritChance: 10
       CritDamageMultiplier: 1.5
-      SpinSpeedRange: {x: 0, y: 0}
-      SpinSlowDown: 0
+      SpinSpeedRange: {x: 10, y: 20}
+      SpinSlowDown: 0.1
 --- !u!1 &299506224
 GameObject:
   m_ObjectHideFlags: 0

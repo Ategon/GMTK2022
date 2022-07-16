@@ -10,7 +10,6 @@ public class PlayerAttackHandler : IHandler<PlayerInteractionState>
     {
         if (data.PlayerAttackState.ShootDir != Vector3.zero)
         {
-            Debug.Log($"data.PlayerAttackState.ShootDir : {data.PlayerAttackState.ShootDir}");
             Vector3 shootDir = data.PlayerAttackState.ShootDir;
             GameObject diceObj = data.PlayerAttackState.dicePool.Get();
             diceObj.SetActive(true);
@@ -18,7 +17,6 @@ public class PlayerAttackHandler : IHandler<PlayerInteractionState>
             diceObj.transform.rotation = data.sharedData.PlayerTransform.rotation;
             Dice dice = diceObj.GetComponent<Dice>();
             dice.Init(data.DiceAttackSettings, data.PlayerAttackState.equippedEffects, data.PlayerAttackState.dicePool, shootDir);
-            
         }
     }
 }

@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 240bb0df535b4fd4bb688e088f5aff71, type: 3}
   m_Name: TestDiceEffect2
   m_EditorClassIdentifier: 
-  diceEffectPrefab: {fileID: 8472016150045437617, guid: d3b37bfe8ecaadc418bbd88976c98095,
+  diceEffectPrefab: {fileID: 4911310729763904448, guid: e49839e2467f1b64887b75bc5c49e0e6,
     type: 3}
   damage: 20
