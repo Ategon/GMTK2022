@@ -10,13 +10,21 @@ public class Health : MonoBehaviour
 
     [SerializeField]
     private Image[] hearts;
+    
     [SerializeField]
-    private Sprite fullHeart;
+    [Range(0, 3)]
+    private int chosenCharacterIndex = 0;
+
     [SerializeField]
-    private Sprite emptyHeart;
+    private Sprite[] fullHearts;
+
+    [SerializeField]
+    private Sprite[] emptyHearts;
 
     [SerializeField]
     private Canvas canvas;
+
+    private Animator animator;
 
     private void Update()
     {
@@ -35,9 +43,9 @@ public class Health : MonoBehaviour
         {
             if(i < health)
             {
-                hearts[i].sprite = fullHeart;
+                hearts[i].sprite = fullHearts[chosenCharacterIndex];
             } else {
-                hearts[i].sprite = emptyHeart;
+                hearts[i].sprite = emptyHearts[chosenCharacterIndex];
             }
 
             if (i < numOfHearts)
