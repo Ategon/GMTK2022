@@ -441,16 +441,6 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 4135994973098379745, guid: b6081640d2b130f448b8b4c788b86366,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4228072748441310305, guid: b6081640d2b130f448b8b4c788b86366,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.5
-      objectReference: {fileID: 0}
     - target: {fileID: 4244877553319162713, guid: b6081640d2b130f448b8b4c788b86366,
         type: 3}
       propertyPath: m_Lens.m_SensorSize.x
