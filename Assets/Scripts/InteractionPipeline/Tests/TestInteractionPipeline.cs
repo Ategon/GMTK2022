@@ -6,13 +6,13 @@ using DataPipeline.Test;
 
 public class TestInteractionPipeline : MonoBehaviour
 {
-    private InteractionPipeline<TestData, TestDataReader> pipeline;
+    private InteractionPipeline<TestData> pipeline;
     private List<Generator> gens;
     private int count;
 
     void Start()
     {
-        pipeline = new InteractionPipeline<TestData, TestDataReader>(new TestDataReader.TestDataInitializer());
+        pipeline = new InteractionPipeline<TestData>(new TestData());
         gens = new List<Generator>();
 
         Generator gen0 = new Generator
@@ -29,10 +29,20 @@ public class TestInteractionPipeline : MonoBehaviour
             TestString = "Test 1",
             TestInt = 1
         };
+        Generator gen2 = new Generator
+        {
+            NeverDone = false,
+            NotDoneTill = 0,
+            WriteString = false,
+            TestString = "You should not see this!",
+            TestInt = 420
+        };
         Handler handler = new Handler();
+        Handler handerTwo = new Handler();
 
         gens.Add(gen0);
         gens.Add(gen1);
+        //gens.Add(gen2);
 
         foreach (Generator gen in gens)
         {
@@ -40,6 +50,7 @@ public class TestInteractionPipeline : MonoBehaviour
         }
 
         pipeline.AddHandler(handler);
+        pipeline.AddHandler(handerTwo);
     }
 
     private int lengthOfTest = 0;

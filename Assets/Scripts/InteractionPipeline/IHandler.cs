@@ -3,10 +3,8 @@ using System.Collections.Generic;
 
 namespace DataPipeline
 {
-    public interface IHandler<T, R>
-        where T : IData
-        where R : IDataReader<T>
+    public interface IHandler<T>
     {
-        void Handle(R data);
+        void Handle(in T data);
     }
 }

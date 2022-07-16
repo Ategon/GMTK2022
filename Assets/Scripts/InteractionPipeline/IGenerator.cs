@@ -7,7 +7,7 @@ namespace DataPipeline
     {
         void Start();
         void StartRound();
-        void Write(T data);
+        void Write(ref T data);
         bool IsNotDoneWriting();
     }
 }

@@ -1,23 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace DataPipeline
 {
-    public class InteractionPipeline<T, R>
-        where T : IData
-        where R : IDataReader<T>
+    public class InteractionPipeline<T>
     {
         private List<IGenerator<T>> generators;
-        private List<IHandler<T, R>> handlers;
-        private IDataInitializer<T, R> dataInitializer;
-        private T data;
-        private R dataReader;
+        private List<IHandler<T>> handlers;
 
-        public InteractionPipeline(IDataInitializer<T, R> dataInitializer)
+        [SerializeField]
+        private T data;
+
+        public InteractionPipeline(T data)
         {
             generators = new List<IGenerator<T>>();
-            handlers = new List<IHandler<T, R>>();
-            this.dataInitializer = dataInitializer;
+            handlers = new List<IHandler<T>>();
+            this.data = data;
         }
 
         public void Execute()
@@ -32,16 +31,15 @@ namespace DataPipeline
         {
             if (handlers.Count > 0)
             {
-                WriteData();
-                HandleData();
+                WriteData(ref data);
+                HandleData(in data);
             }
         }
 
-        private void WriteData()
+        private void WriteData(ref T data)
         {
             int writeCount = 0;
 
-            NewData();
             List<IGenerator<T>> writting = new List<IGenerator<T>>();
             List<IGenerator<T>> writtingNext = new List<IGenerator<T>>();
 
@@ -54,7 +52,7 @@ namespace DataPipeline
 
                 foreach (IGenerator<T> generator in writting)
                 {
-                    generator.Write(data);
+                    generator.Write(ref data);
                     writeCount++;
 
                     if (generator.IsNotDoneWriting())
@@ -75,19 +73,12 @@ namespace DataPipeline
         }
 
 
-        private void HandleData()
+        private void HandleData(in T data)
         {
-            foreach (IHandler<T, R> handler in handlers)
+            foreach (IHandler<T> handler in handlers)
             {
-                handler.Handle(dataReader);
+                handler.Handle(data);
             }
-        }
-
-        private void NewData()
-        {
-            dataInitializer.NewData();
-            data = dataInitializer.GetData();
-            dataReader = dataInitializer.GetReader();
         }
 
         public void AddGenerator(IGenerator<T> generator)
@@ -100,12 +91,12 @@ namespace DataPipeline
             return generators.Remove(generator);
         }
 
-        public void AddHandler(IHandler<T, R> handler)
+        public void AddHandler(IHandler<T> handler)
         {
             handlers.Add(handler);
         }
 
-        public bool RemoveHandler(IHandler<T, R> handler)
+        public bool RemoveHandler(IHandler<T> handler)
         {
             return handlers.Remove(handler);
         }

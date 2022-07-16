@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace DataPipeline.Test
 {
@@ -7,6 +8,8 @@ namespace DataPipeline.Test
     {
         public bool NeverDone = false;
         public int NotDoneTill = 0;
+        public bool WriteString = true;
+        public bool WriteInt = true;
         private int count;
 
         public string TestString = "";
@@ -20,17 +23,18 @@ namespace DataPipeline.Test
         public void Start()
         {
             count = 0;
+            Debug.Log(TestString + " Start!");
         }
 
         public void StartRound()
         {
-
+            Debug.Log(TestString + " Start Round!");
         }
 
-        public void Write(TestData data)
+        public void Write(ref TestData data)
         {
-            data.TestString = TestString;
-            data.TestInt = TestInt;
+            if (WriteString) data.TestString = TestString;
+            if (WriteInt) data.TestInt = TestInt;
 
             count++;
         }
