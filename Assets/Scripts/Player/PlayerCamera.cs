@@ -13,8 +13,7 @@ public class PlayerCamera : MonoBehaviour
 
     private CinemachineVirtualCamera virtualCamera;
     private Transform cameraFollow;
-    private Camera mainCamera;
-    public InputData inputData;
+    private InputData inputData;
 
     private Vector2 screenSize;
 
@@ -22,7 +21,6 @@ public class PlayerCamera : MonoBehaviour
     {
         virtualCamera = GetComponent<CinemachineVirtualCamera>();
         cameraFollow = virtualCamera.Follow;
-        mainCamera = Camera.main;
 
         inputData = inputPipeline.InputData;
 
@@ -34,20 +32,9 @@ public class PlayerCamera : MonoBehaviour
         // Remap range from [ScreenWidth, ScreenHeight] to [-aimLookPercentage, aimLookAmt]
         Vector2 cursorPosRemap = (inputData.CursorPos / screenSize * 2f - Vector2.one) * aimLookAmt;
 
-        print("CursorPosRemap: " + cursorPosRemap);
         cameraFollow.position = new Vector3(
             playerTransform.position.x + cursorPosRemap.x,
             playerTransform.position.y,
             playerTransform.position.z + cursorPosRemap.y);
-
-        //// Convert world space to screen space
-        //Vector3 cameraFollowPos = mainCamera.WorldToScreenPoint(playerTransform.position);
-        //
-        //// Modify the camera position based on the cursor position
-        //cameraFollowPos.x += (cursorPos.x - Screen.width / 2) * aimLookPercentage;
-        //cameraFollowPos.y += (cursorPos.y - Screen.height / 2) * aimLookPercentage;
-        //
-        //// Convert back from screen space to world space
-        //cameraFollow.position = mainCamera.ScreenToWorldPoint(cameraFollowPos);
     }
 }
