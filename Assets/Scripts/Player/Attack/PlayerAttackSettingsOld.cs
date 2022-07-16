@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class PlayerAttackSettings : IInteractionData
+public class PlayerAttackSettingsOld : IInteractionData
 {
     public GameObject DicePrefab;
 
@@ -16,7 +16,7 @@ public class PlayerAttackSettings : IInteractionData
 }
 
 [System.Serializable]
-public class DiceSettings : IInteractionData
+public class DiceSettingsOld : IInteractionData
 {
     // Base dice stats without any modifiers
     public float AttackDamge;

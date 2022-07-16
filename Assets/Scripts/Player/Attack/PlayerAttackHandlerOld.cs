@@ -2,18 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAttackHandler : IHandler
+public class PlayerAttackHandlerOld : IHandler
 {
-    PlayerAttackSettings attackSettings;
-    DiceSettings diceSettings;
-    PlayerAttackPipeline.State currState;
+    PlayerAttackSettingsOld attackSettings;
+    DiceSettingsOld diceSettings;
+    PlayerAttackPipelineOld.State currState;
     InputData inputData;
 
     public void Init(Dictionary<string, IInteractionData> data)
     {
-        attackSettings = (PlayerAttackSettings)data["AttackSettings"];
-        diceSettings = (DiceSettings)data["DiceSettings"];
-        currState = (PlayerAttackPipeline.State)data["CurrState"];
+        attackSettings = (PlayerAttackSettingsOld)data["AttackSettings"];
+        diceSettings = (DiceSettingsOld)data["DiceSettings"];
+        currState = (PlayerAttackPipelineOld.State)data["CurrState"];
         inputData = (InputData)data["InputData"];
     }
 

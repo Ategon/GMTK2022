@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAttackPipeline : IPipelineBehaviour
+public class PlayerAttackPipelineOld : IPipelineBehaviour
 {
-    [SerializeField] PlayerAttackSettings settings;
-    [SerializeField] DiceSettings diceSettings;
+    [SerializeField] PlayerAttackSettingsOld settings;
+    [SerializeField] DiceSettingsOld diceSettings;
 
     private InputPipeline inputPipeline;
 
-    private PlayerAttackHandler attackHandler;
+    private PlayerAttackHandlerOld attackHandler;
     private State currState;
 
     public class State : IInteractionData
@@ -20,7 +20,7 @@ public class PlayerAttackPipeline : IPipelineBehaviour
 
     private void Start()
     {
-        attackHandler = new PlayerAttackHandler();
+        attackHandler = new PlayerAttackHandlerOld();
         currState = new State();
 
         inputPipeline = GetComponent<InputPipeline>();
