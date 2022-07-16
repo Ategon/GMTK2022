@@ -37,13 +37,15 @@ public class Dice : MonoBehaviour
 
         dicePool = _dicePool;
         
-        //rb.
         rb.AddForce((throwDirection + Vector3.up * 0.5f) * diceSettings.Speed, ForceMode.VelocityChange);
+        rb.angularVelocity = Random.onUnitSphere * Random.Range(diceSettings.SpinSpeedRange.x, diceSettings.SpinSpeedRange.y);
     }
 
     private void Update()
     {
         remainingLifetime -= Time.deltaTime;
+
+        rb.angularVelocity -= rb.angularVelocity * diceSettings.SpinSlowDown * Time.deltaTime;
 
         if (remainingLifetime < 0f)
         {

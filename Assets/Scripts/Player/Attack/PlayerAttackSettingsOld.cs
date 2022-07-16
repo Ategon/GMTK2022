@@ -31,5 +31,8 @@ public class DiceSettingsOld : IInteractionData
     // If Crit, Damage = AttackDamage * CritDamageMultiplier
     public float CritDamageMultiplier;
 
+    public Vector2 SpinSpeedRange;
+    public float SpinSlowDown;
+
     public const int numOfSides = 6;
 }

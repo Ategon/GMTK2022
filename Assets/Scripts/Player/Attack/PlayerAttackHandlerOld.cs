@@ -34,7 +34,9 @@ public class PlayerAttackHandlerOld : IHandler
             Ray ray = attackSettings.mainCamera.ScreenPointToRay(inputData.CursorPos);
             if (Physics.Raycast(ray, out hitInfo))
             {
-                Vector3 direction = (hitInfo.point - attackSettings.playerTransform.position).normalized;
+                Vector3 direction = hitInfo.point - attackSettings.playerTransform.position;
+                direction.y = 0f;
+                direction.Normalize();
 
                 GameObject diceObj = currState.dicePool.Get();
                 diceObj.SetActive(true);
