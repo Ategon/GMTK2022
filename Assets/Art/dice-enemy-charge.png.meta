@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: e4d28f1b36dbe8e4c99a7c371db5ac8f
+guid: 82adbb02feed5d84483c36637ea35682
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -118,7 +118,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: dice-enemy-walk_0
+      name: dice-enemy-charge_0
       rect:
         serializedVersion: 2
         x: 0
@@ -132,14 +132,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 84ab1c5a30bf0d14887f623231bdabe1
-      internalID: 1218799080
+      spriteID: b7f20ae24b517b646b25c2e3fcc422ee
+      internalID: -855665366
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dice-enemy-walk_1
+      name: dice-enemy-charge_1
       rect:
         serializedVersion: 2
         x: 32
@@ -153,14 +153,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fdfd9978827a8034bbc81b65a7acc6d0
-      internalID: 1829785294
+      spriteID: 16c57e0eafc5f1c469c8db4b97f562c7
+      internalID: -2079936928
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dice-enemy-walk_2
+      name: dice-enemy-charge_2
       rect:
         serializedVersion: 2
         x: 64
@@ -174,29 +174,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 030555e7ad2bb5546969b3beccdefafe
-      internalID: -1056130968
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: dice-enemy-walk_3
-      rect:
-        serializedVersion: 2
-        x: 96
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2f6d2f7e9b4c61c46bdd30ac71151ac3
-      internalID: 393097082
+      spriteID: 30b442c37280a134098da41e73cc14c9
+      internalID: 469138919
       vertices: []
       indices: 
       edges: []
@@ -204,7 +183,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 70cb2d94d322c254f88cc0506f10be42
+    spriteID: 9c907c2f0862ff9408308abc84eda7d6
     internalID: 0
     vertices: []
     indices: 
@@ -212,10 +191,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      dice-enemy-walk_1: 1829785294
-      dice-enemy-walk_3: 393097082
-      dice-enemy-walk_0: 1218799080
-      dice-enemy-walk_2: -1056130968
+      dice-enemy-charge_0: -855665366
+      dice-enemy-charge_2: 469138919
+      dice-enemy-charge_1: -2079936928
   spritePackingTag: 
   pSDRemoveMatte: 0
   userData: 

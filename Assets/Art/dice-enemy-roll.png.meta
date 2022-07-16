@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: e4d28f1b36dbe8e4c99a7c371db5ac8f
+guid: b43c3aa67028cf5478d6a7d31293d550
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -118,7 +118,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: dice-enemy-walk_0
+      name: dice-enemy-roll_0
       rect:
         serializedVersion: 2
         x: 0
@@ -132,14 +132,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 84ab1c5a30bf0d14887f623231bdabe1
-      internalID: 1218799080
+      spriteID: 39212fd5a5370924da93aa247ac7ea02
+      internalID: 984976435
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dice-enemy-walk_1
+      name: dice-enemy-roll_1
       rect:
         serializedVersion: 2
         x: 32
@@ -153,14 +153,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fdfd9978827a8034bbc81b65a7acc6d0
-      internalID: 1829785294
+      spriteID: 953033f38e732b444bc0ab33acf8b096
+      internalID: 2108642387
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dice-enemy-walk_2
+      name: dice-enemy-roll_2
       rect:
         serializedVersion: 2
         x: 64
@@ -174,14 +174,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 030555e7ad2bb5546969b3beccdefafe
-      internalID: -1056130968
+      spriteID: 3d27dbd3462ee984ba348fe4c97b4539
+      internalID: -293758736
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dice-enemy-walk_3
+      name: dice-enemy-roll_3
       rect:
         serializedVersion: 2
         x: 96
@@ -195,8 +195,92 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2f6d2f7e9b4c61c46bdd30ac71151ac3
-      internalID: 393097082
+      spriteID: b511f80c292fbb7418313e2519721259
+      internalID: 15592601
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dice-enemy-roll_4
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1208cd97125aee84a98eb6df2114aa1c
+      internalID: 1306148956
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dice-enemy-roll_5
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6fa42be44c513ac4e9ac49768e544cfa
+      internalID: 2083721236
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dice-enemy-roll_6
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 08ee76da5aed047479ea5209e8d5a95d
+      internalID: -1199469584
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dice-enemy-roll_7
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e266fb08e1e16014eae54a4e1b552893
+      internalID: 171138303
       vertices: []
       indices: 
       edges: []
@@ -204,7 +288,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 70cb2d94d322c254f88cc0506f10be42
+    spriteID: 5c909b22db7c6b14a9ee917abd5142d7
     internalID: 0
     vertices: []
     indices: 
@@ -212,10 +296,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      dice-enemy-walk_1: 1829785294
-      dice-enemy-walk_3: 393097082
-      dice-enemy-walk_0: 1218799080
-      dice-enemy-walk_2: -1056130968
+      dice-enemy-roll_7: 171138303
+      dice-enemy-roll_2: -293758736
+      dice-enemy-roll_1: 2108642387
+      dice-enemy-roll_6: -1199469584
+      dice-enemy-roll_0: 984976435
+      dice-enemy-roll_4: 1306148956
+      dice-enemy-roll_5: 2083721236
+      dice-enemy-roll_3: 15592601
   spritePackingTag: 
   pSDRemoveMatte: 0
   userData: 
