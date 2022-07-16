@@ -37,7 +37,7 @@ public class Dice : MonoBehaviour
 
         dicePool = _dicePool;
         
-        rb.AddForce((throwDirection + Vector3.up * 0.5f) * diceSettings.Speed, ForceMode.VelocityChange);
+        rb.AddForce(throwDirection * diceSettings.Speed, ForceMode.VelocityChange);
         rb.angularVelocity = Random.onUnitSphere * Random.Range(diceSettings.SpinSpeedRange.x, diceSettings.SpinSpeedRange.y);
     }
 
