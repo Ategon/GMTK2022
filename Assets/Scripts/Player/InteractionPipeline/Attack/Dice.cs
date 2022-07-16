@@ -17,9 +17,9 @@ public class Dice : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
+    // Reset the die
     private void OnDisable()
     {
-        // Reset it
         remainingLifetime = -1f;
 
         // Reset rigidbody
@@ -49,12 +49,18 @@ public class Dice : MonoBehaviour
 
         if (remainingLifetime < 0f)
         {
-            int chosenSide = Random.Range(0, DiceAttackSettings.numOfSides - 1);
+            int chosenSide = GetRolledNumber();
 
-            SpawnEffect(Random.Range(0, DiceAttackSettings.numOfSides - 1));
+            SpawnEffect(chosenSide);
 
             dicePool.Release(this.gameObject);
         }
+    }
+
+    // TODO (GnoxNahte): Change to comparing the up vector 
+    private int GetRolledNumber()
+    {
+        return Random.Range(0, DiceAttackSettings.numOfSides - 1);
     }
 
     private void SpawnEffect(int numberRolled)
