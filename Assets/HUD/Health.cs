@@ -15,11 +15,20 @@ public class Health : MonoBehaviour
     [SerializeField]
     private Sprite emptyHeart;
 
+    [SerializeField]
+    private Canvas canvas;
+
     private void Update()
     {
         if (health > numOfHearts)
         {
             health = numOfHearts;
+        }
+
+        if (health == 0)
+        {
+            //TODO - play dead animation
+            canvas.GetComponent<PauseMenu>().Defeat();
         }
 
         for (int i = 0; i < hearts.Length; i++)
