@@ -266,7 +266,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 794417300}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1964951688}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 06abda56fa5aa164d908c8266c2b90bd, type: 3}
@@ -440,6 +440,36 @@ PrefabInstance:
     - target: {fileID: 1139050044, guid: b6081640d2b130f448b8b4c788b86366, type: 3}
       propertyPath: m_LocalRotation.z
       value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4135994973098379745, guid: b6081640d2b130f448b8b4c788b86366,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9914449
+      objectReference: {fileID: 0}
+    - target: {fileID: 4135994973098379745, guid: b6081640d2b130f448b8b4c788b86366,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.13052616
+      objectReference: {fileID: 0}
+    - target: {fileID: 4135994973098379745, guid: b6081640d2b130f448b8b4c788b86366,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4228072748441310305, guid: b6081640d2b130f448b8b4c788b86366,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9914449
+      objectReference: {fileID: 0}
+    - target: {fileID: 4228072748441310305, guid: b6081640d2b130f448b8b4c788b86366,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.13052616
+      objectReference: {fileID: 0}
+    - target: {fileID: 4228072748441310305, guid: b6081640d2b130f448b8b4c788b86366,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 4244877553319162713, guid: b6081640d2b130f448b8b4c788b86366,
         type: 3}
@@ -1110,6 +1140,105 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1699442729}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1942904840
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1942904842}
+  - component: {fileID: 1942904841}
+  m_Layer: 0
+  m_Name: EnemySpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1942904841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1942904840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9442a0656075b5b41b0ebbdc9591cea5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waves:
+  - waveName: Minute 1
+    enemies:
+    - name: Dice
+      weight: 1
+      gameObject: {fileID: 1622322677565801872, guid: 3cd026ad4bc86024d838ca7c89212adc,
+        type: 3}
+  - waveName: Minute 2
+    enemies:
+    - name: Dice
+      weight: 9
+      gameObject: {fileID: 1622322677565801872, guid: 3cd026ad4bc86024d838ca7c89212adc,
+        type: 3}
+    - name: Bouncer
+      weight: 1
+      gameObject: {fileID: 0}
+  - waveName: Minute 3
+    enemies:
+    - name: Dice
+      weight: 8
+      gameObject: {fileID: 1622322677565801872, guid: 3cd026ad4bc86024d838ca7c89212adc,
+        type: 3}
+    - name: Bouncer
+      weight: 2
+      gameObject: {fileID: 0}
+  - waveName: Minute 4
+    enemies:
+    - name: Dice
+      weight: 8
+      gameObject: {fileID: 1622322677565801872, guid: 3cd026ad4bc86024d838ca7c89212adc,
+        type: 3}
+    - name: Roulette
+      weight: 1
+      gameObject: {fileID: 0}
+  - waveName: Minute 5
+    enemies:
+    - name: Dice
+      weight: 9
+      gameObject: {fileID: 1622322677565801872, guid: 3cd026ad4bc86024d838ca7c89212adc,
+        type: 3}
+    - name: Giant Dice
+      weight: 5
+      gameObject: {fileID: 0}
+  hordeChanceBase: 5
+  hordeChanceDecrease: 0.0022222223
+  enemySpawnChanceBase: 20
+  enemySpawnChanceDecrease: 0.0011111111
+  hordeSize: 3
+  player: {fileID: 1964951688}
+--- !u!4 &1942904842
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1942904840}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 988.26, y: 739.07996, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1964951688 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7918230048587336569, guid: b6081640d2b130f448b8b4c788b86366,
+    type: 3}
+  m_PrefabInstance: {fileID: 794417300}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2070332401 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4705240731728215541, guid: b6081640d2b130f448b8b4c788b86366,
