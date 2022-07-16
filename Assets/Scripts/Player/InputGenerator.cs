@@ -45,6 +45,8 @@ public class InputGenerator : IInteractionDataGenerator
                 {
                     ReadVector2(context, ref inputData.Aim);
                 }
+
+                ReadVector2(context, ref inputData.CursorPos);
                 break;
             case "Pause":
                 ReadBool(context, ref inputData.Pause);
