@@ -1,5 +1,5 @@
-// Generates the IInteractionData
-public interface IInteractionGenerator
+// Interface for data generation
+public interface IInteractionDataGenerator
 {
     public class GenerationParams { }
 

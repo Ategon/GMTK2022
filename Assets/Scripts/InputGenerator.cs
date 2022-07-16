@@ -1,15 +1,15 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class InputGenerator : IInteractionGenerator
+public class InputGenerator : IInteractionDataGenerator
 {
-    public class InputParams : IInteractionGenerator.GenerationParams
+    public class InputParams : IInteractionDataGenerator.GenerationParams
     {
         public InputAction.CallbackContext context;
         public bool ifKeyboardAndMouse;
     }
 
-    public IInteractionData GenerateData(IInteractionGenerator.GenerationParams parameters, ref IInteractionData data)
+    public IInteractionData GenerateData(IInteractionDataGenerator.GenerationParams parameters, ref IInteractionData data)
     {
         InputParams inputParams = (InputParams)parameters;
         ReadAction(inputParams.context, inputParams.ifKeyboardAndMouse, ref data);

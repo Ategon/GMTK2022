@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Holds all the IInteractionData, IHandler, IInteractionDataGenerator
 public class IPipelineBehaviour : MonoBehaviour
 {
     // Format: 
