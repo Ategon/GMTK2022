@@ -4,6 +4,7 @@ using DataPipeline;
 
 public class InputReader : PlayerInput, IGenerator<PlayerInteractionState>
 {
+    [HideInInspector]
     public PlayerState playerState;
 
     public InputReader()
@@ -13,7 +14,7 @@ public class InputReader : PlayerInput, IGenerator<PlayerInteractionState>
 
     public void Start()
     {
-
+        onActionTriggered += ReadAction;
     }
 
     public void StartRound()

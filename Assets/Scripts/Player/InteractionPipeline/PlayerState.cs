@@ -22,6 +22,8 @@ public struct PlayerState
     public float LastDodgedTime;
 
     public Vector3 Velocity;
+
+    public float MoveSpeed;
 }
 
 public enum MoveState

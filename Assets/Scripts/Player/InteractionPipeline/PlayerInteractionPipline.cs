@@ -3,28 +3,30 @@ using System.Collections.Generic;
 using UnityEngine;
 using DataPipeline;
 
-public class PlayerInteraction : MonoBehaviour
+public class PlayerInteractionPipline : MonoBehaviour
 {
-    // public float WalkingSpeed = 5;
-    // public float CrouchSpeed = 3;
-    // public float DodgeSpeed = 20;
-    // public float DodgeTime = 1f;
-    // public float DodgeCooldown = 0.5f;
-    // public Vector3 Gravity = new Vector3(0f, -9.8f, 0f);
+    [SerializeField]
+    PlayerInteractionState startPlayerState;
 
     [SerializeField]
     private InteractionPipeline<PlayerInteractionState> pipeline;
 
+    private void Awake()
+    {
+        startPlayerState.EntityMovementSettings.CharacterController = GetComponent<CharacterController>();
+    }
+
     public void Start()
     {
-        pipeline = new InteractionPipeline<PlayerInteractionState>(new PlayerInteractionState());
+        pipeline = new InteractionPipeline<PlayerInteractionState>(startPlayerState);
 
-        //Get InputReader GameObj
-        //Add InputReader GameObj to pipeline => (pipeline.AddGenerator(inputreader))
-        //Make GravityMovments and Add to pipeline => (pipeline.AddGenerator(gravityMovments))
-        //Make PlayerMovement and Add to pipeline => (pipeline.AddGenerator(playerMovement))
-        //Make PlayerController and Add to pipeline => (pipeline.AddHandler(playerController))
-        //      PlayerController will read data and get unity to execute the right actions
+        InputReader inputReader = GetComponent<InputReader>();
+
+        pipeline.AddGenerator(inputReader);
+        pipeline.AddGenerator(new GravityMovments());
+        pipeline.AddGenerator(new PlayerMovementGenerator());
+
+        pipeline.AddHandler(new PlayerMovementHandler());
     }
 
     public void Update()
