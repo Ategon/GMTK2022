@@ -26,6 +26,25 @@ public struct PlayerState : IData
 
     public float MoveSpeed;
 
+    public void SetDifference(in PlayerState state)
+    {
+        if (Move != state.Move) Move = state.Move;
+        if (Aim != state.Aim) Aim = state.Aim;
+        if (CursorPos != state.CursorPos) CursorPos = state.CursorPos;
+        if (Dodge != state.Dodge) Dodge = state.Dodge;
+        if (Reload != state.Reload) Reload = state.Reload;
+        if (Crouch != state.Crouch) Crouch = state.Crouch;
+        if (Fire != state.Fire) Fire = state.Fire;
+        if (Pause != state.Pause) Pause = state.Pause;
+        if (IsGrounded != state.IsGrounded) IsGrounded = state.IsGrounded;
+        if (MoveDirection != state.MoveDirection) MoveDirection = state.MoveDirection;
+        if (MoveState != state.MoveState) MoveState = state.MoveState;
+        if (TimeLeftInCurrState != state.TimeLeftInCurrState) TimeLeftInCurrState = state.TimeLeftInCurrState;
+        if (LastDodgedTime != state.LastDodgedTime) LastDodgedTime = state.LastDodgedTime;
+        if (Velocity != state.Velocity) Velocity = state.Velocity;
+        if (MoveSpeed != state.MoveSpeed) MoveSpeed = state.MoveSpeed;
+    }
+
     public void Clear()
     {
 
