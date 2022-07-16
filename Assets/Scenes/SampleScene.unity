@@ -1116,13 +1116,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputPipeline: {fileID: 254370734}
   playerTransform: {fileID: 254370740}
-  aimLookAmt: 0.2
-  inputData:
-    Move: {x: 0, y: 0}
-    Aim: {x: 0, y: 0}
-    CursorPos: {x: 0, y: 0}
-    Dodge: 0
-    Reload: 0
-    Crouch: 0
-    Fire: 0
-    Pause: 0
+  aimLookAmt: 2
