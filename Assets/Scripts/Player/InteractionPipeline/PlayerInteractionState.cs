@@ -1,7 +1,8 @@
 using System;
+using DataPipeline;
 
 [Serializable]
-public struct PlayerInteractionState
+public struct PlayerInteractionState : IData
 {
     public PlayerState PlayerState;
     public EntityMovementSettings EntityMovementSettings;
@@ -12,6 +13,11 @@ public struct PlayerInteractionState
     public DiceAttackSettings DiceAttackSettings;
 
     public SharedData sharedData;
+
+    public void Clear()
+    {
+
+    }
 
     // General shared data, not specific to a handler / generator
     public struct SharedData

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace DataPipeline
 {
-    public interface IGenerator<T>
+    public interface IGenerator<T> where T : IData
     {
         void Start();
         void StartRound();

@@ -24,6 +24,7 @@ public class InputReader : PlayerInput, IGenerator<PlayerInteractionState>
 
     public void Write(ref PlayerInteractionState data)
     {
+        //We might want to change this to write the diff instead of replacing the whole thing.
         data.PlayerState = playerState;
     }
 

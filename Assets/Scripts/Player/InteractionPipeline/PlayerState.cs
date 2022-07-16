@@ -1,8 +1,9 @@
 using System;
 using UnityEngine;
+using DataPipeline;
 
 [Serializable]
-public struct PlayerState
+public struct PlayerState : IData
 {
     public Vector2 Move;
     public Vector2 Aim;
@@ -24,6 +25,11 @@ public struct PlayerState
     public Vector3 Velocity;
 
     public float MoveSpeed;
+
+    public void Clear()
+    {
+
+    }
 }
 
 public enum MoveState

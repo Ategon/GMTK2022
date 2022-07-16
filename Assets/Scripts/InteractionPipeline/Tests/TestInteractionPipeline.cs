@@ -59,6 +59,7 @@ public class TestInteractionPipeline : MonoBehaviour
     {
         LogFrames();
 
+        pipeline.ClearData();
         pipeline.Execute();
 
         if (count == lengthOfTest)

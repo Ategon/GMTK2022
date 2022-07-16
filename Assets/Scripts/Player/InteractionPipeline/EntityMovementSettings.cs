@@ -1,8 +1,9 @@
 using System;
 using UnityEngine;
+using DataPipeline;
 
 [Serializable]
-public struct EntityMovementSettings
+public struct EntityMovementSettings : IData
 {
     [HideInInspector] public CharacterController CharacterController;
     public float WalkingSpeed;
@@ -16,4 +17,9 @@ public struct EntityMovementSettings
     public Transform GroundCheck;
     public LayerMask GroundMask;
     public float GroundDist;
+
+    public void Clear()
+    {
+
+    }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace DataPipeline
 {
-    public class InteractionPipeline<T>
+    public class InteractionPipeline<T> where T : IData
     {
         private List<IGenerator<T>> generators;
         private List<IHandler<T>> handlers;
@@ -72,6 +72,10 @@ namespace DataPipeline
             }
         }
 
+        public void ClearData()
+        {
+            data.Clear();
+        }
 
         private void HandleData(in T data)
         {
