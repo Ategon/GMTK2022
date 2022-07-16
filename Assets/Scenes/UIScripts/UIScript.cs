@@ -20,4 +20,30 @@ public class UIScript : MonoBehaviour
     {
         es.SetSelectedGameObject(gameObject);
     }
+
+    public void Quit()
+    {
+        if (Screen.fullScreenMode != FullScreenMode.Windowed)
+        {
+            Screen.fullScreenMode = FullScreenMode.Windowed;
+        }
+
+#if UNITY_EDITOR
+         UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
+    }
+
+    public void Fullscreen()
+    {
+        if (Screen.fullScreenMode == FullScreenMode.Windowed)
+        {
+            Screen.fullScreenMode = FullScreenMode.ExclusiveFullScreen;
+        }
+        else
+        {
+            Screen.fullScreenMode = FullScreenMode.Windowed;
+        }
+    }
 }
