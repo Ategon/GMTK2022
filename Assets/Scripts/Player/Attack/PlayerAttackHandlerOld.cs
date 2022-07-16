@@ -29,13 +29,21 @@ public class PlayerAttackHandlerOld : IHandler
         float timeBetweenAttacks = 1 / attackSettings.AttackSpeed;
         if (inputData.Fire && Time.time - currState.lastAttackedTime >= timeBetweenAttacks)
         {
-            GameObject diceObj = currState.dicePool.Get();
-            diceObj.SetActive(true);
-            diceObj.transform.position = attackSettings.playerTransform.position;
-            diceObj.transform.rotation = attackSettings.playerTransform.rotation;
-            Dice dice = diceObj.GetComponent<Dice>();
-            dice.Init(diceSettings, loadoutState.equippedEffects, currState.dicePool);
-            currState.lastAttackedTime = Time.time;
+            RaycastHit hitInfo;
+            // Calculate the direction to throw the dice
+            Ray ray = attackSettings.mainCamera.ScreenPointToRay(inputData.CursorPos);
+            if (Physics.Raycast(ray, out hitInfo))
+            {
+                Vector3 direction = (hitInfo.point - attackSettings.playerTransform.position).normalized;
+
+                GameObject diceObj = currState.dicePool.Get();
+                diceObj.SetActive(true);
+                diceObj.transform.position = attackSettings.playerTransform.position + direction + Vector3.up * 0.6f;
+                diceObj.transform.rotation = attackSettings.playerTransform.rotation;
+                Dice dice = diceObj.GetComponent<Dice>();
+                dice.Init(diceSettings, loadoutState.equippedEffects, currState.dicePool, direction);
+                currState.lastAttackedTime = Time.time;
+            }
         }
     }
 }

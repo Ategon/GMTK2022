@@ -9,8 +9,26 @@ public class Dice : MonoBehaviour
     DiceEffectSettings[] equippedDiceEffects;
 
     ObjectPool dicePool; // To return itself to the pool 
-    
-    public void Init(DiceSettingsOld _diceSettings, DiceEffectSettings[] _equippedDiceEffects, ObjectPool _dicePool)
+
+    Rigidbody rb;
+
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
+
+    private void OnDisable()
+    {
+        // Reset it
+        remainingLifetime = -1f;
+
+        // Reset rigidbody
+
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+    }
+
+    public void Init(DiceSettingsOld _diceSettings, DiceEffectSettings[] _equippedDiceEffects, ObjectPool _dicePool, Vector3 throwDirection)
     {
         diceSettings = _diceSettings;
         equippedDiceEffects = _equippedDiceEffects;
@@ -18,6 +36,9 @@ public class Dice : MonoBehaviour
         remainingLifetime = diceSettings.Lifetime;
 
         dicePool = _dicePool;
+        
+        //rb.
+        rb.AddForce((throwDirection + Vector3.up * 0.5f) * diceSettings.Speed, ForceMode.VelocityChange);
     }
 
     private void Update()
@@ -41,7 +62,6 @@ public class Dice : MonoBehaviour
         if (diceEffect == null)
             return;
 
-        
         // TODO (GnoxNahte): Replace with pool
         GameObject.Instantiate(diceEffect.diceEffectPrefab, transform.position, Quaternion.identity);
     }

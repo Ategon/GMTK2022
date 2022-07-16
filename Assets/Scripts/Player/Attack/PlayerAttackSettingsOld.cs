@@ -14,16 +14,17 @@ public class PlayerAttackSettingsOld : IInteractionData
     // Number of attacks per second
     public float AttackSpeed;
 
-    [HideInInspector]
-    public Transform playerTransform;
+    [HideInInspector] public Transform playerTransform;
+    [HideInInspector] public Camera mainCamera;
 }
 
 // Pass this data to the dice that is thrown
 [System.Serializable]
 public class DiceSettingsOld : IInteractionData
-{ 
+{
     // Base dice stats without any modifiers
     public float AttackDamge;
+    public float Speed;
     public float Lifetime;
     public float Size = 1f;
     public float CritChance;

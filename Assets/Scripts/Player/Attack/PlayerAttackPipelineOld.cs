@@ -12,13 +12,14 @@ public class PlayerAttackPipelineOld : IPipelineBehaviour
     private PlayerAttackHandlerOld attackHandler;
     private PlayerDiceEffectLoadoutHandler loadoutHandler;
 
+    // Maybe will combine to 1 state
     private State currState;
     private LoadoutState loadoutState;
 
     // Attack state
     public class State : IInteractionData
     {
-        public float lastAttackedTime = 0f;
+        public float lastAttackedTime = 0f; 
 
         public ObjectPool dicePool;
     }
@@ -39,6 +40,7 @@ public class PlayerAttackPipelineOld : IPipelineBehaviour
         inputPipeline = GetComponent<InputPipeline>();
 
         settings.playerTransform = GetComponent<Transform>();
+        settings.mainCamera = Camera.main;
 
         data.Add("AttackSettings", settings); 
         data.Add("DiceSettings", diceSettings); 
