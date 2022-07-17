@@ -78,11 +78,13 @@ public class Enemy : MonoBehaviour
         LoopMap();
     }
 
-    void OnCollisionEnter2D(Collision2D col)
+    public void TakeDamage(float damage)
     {
-        if (col.gameObject.tag == "PlayerBullet")
+        health -= damage;
+
+        if (health <= 0)
         {
-            
+            Destroy(this.gameObject);
         }
     }
 }
