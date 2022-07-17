@@ -6,6 +6,8 @@ public class PauseMenu : MonoBehaviour
     [SerializeField]
     private GameObject pauseMenu;
     [SerializeField]
+    private GameObject powerUpChoiceMenu;
+    [SerializeField]
     private GameObject defeatMenu;
 
     public void Pause()
@@ -23,6 +25,7 @@ public class PauseMenu : MonoBehaviour
     public void Resume()
     {
         pauseMenu.SetActive(false);
+        powerUpChoiceMenu.SetActive(false);
         Time.timeScale = 1f;
     }
 
