@@ -71,7 +71,9 @@ public class PlayerVisuals : MonoBehaviour
 
         Vector3 screenPos = state.sharedData.MainCamera.WorldToScreenPoint(transform.position);
 
-        if (state.PlayerState.CursorPos.x - screenPos.x > 0) // CHANGE TO SPRITE
+        if (Time.timeScale == 0) return;
+
+        if (state.PlayerState.CursorPos.x - screenPos.x > 0) 
         {
             upper.flipX = false;
             lower.flipX = false;
@@ -82,9 +84,4 @@ public class PlayerVisuals : MonoBehaviour
             lower.flipX = true;
         }
     }
-
-
-    //lowerAnim.Play("clover-charge");
-    //lowerAnim.Play("clover-hold");
-    //lowerAnim.Play("clover-release");
 }

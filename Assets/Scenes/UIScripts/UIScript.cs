@@ -13,7 +13,7 @@ public class UIScript : MonoBehaviour
 
     public void OnClickPlay()
     {
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("SampleScene 1");
     }
 
     public void SwitchSelectedButton(GameObject gameObject)
