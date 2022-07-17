@@ -22,13 +22,13 @@ public class DiceEnemy : Enemy
 
             if (quicker)
             {
-                rb.MovePosition(transform.position + direction * (4.5f + currentBoost) * walkingSpeed * deltaTime);
+                rb.MovePosition(transform.position + direction * (4.5f + currentBoost) * moveSpeed * deltaTime);
                 animator.Play("dice-enemy-roll");
             }
             else
             {
                 rb.MovePosition(transform.position + direction * 1.5f * walkingSpeed * deltaTime);
-                animator.Play("dicebullywalk");
+                animator.Play("dice-enemy-walk");
 
                 if (distance <= 5)
                 {

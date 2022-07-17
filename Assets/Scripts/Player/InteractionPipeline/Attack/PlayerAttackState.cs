@@ -24,6 +24,8 @@ public struct PlayerAttackSettings
 
     // Number of attacks per second
     public float AttackSpeed;
+
+    public LayerMask MouseRaycastLayerMask;
 }
 
 [Serializable]

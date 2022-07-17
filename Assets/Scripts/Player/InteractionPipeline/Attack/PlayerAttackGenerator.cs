@@ -36,7 +36,7 @@ public class PlayerAttackGenerator : IGenerator<PlayerInteractionState>
             RaycastHit hitInfo;
             // Calculate the direction to throw the dice
             Ray ray = data.sharedData.MainCamera.ScreenPointToRay(data.PlayerState.CursorPos);
-            if (Physics.Raycast(ray, out hitInfo))
+            if (Physics.Raycast(ray, out hitInfo, 1000000, data.PlayerAttackSettings.MouseRaycastLayerMask.value))
             {
                 Vector3 shootDir = hitInfo.point - data.sharedData.PlayerTransform.position;
                 shootDir.y = 0f;
