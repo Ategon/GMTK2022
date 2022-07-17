@@ -77,8 +77,8 @@ public class StatusEffects : MonoBehaviour
             case StatusEffectType.Poison:
                 break;
             case StatusEffectType.NoEffect:
-                Debug.LogWarning("Status effect has type: NoEffect");
-                return;
+                //Debug.LogWarning("Status effect has type: NoEffect");
+                //return;
             default:
                 Debug.LogError("StatusEffects.AddStatusEffect: Status effect not implemented");
                 return;

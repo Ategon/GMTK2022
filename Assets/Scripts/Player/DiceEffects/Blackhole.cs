@@ -13,7 +13,10 @@ public class Blackhole : MonoBehaviour
     {
         // Will make further entities pull in faster
         foreach (Rigidbody rb in entitiesToPullIn)
-            rb.AddForce((transform.position - rb.position).normalized * blackholeStrength);
+        {
+            if (rb != null)
+                rb.AddForce((transform.position - rb.position).normalized * blackholeStrength);
+        }
     }
 
     private void OnTriggerEnter(Collider other)

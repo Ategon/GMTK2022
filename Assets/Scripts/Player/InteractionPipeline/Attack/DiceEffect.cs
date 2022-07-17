@@ -5,7 +5,9 @@ using UnityEngine;
 public class DiceEffect : MonoBehaviour
 {
     DiceEffectSettings effectSettings;
-    
+
+    private List<GameObject> enemies = new List<GameObject>();
+
     public void Init(DiceEffectSettings diceEffectSettings)
     {
         effectSettings = diceEffectSettings;
@@ -16,6 +18,19 @@ public class DiceEffect : MonoBehaviour
     IEnumerator EndDiceEffect()
     {
         yield return new WaitForSeconds(effectSettings.effectDuration);
+
+        if (effectSettings.ifRemoveEffectOnLeaveCollider)
+        {
+            foreach (GameObject enemy in enemies)
+            {
+                if (enemy == null)
+                    continue;
+
+                StatusEffects statusEffects = enemy.GetComponent<StatusEffects>();
+                if (statusEffects != null)
+                    statusEffects.RemoveStatusEffect(effectSettings.statusEffect.type);
+            }
+        }
 
         Destroy(this.gameObject);
     }
@@ -29,7 +44,11 @@ public class DiceEffect : MonoBehaviour
 
             StatusEffects statusEffects = other.GetComponent<StatusEffects>();
             if (statusEffects != null)
+            {
                 statusEffects.AddStatusEffect(new StatusEffect(effectSettings.statusEffect), transform.position);
+
+                enemies.Add(other.gameObject);
+            }
         }
     }
 
@@ -41,5 +60,7 @@ public class DiceEffect : MonoBehaviour
         StatusEffects statusEffects = other.GetComponent<StatusEffects>();
         if (statusEffects != null)
             statusEffects.RemoveStatusEffect(effectSettings.statusEffect.type);
+
+        enemies.Remove(other.gameObject);
     }
 }
