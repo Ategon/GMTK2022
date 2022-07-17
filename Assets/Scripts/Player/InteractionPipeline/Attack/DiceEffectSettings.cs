@@ -12,5 +12,8 @@ public class DiceEffectSettings : ScriptableObject
 
     public bool ifRemoveEffectOnLeaveCollider;
 
+    // TODO (GnoxNahte): Refactor
+    public int numOfLightningStrikes; 
+
     public StatusEffect statusEffect;
 }

@@ -12,6 +12,18 @@ public class DiceEffect : MonoBehaviour
     {
         effectSettings = diceEffectSettings;
 
+        LightningEffect lightningEffect = GetComponent<LightningEffect>();
+        if (lightningEffect != null)
+        {
+            lightningEffect.Damage = effectSettings.damage;
+            lightningEffect.NumOfStrikes = effectSettings.numOfLightningStrikes;
+        }
+        IceEffect iceEffect = GetComponent<IceEffect>();
+        if (iceEffect != null)
+        {
+            iceEffect.damage = effectSettings.damage;
+        }
+
         StartCoroutine(EndDiceEffect());
     }
 

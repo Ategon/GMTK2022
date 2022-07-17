@@ -4,23 +4,28 @@ using UnityEngine;
 
 public class LightningEffect : MonoBehaviour
 {
-    [SerializeField] int NumOfStrikes;
+    public int NumOfStrikes;
+    public float Damage;
 
-    private List<GameObject> entitiesToStrike = new List<GameObject>();
-    private List<int> strikedEnemies; // Index of striked enemies in entitiesToStrike
+    public GameObject lightningPrefab;
 
-    private void Update()
+    private void Start()
     {
-        //strikedEnemies.
-    }
+        Camera mainCamera = Camera.main;
 
-    private void OnTriggerEnter(Collider other)
-    {
-        entitiesToStrike.Add(other.gameObject);
-    }
+        List<Collider> colliders = mainCamera.transform.GetComponentInChildren<StoreColliders>().colliders;
 
-    private void OnTriggerExit(Collider other)
-    {
-        entitiesToStrike.Remove(other.gameObject);
+        foreach (Collider collider in colliders)
+        {
+            if (collider == null)
+                continue;
+
+            Enemy enemy = collider.GetComponent<Enemy>();
+            if (enemy != null)
+            {
+                Instantiate(lightningPrefab, enemy.transform.position, Quaternion.identity);
+                enemy.TakeDamage(Damage);
+            }
+        }
     }
 }
