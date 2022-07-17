@@ -60,11 +60,12 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter2D(Collision2D col)
+    private void OnTriggerEnter(Collider other)
     {
-        if (col.gameObject.tag == "PlayerBullet")
+        Dice dice = other.GetComponent<Dice>();
+        if (dice != null)
         {
-            
+            dice.OnHitEnemy();
         }
     }
 }

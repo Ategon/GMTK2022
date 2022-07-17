@@ -71,10 +71,6 @@ public class Dice : MonoBehaviour
 
         if (remainingLifetime < 0f)
         {
-            int chosenSide = GetRolledNumber();
-
-            SpawnEffect(chosenSide);
-
             dicePool.Release(this.gameObject);
         }
     }
@@ -118,5 +114,12 @@ public class Dice : MonoBehaviour
 
         // TODO (GnoxNahte): Replace with pool
         GameObject.Instantiate(diceEffect.diceEffectPrefab, transform.position, Quaternion.identity);
+    }
+
+    public void OnHitEnemy()
+    {
+        int chosenSide = GetRolledNumber();
+
+        SpawnEffect(chosenSide);
     }
 }
