@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2550877827675865184}
   m_Layer: 0
   m_Name: DiceEnemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -47,8 +47,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 2, z: 1}
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!114 &5489331313107492570
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63,6 +63,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkingSpeed: 1
   maxHealth: 100
+  expAmount: 20
+  explosion: {fileID: 282438892204884229, guid: 33e24881717c6c04796e95c653c6f9c9,
+    type: 3}
+  exp: {fileID: 2524370295893443994, guid: 9a0ce85ec1294864c9cd8597b8a501fb, type: 3}
 --- !u!54 &3230402667283426548
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -120,14 +124,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2278755971934365168}
-  m_LocalRotation: {x: 0.13052616, y: 0, z: 0, w: 0.9914449}
+  m_LocalRotation: {x: 0.3420201, y: 0, z: 0, w: 0.9396927}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 4, y: 4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7292397168703613865}
   m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 15, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 40, y: 0, z: 0}
 --- !u!212 &1243119636730644548
 SpriteRenderer:
   m_ObjectHideFlags: 0

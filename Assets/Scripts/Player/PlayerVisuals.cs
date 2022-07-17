@@ -42,6 +42,7 @@ public class PlayerVisuals : MonoBehaviour
 
     public void HandleAnimations(in PlayerInteractionState state)
     {
+
         if (state.PlayerState.Move.x == 0 && state.PlayerState.Move.y == 0)
         {
             lowerAnim.Play("clover-idle-lower");
@@ -71,20 +72,47 @@ public class PlayerVisuals : MonoBehaviour
 
         Vector3 screenPos = state.sharedData.MainCamera.WorldToScreenPoint(transform.position);
 
-        if (state.PlayerState.CursorPos.x - screenPos.x > 0) // CHANGE TO SPRITE
+        if (Time.timeScale == 0) return;
+
+        if (state.PlayerState.CursorPos.x - screenPos.x > 0) 
         {
             upper.flipX = false;
             lower.flipX = false;
+
+            if (state.PlayerState.Move.x < 0)
+            {
+                if (!state.PlayerAttackState.throwTriggered)
+                {
+                    upperAnim.StartPlayback();
+                    upperAnim.speed = -1;
+                }
+                lowerAnim.StartPlayback();
+                lowerAnim.speed = -1;
+            } else
+            {
+                upperAnim.speed = 1;
+                lowerAnim.speed = 1;
+            }
         }
         else
         {
             upper.flipX = true;
             lower.flipX = true;
+
+            if (state.PlayerState.Move.x > 0)
+            {
+                if (!state.PlayerAttackState.throwTriggered)
+                {
+                    upperAnim.StartPlayback();
+                    upperAnim.speed = -1;
+                }
+                lowerAnim.StartPlayback();
+                lowerAnim.speed = -1;
+            } else
+            {
+                upperAnim.speed = 1;
+                lowerAnim.speed = 1;
+            }
         }
     }
-
-
-    //lowerAnim.Play("clover-charge");
-    //lowerAnim.Play("clover-hold");
-    //lowerAnim.Play("clover-release");
 }

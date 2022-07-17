@@ -25,6 +25,8 @@ public struct PlayerState : IData
 
     public Vector3 Velocity;
 
+    public Vector3 position;
+
     public float MoveSpeed;
 
     public void SetDifference(in PlayerState state)

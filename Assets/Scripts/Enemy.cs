@@ -14,10 +14,13 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] protected float walkingSpeed = 1f;
     [SerializeField] private float maxHealth = 100;
+    public float expAmount = 20;
 
     protected float moveSpeed { get { return walkingSpeed * statusEffects.walkingSpeedMultiplier; } }
 
     private float health;
+
+    [SerializeField] public GameObject exp;
 
     // Start is called before the first frame update
     void Start()
@@ -87,6 +90,7 @@ public class Enemy : MonoBehaviour
 
         if (health <= 0)
         {
+            Instantiate(exp, transform.position, Quaternion.identity);
             Destroy(this.gameObject);
         }
     }
