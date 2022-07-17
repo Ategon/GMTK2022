@@ -12,9 +12,31 @@ public class Dice : MonoBehaviour
 
     Rigidbody rb;
 
+    struct DiceFace
+    {
+        public int numberRolled; // number of pips / dots on that face
+        public Vector3 normal;
+
+        public DiceFace(int numberRolled, Vector3 normal)
+        {
+            this.numberRolled = numberRolled;
+            this.normal = normal;
+        }
+    }
+
+    DiceFace[] diceFaces;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+
+        diceFaces = new DiceFace[6];
+        diceFaces[0] = new DiceFace(1, Vector3.up);
+        diceFaces[1] = new DiceFace(2, Vector3.right);
+        diceFaces[2] = new DiceFace(3, Vector3.back);
+        diceFaces[3] = new DiceFace(4, Vector3.forward);
+        diceFaces[4] = new DiceFace(5, Vector3.left);
+        diceFaces[5] = new DiceFace(6, Vector3.down);
     }
 
     // Reset the die
@@ -60,12 +82,36 @@ public class Dice : MonoBehaviour
     // TODO (GnoxNahte): Change to comparing the up vector 
     private int GetRolledNumber()
     {
-        return Random.Range(0, DiceAttackSettings.numOfSides - 1);
+        Vector3 diceUp = transform.up;
+
+        int numRolled = 0;
+        float numRolledDotProduct =  -2f; // Lowest dot product should be -1
+
+        foreach (DiceFace diceFace in diceFaces)
+        {
+            float currDotProduct = Vector3.Dot(diceUp, diceFace.normal);
+            if (currDotProduct > numRolledDotProduct)
+            {
+                numRolled = diceFace.numberRolled;
+                numRolledDotProduct = currDotProduct;
+            }
+        }
+        
+        // Shouldn't happen, just checking
+        if (numRolled == 0)
+        {
+            Debug.LogError("Dice number rolled == 0. Should be between 1-6");
+            numRolled = 1;
+        }
+
+        print("NumberRolled: " + numRolled);
+
+        return numRolled;
     }
 
     private void SpawnEffect(int numberRolled)
     {
-        DiceEffectSettings diceEffect = equippedDiceEffects[numberRolled];
+        DiceEffectSettings diceEffect = equippedDiceEffects[numberRolled - 1];
 
         if (diceEffect == null)
             return;
