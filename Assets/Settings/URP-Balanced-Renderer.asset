@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Active: 1
   settings:
-    Event: 450
+    Event: 500
     LayerMask:
       serializedVersion: 2
       m_Bits: 256

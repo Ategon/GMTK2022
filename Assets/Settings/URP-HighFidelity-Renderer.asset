@@ -37,10 +37,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Active: 1
   settings:
-    Event: 450
+    Event: 500
     LayerMask:
       serializedVersion: 2
-      m_Bits: 256
+      m_Bits: 128
     PixelPerTaxel: 3
     BlitMaterial: {fileID: 2100000, guid: 636d8ca677bb09042bc1f2b69d25359c, type: 2}
 --- !u!114 &11400000
@@ -83,7 +83,7 @@ MonoBehaviour:
   m_AssetVersion: 2
   m_OpaqueLayerMask:
     serializedVersion: 2
-    m_Bits: 247
+    m_Bits: 1399
   m_TransparentLayerMask:
     serializedVersion: 2
     m_Bits: 2147483647
