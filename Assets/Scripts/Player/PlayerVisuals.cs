@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerVisuals : MonoBehaviour
 {
+    [SerializeField] private GameObject pauseMenu;
+
     public int playerIndex;
 
     private SpriteRenderer upper;
@@ -16,12 +18,17 @@ public class PlayerVisuals : MonoBehaviour
     private float throwBufferTimer;
 
     private float throwingTimer;
-    private float throwingTime = 0.5f;
+    private float throwingTime = 0.15f;
 
     void Awake()
     {
 
     }
+
+
+    bool paused;
+    float pauseBreak;
+    float pauseBreakTimer;
 
     public PlayerVisualHandling getHandler()
     {
@@ -32,6 +39,7 @@ public class PlayerVisuals : MonoBehaviour
     {
         throwBufferTimer -= Time.deltaTime;
         throwingTimer -= Time.deltaTime;
+        pauseBreakTimer -= Time.deltaTime;
     }
 
     void Start()
@@ -44,6 +52,21 @@ public class PlayerVisuals : MonoBehaviour
 
     public void HandleAnimations(in PlayerInteractionState state)
     {
+
+        if(state.PlayerState.Pause == true && pauseBreakTimer <= 0)
+        {
+            if (paused)
+            {
+                Time.timeScale = 1;
+                pauseMenu.SetActive(false);
+                pauseBreakTimer = pauseBreak;
+            } else
+            {
+                Time.timeScale = 0;
+                pauseMenu.SetActive(true);
+                pauseBreakTimer = pauseBreak;
+            }
+        }
 
         if (state.PlayerState.Move.x == 0 && state.PlayerState.Move.y == 0)
         {
