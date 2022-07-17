@@ -15,7 +15,7 @@ public class PlayerInteractionPipline : MonoBehaviour
     {
         // TOOD (GnoxNahte?): quick fixfor now, might do something different.
         // maybe for some variables just assign directly in inspector
-        initialPlayerState.EntityMovementSettings.CharacterController = GetComponent<CharacterController>();
+        initialPlayerState.EntityMovementSettings.RigidBody = GetComponent<Rigidbody>();
 
         initialPlayerState.PlayerCameraState.VirtualCamera = GetComponentInChildren<Cinemachine.CinemachineVirtualCamera>();
         initialPlayerState.PlayerCameraState.CameraFollow = initialPlayerState.PlayerCameraState.VirtualCamera.Follow;
@@ -51,7 +51,7 @@ public class PlayerInteractionPipline : MonoBehaviour
         pipeline.AddHandler(playerVisuals.getHandler());
     }
 
-    public void Update()
+    public void FixedUpdate()
     {
         pipeline.Execute();
     }

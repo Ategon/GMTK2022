@@ -17,6 +17,8 @@ public class Enemy : MonoBehaviour
 
     private float health;
 
+    [SerializeField] public GameObject exp;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -84,6 +86,7 @@ public class Enemy : MonoBehaviour
 
         if (health <= 0)
         {
+            Instantiate(exp, transform.position, Quaternion.identity);
             Destroy(this.gameObject);
         }
     }

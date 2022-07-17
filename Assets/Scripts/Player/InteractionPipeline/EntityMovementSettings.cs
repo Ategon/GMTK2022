@@ -5,7 +5,7 @@ using DataPipeline;
 [Serializable]
 public struct EntityMovementSettings : IData
 {
-    [HideInInspector] public CharacterController CharacterController;
+    [HideInInspector] public Rigidbody RigidBody;
     public float WalkingSpeed;
     public float CrouchSpeed;
     public float DodgeSpeed;

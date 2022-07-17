@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System;
+using UnityEngine.UI;
 
 public class Health : MonoBehaviour
 {
@@ -10,6 +12,11 @@ public class Health : MonoBehaviour
     private float flashingTimer;
     private bool dashFlash;
     private int collidingEnemies;
+
+    [SerializeField] private Image chipbar;
+
+    private int exp;
+    private int level;
 
     [SerializeField]
     private int health;
@@ -34,8 +41,24 @@ public class Health : MonoBehaviour
 
     private Animator animator;
 
+    private float healthBlinkTimer;
+    private int healthBlinkIndex;
+
+    private float healthBlinkMult = 2;
+
     private void FixedUpdate()
     {
+        healthBlinkTimer += Time.deltaTime * healthBlinkMult;
+        healthBlinkIndex = (int) Math.Floor(healthBlinkTimer) % 4;
+        if((int) Math.Round(healthBlinkTimer) % 4 == healthBlinkIndex) hearts[healthBlinkIndex].rectTransform.sizeDelta = new Vector2(120, 120);
+        else hearts[healthBlinkIndex].rectTransform.sizeDelta = new Vector2(80, 80);
+        hearts[(healthBlinkIndex + 3) % 4].rectTransform.sizeDelta = new Vector2(100, 100);
+        hearts[(healthBlinkIndex + 2) % 4].rectTransform.sizeDelta = new Vector2(100, 100);
+        hearts[(healthBlinkIndex + 1) % 4].rectTransform.sizeDelta = new Vector2(100, 100);
+
+        chipbar.rectTransform.sizeDelta = new Vector2(640 * (float) exp / (100 + (20 * (level + 1))), 16);
+        chipbar.transform.localPosition = new Vector3((float) exp / (100 + 20 * (level + 1)) * 320 - 320, 0, 0);
+
         if (flashingTimer > 0)
         {
             flashingTimer -= Time.deltaTime;
@@ -100,27 +123,34 @@ public class Health : MonoBehaviour
                 hearts[i].enabled = false;
             }
         }
+    }
 
-        if (invulnerableTimer <= 0 && collidingEnemies > 0)
+    private void OnCollisionStay(Collision hit)
+    {
+        if (hit.gameObject.tag == "Enemy")
         {
-            health--;
-            invulnerableTimer = invulnerableTime;
+            if (invulnerableTimer <= 0)
+            {
+                health--;
+                invulnerableTimer = invulnerableTime;
+            }
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter(Collision hit)
     {
-        if(collision.gameObject.tag == "Enemy")
+        if (hit.gameObject.tag == "Enemy")
         {
-            collidingEnemies++;
+            if (invulnerableTimer <= 0)
+            {
+                health--;
+                invulnerableTimer = invulnerableTime;
+            }
         }
-    }
-
-    void OnCollisionExit(Collision col)
-    {
-        if (col.gameObject.tag == "Enemy")
+        else if (hit.gameObject.tag == "EXP")
         {
-            collidingEnemies--;
+            exp += 20;
+            Destroy(hit.gameObject);
         }
     }
 }
