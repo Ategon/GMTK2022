@@ -7,7 +7,7 @@ public class UIText : MonoBehaviour
 {
     public void Select()
     {
-        GetComponent<TextMeshProUGUI>().color = new Color(1, 1, 1);
+        GetComponent<TextMeshProUGUI>().color = new Color(0.9098039f, 0.7568628f, 0.4392157f);
     }
 
     public void Deselect()
