@@ -7,6 +7,7 @@ public class Health : MonoBehaviour
 {
     [SerializeField] SpriteRenderer playerSR;
     [SerializeField] SpriteRenderer playerSR2;
+    [SerializeField] GameObject powerUpCanvas;
     private float invulnerableTime = 2;
     private float invulnerableTimer;
     private float flashingTimer;
@@ -151,6 +152,15 @@ public class Health : MonoBehaviour
         {
             exp += 20;
             Destroy(hit.gameObject);
+
+            if (exp >= (100 + (20 * (level + 1))))
+            {
+                exp -= (100 + (20 * (level + 1)));
+                powerUpCanvas.SetActive(true);
+                Time.timeScale = 0f;
+                powerUpCanvas.GetComponent<PowerUpPool>().FillTextWithPowerUps();
+                level++;
+            }
         }
     }
 }
