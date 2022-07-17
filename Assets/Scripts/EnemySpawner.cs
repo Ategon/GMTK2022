@@ -16,9 +16,11 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private GameObject player;
     [SerializeField] private TextMeshProUGUI timerText;
 
+    [SerializeField] private GameObject winScreen;
+
     [SerializeField] private GameObject kingDice;
 
-    private double gameTimer;
+    public double gameTimer;
     private double enemyTimer = 0;
 
     private int kings;
@@ -45,6 +47,12 @@ public class EnemySpawner : MonoBehaviour
             kings++;
             SpawnHelper(UnityEngine.Random.Range(0, 4), kingDice, 1);
             SpawnHelper(UnityEngine.Random.Range(0, 4), kingDice, 1);
+        }
+
+        if(gameTimer >= 60 * 15)
+        {
+            Time.timeScale = 0;
+            winScreen.SetActive(true);
         }
 
         timerText.text = "Survive! " + TimerToString(SplitMinutes(60*15 - gameTimer));

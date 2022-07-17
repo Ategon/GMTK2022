@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SelectCanvas : MonoBehaviour
 {
-    int userIndex;
+    public int userIndex;
 
     void Start()
     {

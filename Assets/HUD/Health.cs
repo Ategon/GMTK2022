@@ -27,9 +27,7 @@ public class Health : MonoBehaviour
     [SerializeField]
     private Image[] hearts;
     
-    [SerializeField]
-    [Range(0, 3)]
-    private int chosenCharacterIndex = 0;
+    public int chosenCharacterIndex = 0;
 
     [SerializeField]
     private Sprite[] fullHearts;

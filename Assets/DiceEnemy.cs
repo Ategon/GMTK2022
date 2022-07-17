@@ -28,7 +28,7 @@ public class DiceEnemy : Enemy
             else
             {
                 rb.MovePosition(transform.position + direction * 1.5f * walkingSpeed * deltaTime);
-                animator.Play("dice-enemy-walk");
+                animator.Play("dicebullywalk");
 
                 if (distance <= 5)
                 {

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerVisuals : MonoBehaviour
 {
+    public int playerIndex;
+
     private SpriteRenderer upper;
     private SpriteRenderer lower;
     private Animator upperAnim;
@@ -45,28 +47,35 @@ public class PlayerVisuals : MonoBehaviour
 
         if (state.PlayerState.Move.x == 0 && state.PlayerState.Move.y == 0)
         {
-            lowerAnim.Play("clover-idle-lower");
+            if(playerIndex == 1) lowerAnim.Play("scarlet-idle-lower");
+            else lowerAnim.Play("clover-idle-lower");
+
             if (state.PlayerAttackState.throwTriggered)
             {
                 throwingTimer = throwingTime;
-                upperAnim.Play("clover-throw");
+                if (playerIndex == 1) upperAnim.Play("scarlet-throw");
+                else upperAnim.Play("clover-throw");
             }
             else if(throwingTimer < 0)
             {
-                upperAnim.Play("clover-idle");
+                if (playerIndex == 1) upperAnim.Play("scarlet-idle");
+                else upperAnim.Play("clover-idle");
             }
         }
         else
         {
-            lowerAnim.Play("clover-walk-lower");
+            if (playerIndex == 1) lowerAnim.Play("scarlet-walk-lower");
+            else lowerAnim.Play("clover-walk-lower");
             if (state.PlayerAttackState.throwTriggered)
             {
                 throwingTimer = throwingTime;
-                upperAnim.Play("clover-throw");
+                if (playerIndex == 1) upperAnim.Play("scarlet-throw");
+                else upperAnim.Play("clover-throw");
             }
             else if (throwingTimer < 0)
             {
-                upperAnim.Play("clover-walk");
+                if (playerIndex == 1) upperAnim.Play("scarlet-walk");
+                else upperAnim.Play("clover-walk");
             }
         }
 
