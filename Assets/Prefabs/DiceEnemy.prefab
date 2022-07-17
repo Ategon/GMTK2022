@@ -34,7 +34,7 @@ Transform:
   m_Children:
   - {fileID: 369786936499231949}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &3211274726829564545
 BoxCollider:
@@ -91,6 +91,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43fbb53b0a36c0f44935d13f417e10f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  walkingSpeedMultiplier: 1
+  slowTint: {r: 0.51320755, g: 0.7250681, b: 1, a: 1}
+  burningTint: {r: 1, g: 0.4117647, b: 0, a: 1}
+  poisonTint: {r: 0.42745098, g: 1, b: 0, a: 1}
 --- !u!1 &2278755971934365168
 GameObject:
   m_ObjectHideFlags: 0

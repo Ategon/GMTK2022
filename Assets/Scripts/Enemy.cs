@@ -90,4 +90,9 @@ public class Enemy : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
+
+    public void UpdateTint(Color color)
+    {
+        sr.color = color;
+    }
 }

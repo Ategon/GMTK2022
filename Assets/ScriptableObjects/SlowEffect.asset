@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 240bb0df535b4fd4bb688e088f5aff71, type: 3}
-  m_Name: PoisonEffect
+  m_Name: SlowEffect
   m_EditorClassIdentifier: 
-  diceEffectPrefab: {fileID: 6967392857742194697, guid: 5bb6179c47cd75c4a917081155555b4a,
+  diceEffectPrefab: {fileID: 2040798472673751623, guid: 17bdd91c502195240a253b456110dc5c,
     type: 3}
   diceEffectGlyph: {fileID: 0}
-  damage: 0
-  effectDuration: 2
+  damage: 5
+  effectDuration: 13
   statusEffect:
-    type: 2
-    value: 1
-    duration: 10
-    timeBetweenApplyEffect: 1
+    type: 3
+    value: 0.2
+    duration: 3
+    timeBetweenApplyEffect: 10000
     lastTimeEffectWasApplied: 0
     explosionForce: 0
     explosionRadius: 0
