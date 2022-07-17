@@ -19,14 +19,27 @@ public class StatusEffect
     // Amount of damage over time / Slow effect
     public float value; 
     // Remaining duration the effect is active
-    public float remainingDuration; 
+    public float duration; 
     public float timeBetweenApplyEffect;
 
+    //[HideInInspector]
     public float lastTimeEffectWasApplied;
 
     [Header("Knockback")]
     public float explosionForce;
     public float explosionRadius;
+
+    public StatusEffect(StatusEffect copy)
+    {
+        type = copy.type;
+        value = copy.value;
+        duration = copy.duration;
+        timeBetweenApplyEffect = copy.timeBetweenApplyEffect;
+        explosionForce = copy.explosionForce;
+        explosionRadius = copy.explosionRadius;
+
+        lastTimeEffectWasApplied = 0f;
+    }
 }
 
 public class StatusEffects : MonoBehaviour
@@ -52,7 +65,7 @@ public class StatusEffects : MonoBehaviour
         switch (statusEffect.type)
         {
             case StatusEffectType.Slow:
-                walkingSpeedMultiplier *= statusEffect.value;
+                walkingSpeedMultiplier = statusEffect.value;
                 break;
             case StatusEffectType.Knockback:
                 rb.AddExplosionForce(statusEffect.explosionForce, dicePos, statusEffect.explosionRadius, 0, ForceMode.Impulse);
@@ -60,14 +73,14 @@ public class StatusEffects : MonoBehaviour
             case StatusEffectType.NoEffect:
             case StatusEffectType.Fire:
             case StatusEffectType.Poison:
-                // For now, do nothing
                 break;
             default:
                 Debug.LogError("StatusEffects.AddStatusEffect: Status effect not implemented");
                 break;
         }
 
-        statusEffects.Add(statusEffect);
+
+        RefreshAndAddStatusEffect(statusEffect);
     }
 
     private void Update()
@@ -75,8 +88,8 @@ public class StatusEffects : MonoBehaviour
         for (int i = 0; i < statusEffects.Count; )
         {
             StatusEffect statusEffect = statusEffects[i];
-            statusEffect.remainingDuration -= Time.deltaTime;
-            if (statusEffect.remainingDuration < 0)
+            statusEffect.duration -= Time.deltaTime;
+            if (statusEffect.duration < 0)
             {
                 statusEffects.RemoveAt(i);
                 continue;
@@ -88,6 +101,8 @@ public class StatusEffects : MonoBehaviour
                     case StatusEffectType.Fire:
                     case StatusEffectType.Poison:
                         enemy.TakeDamage(statusEffect.value);
+                        print($"Enemy taking damage by {statusEffect.type}, Dmg: {statusEffect.value}, time: {statusEffect.lastTimeEffectWasApplied}");
+                        statusEffect.lastTimeEffectWasApplied = Time.time;
                         break;
                     case StatusEffectType.NoEffect:
                     case StatusEffectType.Slow:
@@ -102,5 +117,19 @@ public class StatusEffects : MonoBehaviour
 
             ++i;
         }
+    }
+
+    // Overwrites the status effect if there is already a status effect of that type
+    public void RefreshAndAddStatusEffect(StatusEffect statusEffect)
+    {
+        for (int i = 0; i < statusEffects.Count; i++)
+        {
+            if (statusEffects[i].type == statusEffect.type)
+            {
+                statusEffects.RemoveAt(i);
+            }
+        }
+
+        statusEffects.Add(statusEffect);
     }
 }

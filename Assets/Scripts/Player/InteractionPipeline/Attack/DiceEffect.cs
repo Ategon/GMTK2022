@@ -30,7 +30,7 @@ public class DiceEffect : MonoBehaviour
             StatusEffects statusEffects = other.GetComponent<StatusEffects>();
             if (statusEffects != null)
             {
-                statusEffects.AddStatusEffect(effectSettings.statusEffect, transform.position);
+                statusEffects.AddStatusEffect(new StatusEffect(effectSettings.statusEffect), transform.position);
             }
         }
     }

@@ -12,15 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 240bb0df535b4fd4bb688e088f5aff71, type: 3}
   m_Name: PoisonEffect
   m_EditorClassIdentifier: 
-  diceEffectPrefab: {fileID: 0}
+  diceEffectPrefab: {fileID: 6967392857742194697, guid: 5bb6179c47cd75c4a917081155555b4a,
+    type: 3}
   diceEffectGlyph: {fileID: 0}
   damage: 0
-  effectDuration: 0
+  effectDuration: 2
   statusEffect:
-    type: 0
-    value: 0
-    remainingDuration: 0
-    timeBetweenApplyEffect: 0
+    type: 2
+    value: 1
+    duration: 5
+    timeBetweenApplyEffect: 0.1
     lastTimeEffectWasApplied: 0
     explosionForce: 0
     explosionRadius: 0
