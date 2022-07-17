@@ -60,12 +60,13 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void TakeDamage(float damage)
     {
-        Dice dice = other.GetComponent<Dice>();
-        if (dice != null)
+        health -= damage;
+
+        if (health <= 0)
         {
-            dice.OnHitEnemy();
+            Destroy(this.gameObject);
         }
     }
 }

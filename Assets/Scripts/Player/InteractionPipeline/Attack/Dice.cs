@@ -100,8 +100,6 @@ public class Dice : MonoBehaviour
             numRolled = 1;
         }
 
-        print("NumberRolled: " + numRolled);
-
         return numRolled;
     }
 
@@ -116,12 +114,17 @@ public class Dice : MonoBehaviour
         GameObject.Instantiate(diceEffect.diceEffectPrefab, transform.position, Quaternion.identity);
     }
 
-    public void OnHitEnemy()
+    private void OnTriggerEnter(Collider other)
     {
-        int chosenSide = GetRolledNumber();
+        Enemy enemy = other.GetComponent<Enemy>();
+        if (enemy != null)
+        {
+            enemy.TakeDamage(diceSettings.AttackDamge);
 
-        SpawnEffect(chosenSide);
+            int chosenSide = GetRolledNumber();
+            SpawnEffect(chosenSide);
 
-        dicePool.Release(this.gameObject);
+            dicePool.Release(this.gameObject);
+        }
     }
 }

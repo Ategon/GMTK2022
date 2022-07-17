@@ -326,6 +326,7 @@ MonoBehaviour:
     PlayerAttackState:
       lastAttackedTime: 0
       ShootDir: {x: 0, y: 0, z: 0}
+      throwTriggered: 0
       equippedEffects: []
     PlayerAttackSettings:
       DicePrefab: {fileID: 797911412570339118, guid: 910f448e1605c4744ac08227079aed6e,
@@ -337,7 +338,7 @@ MonoBehaviour:
       StartingDiceEffectIndex: 0
       AttackSpeed: 1
     DiceAttackSettings:
-      AttackDamge: 5
+      AttackDamge: 50
       Speed: 20
       Lifetime: 1
       Size: 1
@@ -1365,7 +1366,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67f9fde5c29f0d94e99366bcd0b46289, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camera: {fileID: 1518952156}
 --- !u!1 &1403847356
 GameObject:
   m_ObjectHideFlags: 0
@@ -2724,7 +2724,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67f9fde5c29f0d94e99366bcd0b46289, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camera: {fileID: 0}
 --- !u!1 &8289325798301167955
 GameObject:
   m_ObjectHideFlags: 0
