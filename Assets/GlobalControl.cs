@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GlobalControl : MonoBehaviour
@@ -9,10 +7,10 @@ public class GlobalControl : MonoBehaviour
     [Range(0, 1)]
     public float MasterVolume;
 
-    [Range(0, 1)]
+    [Range(0, 1f)]
     public float MusicVolume;
 
-    [Range(0, 1)]
+    [Range(0, 1f)]
     public float SoundEffectVolume;
 
     private void Awake()
@@ -22,8 +20,8 @@ public class GlobalControl : MonoBehaviour
             DontDestroyOnLoad(gameObject);
             Instance = this;
             MasterVolume = 1;
-            MusicVolume = 1;
-            SoundEffectVolume = 1;
+            MusicVolume = 0.8797727f;
+            SoundEffectVolume = 0.8797727f;
         }
         else if (Instance != this)
         {

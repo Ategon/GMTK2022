@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,8 +22,8 @@ public class SynchVolume : MonoBehaviour
     private void Update()
     {
         globalControl.MasterVolume = master.value;
-        globalControl.MusicVolume = music.value;
-        globalControl.SoundEffectVolume = sfx.value;
+        globalControl.MusicVolume = (float)Math.Pow(( music.value) * (master.value), 0.5f);// music.value;
+        globalControl.SoundEffectVolume = (float)Math.Pow((sfx.value) * (master.value), 0.5f);
     }
 
 }
