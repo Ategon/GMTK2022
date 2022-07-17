@@ -97,6 +97,7 @@ public class Enemy : MonoBehaviour
 
     public void UpdateTint(Color color)
     {
-        sr.color = color;
+        if (sr != null)
+            sr.color = color;
     }
 }

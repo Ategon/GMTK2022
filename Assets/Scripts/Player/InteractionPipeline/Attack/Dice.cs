@@ -107,8 +107,10 @@ public class Dice : MonoBehaviour
     {
         DiceEffectSettings diceEffectSetting = equippedDiceEffects[numberRolled - 1];
 
-        if (diceEffectSetting == null)
+        if (diceEffectSetting == null || !diceEffectSetting.ifEnabled)
             return;
+
+        print("effect settings: " + diceEffectSetting.effectName);
 
         // TODO (GnoxNahte): Replace with pool
         Vector3 spawnPos = transform.position;

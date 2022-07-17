@@ -12,12 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 240bb0df535b4fd4bb688e088f5aff71, type: 3}
   m_Name: IceEffect
   m_EditorClassIdentifier: 
+  ifEnabled: 0
+  effectName: Ice
   diceEffectPrefab: {fileID: 354771392444338835, guid: cb84248dc8e55bb41bd268f0f369b019,
     type: 3}
-  diceEffectGlyph: {fileID: 0}
+  diceEffectGlyph: {fileID: -1631817135, guid: ca03bbd482082d34b994ea17ec390a85, type: 3}
   damage: 0
   effectDuration: 1000
   ifRemoveEffectOnLeaveCollider: 0
+  floatMultiplier: 1
+  intValue: 0
   statusEffect:
     type: 0
     value: 0
@@ -26,3 +30,4 @@ MonoBehaviour:
     lastTimeEffectWasApplied: 0
     explosionForce: 0
     explosionRadius: 0
+    floatMultiplier: 0

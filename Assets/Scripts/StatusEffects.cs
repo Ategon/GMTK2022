@@ -29,10 +29,15 @@ public class StatusEffect
     public float explosionForce;
     public float explosionRadius;
 
-    public StatusEffect(StatusEffect copy)
+    // TODO (GnoxNahte): Refactor
+    public float floatMultiplier;
+
+    public StatusEffect(StatusEffect copy, float damageMultiplier)
     {
         type = copy.type;
+
         value = copy.value;
+        floatMultiplier = damageMultiplier;
         duration = copy.duration;
         timeBetweenApplyEffect = copy.timeBetweenApplyEffect;
         explosionForce = copy.explosionForce;
@@ -68,7 +73,7 @@ public class StatusEffects : MonoBehaviour
         switch (statusEffect.type)
         {
             case StatusEffectType.Slow:
-                walkingSpeedMultiplier = statusEffect.value;
+                walkingSpeedMultiplier = statusEffect.value / statusEffect.floatMultiplier;
                 break;
             case StatusEffectType.Knockback:
                 rb.AddExplosionForce(statusEffect.explosionForce, dicePos, statusEffect.explosionRadius, 0, ForceMode.Impulse);
@@ -150,7 +155,7 @@ public class StatusEffects : MonoBehaviour
                 {
                     case StatusEffectType.Burn:
                     case StatusEffectType.Poison:
-                        enemy.TakeDamage(statusEffect.value);
+                        enemy.TakeDamage(statusEffect.value * statusEffect.floatMultiplier);
                         statusEffect.lastTimeEffectWasApplied = Time.time;
                         break;
                     case StatusEffectType.NoEffect:

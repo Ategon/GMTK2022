@@ -15,13 +15,13 @@ public class DiceEffect : MonoBehaviour
         LightningEffect lightningEffect = GetComponent<LightningEffect>();
         if (lightningEffect != null)
         {
-            lightningEffect.Damage = effectSettings.damage;
-            lightningEffect.NumOfStrikes = effectSettings.numOfLightningStrikes;
+            lightningEffect.Damage = effectSettings.damage * effectSettings.floatMultiplier;
+            lightningEffect.NumOfStrikes = effectSettings.intValue;
         }
         IceEffect iceEffect = GetComponent<IceEffect>();
         if (iceEffect != null)
         {
-            iceEffect.damage = effectSettings.damage;
+            iceEffect.damage = effectSettings.damage * effectSettings.floatMultiplier;
         }
 
         StartCoroutine(EndDiceEffect());
@@ -52,12 +52,12 @@ public class DiceEffect : MonoBehaviour
         Enemy enemy = other.GetComponent<Enemy>();
         if (enemy != null)
         {
-            enemy.TakeDamage(effectSettings.damage);
+            enemy.TakeDamage(effectSettings.damage * effectSettings.floatMultiplier);
 
             StatusEffects statusEffects = other.GetComponent<StatusEffects>();
             if (statusEffects != null)
             {
-                statusEffects.AddStatusEffect(new StatusEffect(effectSettings.statusEffect), transform.position);
+                statusEffects.AddStatusEffect(new StatusEffect(effectSettings.statusEffect, effectSettings.floatMultiplier), transform.position);
 
                 enemies.Add(other.gameObject);
             }

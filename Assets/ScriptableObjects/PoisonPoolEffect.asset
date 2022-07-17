@@ -12,11 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 240bb0df535b4fd4bb688e088f5aff71, type: 3}
   m_Name: PoisonPoolEffect
   m_EditorClassIdentifier: 
+  ifEnabled: 1
+  effectName: Poison
   diceEffectPrefab: {fileID: 246334279247630241, guid: bf783a883a1abf54cbf6c51660a69ad0,
     type: 3}
-  diceEffectGlyph: {fileID: 0}
+  diceEffectGlyph: {fileID: 2104547201, guid: ca03bbd482082d34b994ea17ec390a85, type: 3}
   damage: 0
   effectDuration: 10
+  ifRemoveEffectOnLeaveCollider: 0
+  floatMultiplier: 1.4
+  intValue: 0
   statusEffect:
     type: 2
     value: 2
@@ -25,3 +30,4 @@ MonoBehaviour:
     lastTimeEffectWasApplied: 0
     explosionForce: 0
     explosionRadius: 0
+    floatMultiplier: 0

@@ -12,12 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 240bb0df535b4fd4bb688e088f5aff71, type: 3}
   m_Name: ExplosionEffect
   m_EditorClassIdentifier: 
+  ifEnabled: 0
+  effectName: Fire
   diceEffectPrefab: {fileID: 935016883441691472, guid: d42a6e8f722b47347bbda9c8a86038dc,
     type: 3}
-  diceEffectGlyph: {fileID: 0}
+  diceEffectGlyph: {fileID: -935903455, guid: ca03bbd482082d34b994ea17ec390a85, type: 3}
   damage: 20
   effectDuration: 0.4
   ifRemoveEffectOnLeaveCollider: 0
+  floatMultiplier: 1
+  intValue: 0
   statusEffect:
     type: 4
     value: 0
@@ -26,3 +30,4 @@ MonoBehaviour:
     lastTimeEffectWasApplied: 0
     explosionForce: 10
     explosionRadius: 5
+    floatMultiplier: 0
