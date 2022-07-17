@@ -302,6 +302,7 @@ MonoBehaviour:
       MoveDirection: {x: 0, y: 0, z: 0}
       MoveState: 0
       TimeLeftInCurrState: 0
+      dodgeDirection: {x: 0, y: 0, z: 0}
       LastDodgedTime: 0
       Velocity: {x: 0, y: 0, z: 0}
       MoveSpeed: 0
@@ -309,9 +310,9 @@ MonoBehaviour:
       CharacterController: {fileID: 0}
       WalkingSpeed: 5
       CrouchSpeed: 3
-      DodgeSpeed: 20
-      DodgeTime: 0.3
-      DodgeCooldown: 0.5
+      DodgeSpeed: 15
+      DodgeTime: 0.25
+      DodgeCooldown: 2
       Gravity: {x: 0, y: -9.8, z: 0}
       GroundCheck: {fileID: 660147668}
       GroundMask:
@@ -390,6 +391,7 @@ MonoBehaviour:
     MoveDirection: {x: 0, y: 0, z: 0}
     MoveState: 0
     TimeLeftInCurrState: 0
+    dodgeDirection: {x: 0, y: 0, z: 0}
     LastDodgedTime: 0
     Velocity: {x: 0, y: 0, z: 0}
     MoveSpeed: 0
