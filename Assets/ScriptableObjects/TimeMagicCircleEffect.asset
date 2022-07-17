@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 240bb0df535b4fd4bb688e088f5aff71, type: 3}
   m_Name: TimeMagicCircleEffect
   m_EditorClassIdentifier: 
-  ifEnabled: 0
+  ifEnabled: 1
   effectName: Time
   diceEffectPrefab: {fileID: 439533966783478348, guid: dbb9a346365cb754695594e69ce0d4f3,
     type: 3}
