@@ -16,8 +16,14 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private GameObject player;
     [SerializeField] private TextMeshProUGUI timerText;
 
-    private double gameTimer;
+    [SerializeField] private GameObject winScreen;
+
+    [SerializeField] private GameObject kingDice;
+
+    public double gameTimer;
     private double enemyTimer = 0;
+
+    private int kings;
 
     private void FixedUpdate()
     {
@@ -28,6 +34,25 @@ public class EnemySpawner : MonoBehaviour
         {
             enemyTimer = 0.1f;
             SpawnEnemy();
+        }
+
+        if(gameTimer >= 60 * 5 && kings == 0)
+        {
+            kings++;
+            SpawnHelper(UnityEngine.Random.Range(0, 4), kingDice, 1);
+        }
+
+        if (gameTimer >= 60 * 10 && kings == 1)
+        {
+            kings++;
+            SpawnHelper(UnityEngine.Random.Range(0, 4), kingDice, 1);
+            SpawnHelper(UnityEngine.Random.Range(0, 4), kingDice, 1);
+        }
+
+        if(gameTimer >= 60 * 15)
+        {
+            Time.timeScale = 0;
+            winScreen.SetActive(true);
         }
 
         timerText.text = "Survive! " + TimerToString(SplitMinutes(60*15 - gameTimer));
@@ -70,6 +95,8 @@ public class EnemySpawner : MonoBehaviour
                 i += waves[waveNum].enemies[j].weight;
                 ++j;
             }
+
+            if (j != 0) j -= 1;
 
             enemy = waves[waveNum].enemies[j].gameObject;
 

@@ -3,6 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+[System.Serializable] // TempDebug
 public class PowerUp
 {
     public string name;
@@ -23,6 +24,8 @@ public class PowerUpPool : MonoBehaviour
 
     [SerializeField] private Sprite[] sprites;
 
+    [SerializeField] List<DiceEffectSettings> diceEffectSettings;
+
     // Start is called before the first frame update
     private void Awake()
     {
@@ -34,6 +37,8 @@ public class PowerUpPool : MonoBehaviour
         powerups.Add(new PowerUp { name = "Air", level = 0, chosenThatTime = false, description = "Displacement ability, Pushes enemies away from your die." });
 
         FillTextWithPowerUps();
+
+        UpdatePowerUps();
     }
 
     public void FillTextWithPowerUps()
@@ -100,8 +105,38 @@ public class PowerUpPool : MonoBehaviour
                 break;
         }
 
+        UpdatePowerUps();
+
         Time.timeScale = 1;
         gameObject.SetActive(false);
+    }
+
+    [ContextMenu("Reset Powerups")]
+    public void UpdatePowerUps()
+    {
+        foreach (DiceEffectSettings effectSetting in diceEffectSettings)
+        {
+            foreach (PowerUp powerUp in powerups)
+            {
+                if (effectSetting.effectName == powerUp.name)
+                {
+                    switch (effectSetting.effectName)
+                    {
+                        case "Fire": effectSetting.floatMultiplier = 1 + 0.2f * powerUp.level; break;
+                        case "Ice": effectSetting.floatMultiplier = 1 + 0.2f * powerUp.level; break;
+                        case "Poison": effectSetting.floatMultiplier = 1 + 0.2f * powerUp.level; break;
+                        case "Lightning": effectSetting.intValue = 3 + powerUp.level; break;
+                        case "Time": effectSetting.floatMultiplier = 1 + 0.2f * powerUp.level; break;
+                        case "Air": /* Do Nothing */ break;
+                        default: Debug.LogError("PowerUpPool.UpdatePowerUps(): Can't find name"); break;
+                    }
+
+
+                    effectSetting.ifEnabled = powerUp.level != 0;
+                }
+
+            }
+        }
     }
 
     public void hoverOption(int buttonId)
@@ -127,5 +162,4 @@ public class PowerUpPool : MonoBehaviour
                 break;
         }
     }
-
 }

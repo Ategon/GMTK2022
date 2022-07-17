@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3211274726829564545}
   - component: {fileID: 5489331313107492570}
   - component: {fileID: 3230402667283426548}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: DiceEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -33,7 +33,7 @@ Transform:
   m_Children:
   - {fileID: 369786936499231949}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &3211274726829564545
 BoxCollider:
@@ -63,8 +63,6 @@ MonoBehaviour:
   walkingSpeed: 1
   maxHealth: 100
   expAmount: 20
-  explosion: {fileID: 282438892204884229, guid: 33e24881717c6c04796e95c653c6f9c9,
-    type: 3}
   exp: {fileID: 2524370295893443994, guid: 9a0ce85ec1294864c9cd8597b8a501fb, type: 3}
 --- !u!54 &3230402667283426548
 Rigidbody:
@@ -82,6 +80,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &2550877827675865184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1622322677565801872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43fbb53b0a36c0f44935d13f417e10f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  walkingSpeedMultiplier: 1
+  slowTint: {r: 0.51320755, g: 0.7250681, b: 1, a: 1}
+  burningTint: {r: 1, g: 0.4117647, b: 0, a: 1}
+  poisonTint: {r: 0.42745098, g: 1, b: 0, a: 1}
 --- !u!1 &2278755971934365168
 GameObject:
   m_ObjectHideFlags: 0

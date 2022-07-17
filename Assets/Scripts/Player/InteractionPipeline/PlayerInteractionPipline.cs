@@ -24,9 +24,12 @@ public class PlayerInteractionPipline : MonoBehaviour
         initialPlayerState.PlayerAttackState.dicePool = new ObjectPool();
         initialPlayerState.PlayerAttackState.dicePool.InitPool("DicePool", initialPlayerState.PlayerAttackSettings.DicePrefab, 30);
 
-        initialPlayerState.PlayerAttackState.equippedEffects = new DiceEffectSettings[DiceAttackSettings.numOfSides];
-        initialPlayerState.PlayerAttackState.equippedEffects[0] =
-            initialPlayerState.PlayerAttackSettings.DiceEffects[initialPlayerState.PlayerAttackSettings.StartingDiceEffectIndex];
+        //initialPlayerState.PlayerAttackState.equippedEffects = new DiceEffectSettings[DiceAttackSettings.numOfSides];
+        //initialPlayerState.PlayerAttackState.equippedEffects[0] =
+        //    initialPlayerState.PlayerAttackSettings.DiceEffects[initialPlayerState.PlayerAttackSettings.StartingDiceEffectIndex];
+
+        foreach (DiceEffectSettings effectSettings in initialPlayerState.PlayerAttackState.equippedEffects)
+            effectSettings.ifEnabled = false;
 
         initialPlayerState.sharedData.PlayerTransform = transform;
         initialPlayerState.sharedData.MainCamera = Camera.main;

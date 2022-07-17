@@ -105,13 +105,20 @@ public class Dice : MonoBehaviour
 
     private void SpawnEffect(int numberRolled)
     {
-        DiceEffectSettings diceEffect = equippedDiceEffects[numberRolled - 1];
+        DiceEffectSettings diceEffectSetting = equippedDiceEffects[numberRolled - 1];
 
-        if (diceEffect == null)
+        if (diceEffectSetting == null || !diceEffectSetting.ifEnabled)
             return;
 
+        print("effect settings: " + diceEffectSetting.effectName);
+
         // TODO (GnoxNahte): Replace with pool
-        GameObject.Instantiate(diceEffect.diceEffectPrefab, transform.position, Quaternion.identity);
+        Vector3 spawnPos = transform.position;
+        spawnPos.y = 0.01f;
+
+        GameObject diceEffectObj = GameObject.Instantiate(diceEffectSetting.diceEffectPrefab, spawnPos, Quaternion.identity);
+        DiceEffect diceEffect = diceEffectObj.GetComponent<DiceEffect>();
+        diceEffect.Init(diceEffectSetting);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -119,12 +126,25 @@ public class Dice : MonoBehaviour
         Enemy enemy = other.GetComponent<Enemy>();
         if (enemy != null)
         {
-            enemy.TakeDamage(diceSettings.AttackDamge);
+            RouletteEnemy script = other.GetComponent<RouletteEnemy>();
+            if (script != null && script.summoning)
+            {
+                rb.velocity = new Vector3();
+                Vector3 dir = new Vector3(Random.Range(-100, 100), 0, Random.Range(-100, 100));
+                if (dir.x < 1) dir.x = 1;
+                if (dir.z < 1) dir.z = 1;
+                dir.Normalize();
+                rb.AddForce(dir * diceSettings.Speed, ForceMode.VelocityChange);
+            }
+            else
+            {
+                enemy.TakeDamage(diceSettings.AttackDamge);
 
-            int chosenSide = GetRolledNumber();
-            SpawnEffect(chosenSide);
+                int chosenSide = GetRolledNumber();
+                SpawnEffect(chosenSide);
 
-            dicePool.Release(this.gameObject);
+                dicePool.Release(this.gameObject);
+            }
         }
     }
 }
