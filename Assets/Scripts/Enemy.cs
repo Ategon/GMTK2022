@@ -1,36 +1,37 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Enemy : MonoBehaviour
 {
     GameObject player;
-    Rigidbody rb;
+    protected Rigidbody rb;
     SpriteRenderer sr;
-    CharacterController controller;
+    //protected CharacterController controller;
+    protected Animator animator;
 
-    [SerializeField] private float walkingSpeed = 1f;
+    [SerializeField] protected float walkingSpeed = 1f;
     [SerializeField] private float maxHealth = 100;
+    public float expAmount = 20;
 
     private float health;
+
+    [SerializeField] public GameObject exp;
 
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.Find("Player");
-        controller = GetComponent<CharacterController>();
+        //controller = GetComponent<CharacterController>();
         rb = GetComponent<Rigidbody>();
         sr = transform.Find("Sprite").GetComponent<SpriteRenderer>();
         health = maxHealth;
+        animator = transform.Find("Sprite").GetComponent<Animator>();
     }
 
-    void FixedUpdate()
+    void FlipDirection(Vector3 direction)
     {
-        Vector3 direction = player.transform.position - transform.position;
-        float angle = Mathf.Atan2(direction.z, direction.x) * Mathf.Rad2Deg;
-
-        direction.Normalize();
-
         if (direction.x < 0)
         {
             sr.flipX = true;
@@ -39,32 +40,54 @@ public class Enemy : MonoBehaviour
         {
             sr.flipX = false;
         }
+    }
 
-        controller.Move(direction * 2f * walkingSpeed * Time.deltaTime);
+    public virtual void Movement(Vector3 direction, float deltaTime, float distance)
+    {
+        rb.MovePosition(transform.position + direction * 2f * walkingSpeed * deltaTime);
+    }
 
+    void LoopMap()
+    {
         if (player.transform.position.x - transform.position.x > 40)
         {
-            controller.Move(Vector3.right * 80f);
+            rb.MovePosition(transform.position + Vector3.right * 80f);
         }
         if (player.transform.position.x - transform.position.x < -40)
         {
-            controller.Move(Vector3.right * -80f);
+            rb.MovePosition(transform.position + Vector3.right * -80f);
         }
         if (player.transform.position.z - transform.position.z > 40)
         {
-            controller.Move(Vector3.forward * 80f);
+            rb.MovePosition(transform.position + Vector3.forward * 80f);
         }
         if (player.transform.position.z - transform.position.z < -40)
         {
-            controller.Move(Vector3.forward * -80f);
+            rb.MovePosition(transform.position + Vector3.forward * -80f);
         }
     }
 
-    void OnCollisionEnter2D(Collision2D col)
+    void FixedUpdate()
     {
-        if (col.gameObject.tag == "PlayerBullet")
+        Vector3 direction = player.transform.position - transform.position;
+        float angle = Mathf.Atan2(direction.z, direction.x) * Mathf.Rad2Deg;
+        float distance = (float) Math.Sqrt(Math.Pow(player.transform.position.x - transform.position.x, 2) + Math.Pow(player.transform.position.z - transform.position.z, 2));
+
+        direction.Normalize();
+
+        FlipDirection(direction);
+        Movement(direction, Time.deltaTime, distance);
+        LoopMap();
+    }
+
+    public void TakeDamage(float damage)
+    {
+        health -= damage;
+
+        if (health <= 0)
         {
-            
+            Instantiate(exp, transform.position, Quaternion.identity);
+            Destroy(this.gameObject);
         }
     }
 }

@@ -8,6 +8,6 @@ public class PlayerMovementHandler : IHandler<PlayerInteractionState>
 {
     public void Handle(in PlayerInteractionState data)
     {
-        data.EntityMovementSettings.CharacterController.Move(data.PlayerState.MoveDirection * data.PlayerState.MoveSpeed * Time.deltaTime + data.PlayerState.Velocity * Time.deltaTime);
+        data.EntityMovementSettings.RigidBody.MovePosition(data.sharedData.PlayerTransform.position + data.PlayerState.MoveDirection * data.PlayerState.MoveSpeed * Time.deltaTime + data.PlayerState.Velocity * Time.deltaTime);
     } 
 }

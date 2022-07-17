@@ -20,9 +20,12 @@ public struct PlayerState : IData
     public MoveState MoveState;
     public float TimeLeftInCurrState;
 
+    public Vector3 dodgeDirection;
     public float LastDodgedTime;
 
     public Vector3 Velocity;
+
+    public Vector3 position;
 
     public float MoveSpeed;
 
@@ -38,9 +41,9 @@ public struct PlayerState : IData
         if (Pause != state.Pause) Pause = state.Pause;
         if (IsGrounded != state.IsGrounded) IsGrounded = state.IsGrounded;
         if (MoveDirection != state.MoveDirection) MoveDirection = state.MoveDirection;
-        if (MoveState != state.MoveState) MoveState = state.MoveState;
-        if (TimeLeftInCurrState != state.TimeLeftInCurrState) TimeLeftInCurrState = state.TimeLeftInCurrState;
-        if (LastDodgedTime != state.LastDodgedTime) LastDodgedTime = state.LastDodgedTime;
+        //if (MoveState != state.MoveState) MoveState = state.MoveState;
+        //if (TimeLeftInCurrState != state.TimeLeftInCurrState) TimeLeftInCurrState = state.TimeLeftInCurrState;
+        //if (LastDodgedTime != state.LastDodgedTime) LastDodgedTime = state.LastDodgedTime;
         if (Velocity != state.Velocity) Velocity = state.Velocity;
         if (MoveSpeed != state.MoveSpeed) MoveSpeed = state.MoveSpeed;
     }

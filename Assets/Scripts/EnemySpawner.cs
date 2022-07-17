@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using System;
+using TMPro;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private float enemySpawnChanceDecrease;
     [SerializeField] private int hordeSize;
     [SerializeField] private GameObject player;
+    [SerializeField] private TextMeshProUGUI timerText;
 
     private double gameTimer;
     private double enemyTimer = 0;
@@ -27,11 +29,32 @@ public class EnemySpawner : MonoBehaviour
             enemyTimer = 0.1f;
             SpawnEnemy();
         }
+
+        timerText.text = "Survive! " + TimerToString(SplitMinutes(60*15 - gameTimer));
+    }
+
+    private string TimerToString(double[] parts)
+    {
+        return $"{parts[0]:0}:{parts[1]:00.00}";
+    }
+
+    private double[] SplitMinutes(double time)
+    {
+        double minutes = 0;
+
+        while (time >= 60)
+        {
+            time -= 60;
+            minutes++;
+        }
+
+        return new double[] { minutes, time };
     }
 
     public void SpawnEnemy()
     {
-        int totalPriority = waves[(int) Math.Floor(gameTimer / 60)].enemies.Sum(enemy => enemy.weight);
+        int waveNum = (int)Math.Floor(gameTimer / 60);
+        int totalPriority = waves[waveNum].enemies.Sum(enemy => enemy.weight);
         int randomSide = UnityEngine.Random.Range(0, 4);
         int enemyType = UnityEngine.Random.Range(0, totalPriority);
         float enemySpawned = UnityEngine.Random.Range(0, enemySpawnChanceBase + enemySpawnChanceDecrease * (float) gameTimer);
@@ -41,7 +64,14 @@ public class EnemySpawner : MonoBehaviour
         {
             GameObject enemy;
 
-            enemy = waves[0].enemies[0].gameObject; // TODO Change to selecting from wave info instead of static.
+            int i = 0;
+            int j = 0;
+            while (i < enemyType) {
+                i += waves[waveNum].enemies[j].weight;
+                ++j;
+            }
+
+            enemy = waves[waveNum].enemies[j].gameObject;
 
             int enemyAmount = hordeSpawned < 1 ? hordeSize : 1;
             SpawnHelper(randomSide, enemy, enemyAmount);
