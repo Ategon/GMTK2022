@@ -82,13 +82,13 @@ public class EnemySpawner : MonoBehaviour
             GameObject enemy;
 
             int i = 0;
-            int j = -1;
+            int j = 0;
             while (i < enemyType) {
                 i += waves[waveNum].enemies[j].weight;
                 ++j;
             }
 
-            if (j == -1) j = 0;
+            if (j != 0) j -= 1;
 
             enemy = waves[waveNum].enemies[j].gameObject;
 
