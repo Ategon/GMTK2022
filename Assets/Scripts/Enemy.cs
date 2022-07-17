@@ -13,6 +13,7 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] protected float walkingSpeed = 1f;
     [SerializeField] private float maxHealth = 100;
+    public float expAmount = 20;
 
     private float health;
 

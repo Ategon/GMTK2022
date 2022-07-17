@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using System;
+using TMPro;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private float enemySpawnChanceDecrease;
     [SerializeField] private int hordeSize;
     [SerializeField] private GameObject player;
+    [SerializeField] private TextMeshProUGUI timerText;
 
     private double gameTimer;
     private double enemyTimer = 0;
@@ -27,6 +29,26 @@ public class EnemySpawner : MonoBehaviour
             enemyTimer = 0.1f;
             SpawnEnemy();
         }
+
+        timerText.text = "Survive! " + TimerToString(SplitMinutes(60*15 - gameTimer));
+    }
+
+    private string TimerToString(double[] parts)
+    {
+        return $"{parts[0]:0}:{parts[1]:00.00}";
+    }
+
+    private double[] SplitMinutes(double time)
+    {
+        double minutes = 0;
+
+        while (time >= 60)
+        {
+            time -= 60;
+            minutes++;
+        }
+
+        return new double[] { minutes, time };
     }
 
     public void SpawnEnemy()

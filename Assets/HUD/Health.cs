@@ -5,10 +5,11 @@ public class Health : MonoBehaviour
 {
     [SerializeField] SpriteRenderer playerSR;
     [SerializeField] SpriteRenderer playerSR2;
-    private float invulnerableTime = 0.3f * 6;
+    private float invulnerableTime = 2;
     private float invulnerableTimer;
     private float flashingTimer;
     private bool dashFlash;
+    private int collidingEnemies;
 
     [SerializeField]
     private int health;
@@ -35,8 +36,6 @@ public class Health : MonoBehaviour
 
     private void FixedUpdate()
     {
-        invulnerableTimer -= Time.deltaTime;
-
         if (flashingTimer > 0)
         {
             flashingTimer -= Time.deltaTime;
@@ -81,7 +80,6 @@ public class Health : MonoBehaviour
         {
             //TODO - play dead animation
             canvas.GetComponent<PauseMenu>().Defeat();
-
         }
 
         for (int i = 0; i < hearts.Length; i++)
@@ -102,18 +100,27 @@ public class Health : MonoBehaviour
                 hearts[i].enabled = false;
             }
         }
+
+        if (invulnerableTimer <= 0 && collidingEnemies > 0)
+        {
+            health--;
+            invulnerableTimer = invulnerableTime;
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.tag == "Enemy")
         {
-            if(invulnerableTimer <= 0)
-            {
-                Destroy(collision.gameObject);
-                health--;
-                invulnerableTimer = invulnerableTime;
-            }
+            collidingEnemies++;
+        }
+    }
+
+    void OnCollisionExit(Collision col)
+    {
+        if (col.gameObject.tag == "Enemy")
+        {
+            collidingEnemies--;
         }
     }
 }
