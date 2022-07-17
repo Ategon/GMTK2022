@@ -11,12 +11,12 @@ public class Chips : MonoBehaviour
     private void Awake()
     {
         numberOfChips = 0;
-        textMeshPro = GetComponent<TextMeshProUGUI>();
-        textMeshPro.text = "Chips : ";
+        /*textMeshPro = GetComponent<TextMeshProUGUI>();
+        textMeshPro.text = "Chips : ";*/
     }
     
     private void Update()
     {
-        textMeshPro.text = "Chips : " + numberOfChips;
+        //textMeshPro.text = "Chips : " + numberOfChips;
     }
 }
