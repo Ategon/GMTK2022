@@ -36,7 +36,7 @@ public class PlayerAttackDiceEffectGenerator : MonoBehaviour, IGenerator<PlayerI
         DiceEffect diceEffect = other.GetComponent<DiceEffect>();
         if (diceEffect != null && diceEffect.EffectSettings.effectName == "Time")
         {
-            playerAttackSpeedMultiplier = (1 / diceEffect.EffectSettings.statusEffect.value) * diceEffect.EffectSettings.floatMultiplier;
+            playerAttackSpeedMultiplier =  diceEffect.EffectSettings.floatMultiplier + 0.5f;
             currTimeEffect = diceEffect;
         }
     }
