@@ -119,12 +119,25 @@ public class Dice : MonoBehaviour
         Enemy enemy = other.GetComponent<Enemy>();
         if (enemy != null)
         {
-            enemy.TakeDamage(diceSettings.AttackDamge);
+            RouletteEnemy script = other.GetComponent<RouletteEnemy>();
+            if (script != null && script.summoning)
+            {
+                rb.velocity = new Vector3();
+                Vector3 dir = new Vector3(Random.Range(-100, 100), 0, Random.Range(-100, 100));
+                if (dir.x < 1) dir.x = 1;
+                if (dir.z < 1) dir.z = 1;
+                dir.Normalize();
+                rb.AddForce(dir * diceSettings.Speed, ForceMode.VelocityChange);
+            }
+            else
+            {
+                enemy.TakeDamage(diceSettings.AttackDamge);
 
-            int chosenSide = GetRolledNumber();
-            SpawnEffect(chosenSide);
+                int chosenSide = GetRolledNumber();
+                SpawnEffect(chosenSide);
 
-            dicePool.Release(this.gameObject);
+                dicePool.Release(this.gameObject);
+            }
         }
     }
 }

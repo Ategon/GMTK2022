@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3211274726829564545}
   - component: {fileID: 5489331313107492570}
   - component: {fileID: 3230402667283426548}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: DiceEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -63,8 +63,6 @@ MonoBehaviour:
   walkingSpeed: 1
   maxHealth: 100
   expAmount: 20
-  explosion: {fileID: 282438892204884229, guid: 33e24881717c6c04796e95c653c6f9c9,
-    type: 3}
   exp: {fileID: 2524370295893443994, guid: 9a0ce85ec1294864c9cd8597b8a501fb, type: 3}
 --- !u!54 &3230402667283426548
 Rigidbody:
