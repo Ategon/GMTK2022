@@ -29,12 +29,12 @@ public class PowerUpPool : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
-        powerups.Add(new PowerUp { name = "Fire", level = 0, chosenThatTime = false, description = "Explosion, AOE damage, very slightly displacement. Only scales damage." });
-        powerups.Add(new PowerUp { name = "Ice", level = 0, chosenThatTime = false, description = "Shoots out ice spears at enemy (5 projectiles). Only Scales damage." });
-        powerups.Add(new PowerUp { name = "Poison", level = 0, chosenThatTime = false, description = "Puddle of poison, applies DOT effect to enemies (last 3 seconds. Refreshes while still inside pool). Only scales damage" });
-        powerups.Add(new PowerUp { name = "Lightning", level = 0, chosenThatTime = false, description = "Lighting strikes random enemies on screen dealing small AOE damage to all enemies around it. . 3 projectiles to start, scales to 5" });
-        powerups.Add(new PowerUp { name = "Time", level = 0, chosenThatTime = false, description = "Creates a circle around your die. Enemies inside the zone are slowed and player attack speed is increased while inside. Only scales in effect strength (Aka enemy movement slow % and player attack speed %)" });
-        powerups.Add(new PowerUp { name = "Air", level = 0, chosenThatTime = false, description = "Displacement ability, Pushes enemies away from your die." });
+        powerups.Add(new PowerUp { name = "Fire", level = 0, chosenThatTime = false, description = "Creates an explosion that deals damage to nearby enemies" });
+        powerups.Add(new PowerUp { name = "Ice", level = 0, chosenThatTime = false, description = "Fires 5 ice spears at nearby enemies, piercing through." });
+        powerups.Add(new PowerUp { name = "Poison", level = 0, chosenThatTime = false, description = "Spawns a pool of poison which poisons enemies trapped inside." });
+        powerups.Add(new PowerUp { name = "Lightning", level = 0, chosenThatTime = false, description = "Lightning strikes down on random enemies dealing damage to all those around." });
+        powerups.Add(new PowerUp { name = "Magic Circle", level = 0, chosenThatTime = false, description = "Spawns a magic circle that slows enemies and hastens player attack speed." });
+        powerups.Add(new PowerUp { name = "Gravity", level = 0, chosenThatTime = false, description = "Creates a black hole, pulling all enemies near inside." });
 
         FillTextWithPowerUps();
 
