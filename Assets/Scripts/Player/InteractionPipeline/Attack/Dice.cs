@@ -105,13 +105,15 @@ public class Dice : MonoBehaviour
 
     private void SpawnEffect(int numberRolled)
     {
-        DiceEffectSettings diceEffect = equippedDiceEffects[numberRolled - 1];
+        DiceEffectSettings diceEffectSetting = equippedDiceEffects[numberRolled - 1];
 
-        if (diceEffect == null)
+        if (diceEffectSetting == null)
             return;
 
         // TODO (GnoxNahte): Replace with pool
-        GameObject.Instantiate(diceEffect.diceEffectPrefab, transform.position, Quaternion.identity);
+        GameObject diceEffectObj = GameObject.Instantiate(diceEffectSetting.diceEffectPrefab, transform.position, Quaternion.identity);
+        DiceEffect diceEffect = diceEffectObj.GetComponent<DiceEffect>();
+        diceEffect.Init(diceEffectSetting);
     }
 
     private void OnTriggerEnter(Collider other)

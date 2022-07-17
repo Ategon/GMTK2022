@@ -275,7 +275,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &287782125
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -333,11 +333,15 @@ MonoBehaviour:
       DicePrefab: {fileID: 797911412570339118, guid: 910f448e1605c4744ac08227079aed6e,
         type: 3}
       DiceEffects:
+      - {fileID: 11400000, guid: 1f25d9a0c6e6c3742b84c4cecdc5f5e2, type: 2}
       - {fileID: 11400000, guid: 4023b3cc14a5c284aaabc8988225d4b2, type: 2}
       - {fileID: 11400000, guid: e9e093bac76a9a4449b6e21955288a15, type: 2}
       - {fileID: 11400000, guid: 97df41b6d1cd6a542a17a6eed1a3f28a, type: 2}
       StartingDiceEffectIndex: 0
-      AttackSpeed: 1
+      AttackSpeed: 5
+      MouseRaycastLayerMask:
+        serializedVersion: 2
+        m_Bits: 0
     DiceAttackSettings:
       AttackDamge: 50
       Speed: 20
@@ -1813,6 +1817,87 @@ Transform:
   m_Father: {fileID: 287782131}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1664123398
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 2
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2775595524231004611, guid: 775604b1fca889349901af27617e1096,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2775595524231004611, guid: 775604b1fca889349901af27617e1096,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2775595524231004611, guid: 775604b1fca889349901af27617e1096,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2775595524231004611, guid: 775604b1fca889349901af27617e1096,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2775595524231004611, guid: 775604b1fca889349901af27617e1096,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2775595524231004611, guid: 775604b1fca889349901af27617e1096,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2775595524231004611, guid: 775604b1fca889349901af27617e1096,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2775595524231004611, guid: 775604b1fca889349901af27617e1096,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2775595524231004611, guid: 775604b1fca889349901af27617e1096,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2775595524231004611, guid: 775604b1fca889349901af27617e1096,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2775595524231004611, guid: 775604b1fca889349901af27617e1096,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2775595524231004636, guid: 775604b1fca889349901af27617e1096,
+        type: 3}
+      propertyPath: m_Name
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 2775595524231004636, guid: 775604b1fca889349901af27617e1096,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 2775595524231004637, guid: 775604b1fca889349901af27617e1096,
+        type: 3}
+      propertyPath: initialPlayerState.PlayerAttackSettings.MouseRaycastLayerMask.m_Bits
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_AddedGameObjects: []
+  m_SourcePrefab: {fileID: 100100000, guid: 775604b1fca889349901af27617e1096, type: 3}
 --- !u!1 &1699442729
 GameObject:
   m_ObjectHideFlags: 0

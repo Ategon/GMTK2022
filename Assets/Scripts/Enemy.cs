@@ -10,9 +10,12 @@ public class Enemy : MonoBehaviour
     SpriteRenderer sr;
     //protected CharacterController controller;
     protected Animator animator;
+    protected StatusEffects statusEffects;
 
     [SerializeField] protected float walkingSpeed = 1f;
     [SerializeField] private float maxHealth = 100;
+
+    protected float moveSpeed { get { return walkingSpeed * statusEffects.walkingSpeedMultiplier; } }
 
     private float health;
 
@@ -25,6 +28,7 @@ public class Enemy : MonoBehaviour
         sr = transform.Find("Sprite").GetComponent<SpriteRenderer>();
         health = maxHealth;
         animator = transform.Find("Sprite").GetComponent<Animator>();
+        statusEffects = GetComponent<StatusEffects>();
     }
 
     void FlipDirection(Vector3 direction)
@@ -41,7 +45,7 @@ public class Enemy : MonoBehaviour
 
     public virtual void Movement(Vector3 direction, float deltaTime, float distance)
     {
-        rb.MovePosition(transform.position + direction * 2f * walkingSpeed * deltaTime);
+        rb.MovePosition(transform.position + direction * 2f * moveSpeed * deltaTime);
     }
 
     void LoopMap()

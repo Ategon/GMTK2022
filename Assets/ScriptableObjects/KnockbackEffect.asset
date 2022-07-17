@@ -10,15 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 240bb0df535b4fd4bb688e088f5aff71, type: 3}
-  m_Name: TestDiceEffect1
+  m_Name: KnockbackEffect
   m_EditorClassIdentifier: 
-  diceEffectPrefab: {fileID: 5878755354908967663, guid: c62e010322ac86e438770f1c5d055a7c,
+  diceEffectPrefab: {fileID: 4266143226166666844, guid: 9f3f8d5226b7c3a429ed67aec6b175c9,
     type: 3}
   diceEffectGlyph: {fileID: 0}
-  damage: 10
+  damage: 15
   statusEffect:
-    type: 3
+    type: 4
     value: 0
     remainingDuration: 0
     timeBetweenApplyEffect: 0
     lastTimeEffectWasApplied: 0
+    explosionForce: 15
+    explosionRadius: 7.5

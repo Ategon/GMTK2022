@@ -6,5 +6,9 @@ using UnityEngine;
 public class DiceEffectSettings : ScriptableObject
 {
     public GameObject diceEffectPrefab;
+    public Sprite diceEffectGlyph;
     public float damage;
+    public float effectDuration;
+
+    public StatusEffect statusEffect;
 }

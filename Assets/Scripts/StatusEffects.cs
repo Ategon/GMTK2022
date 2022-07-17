@@ -4,29 +4,29 @@ using UnityEngine;
 
 public enum StatusEffectType
 {
+    NoEffect,
     Fire,
     Poison,
     Slow,
+    Knockback,
 }
 
+[System.Serializable]
 public class StatusEffect
 {
     public StatusEffectType type;
 
-    public float value;
-    public float duration;
+    // Amount of damage over time / Slow effect
+    public float value; 
+    // Remaining duration the effect is active
+    public float remainingDuration; 
     public float timeBetweenApplyEffect;
 
     public float lastTimeEffectWasApplied;
 
-    public StatusEffect(StatusEffectType type, float value, float duration)
-    {
-        this.type = type;
-        this.value = value;
-        this.duration = duration;
-
-        lastTimeEffectWasApplied = 0f;
-    }
+    [Header("Knockback")]
+    public float explosionForce;
+    public float explosionRadius;
 }
 
 public class StatusEffects : MonoBehaviour
@@ -36,29 +36,31 @@ public class StatusEffects : MonoBehaviour
     private Enemy enemy;
     private Rigidbody rb;
 
-    float walkingSpeedMultiplier = 1f;
+    public float walkingSpeedMultiplier = 1f;
 
     private void Awake()
     {
         enemy = GetComponent<Enemy>();
         rb = GetComponent<Rigidbody>();
+
+        statusEffects = new List<StatusEffect>();
     }
 
-    public void OnKnockback(float explosionForce, Vector3 explosionPosition, float explosionRadius)
+    public void AddStatusEffect(StatusEffect statusEffect, Vector3 dicePos)
     {
-        rb.AddExplosionForce(explosionForce, explosionPosition, explosionRadius);
-    }
-
-    public void AddStatusEffect(StatusEffect statusEffect)
-    {
+        print("Added status effect: " + statusEffect.type);
         switch (statusEffect.type)
         {
+            case StatusEffectType.Slow:
+                walkingSpeedMultiplier *= statusEffect.value;
+                break;
+            case StatusEffectType.Knockback:
+                rb.AddExplosionForce(statusEffect.explosionForce, dicePos, statusEffect.explosionRadius, 0, ForceMode.Impulse);
+                return;
+            case StatusEffectType.NoEffect:
             case StatusEffectType.Fire:
             case StatusEffectType.Poison:
                 // For now, do nothing
-                break;
-            case StatusEffectType.Slow:
-                walkingSpeedMultiplier *= statusEffect.value;
                 break;
             default:
                 Debug.LogError("StatusEffects.AddStatusEffect: Status effect not implemented");
@@ -70,8 +72,15 @@ public class StatusEffects : MonoBehaviour
 
     private void Update()
     {
-        foreach (StatusEffect statusEffect in statusEffects)
+        for (int i = 0; i < statusEffects.Count; )
         {
+            StatusEffect statusEffect = statusEffects[i];
+            statusEffect.remainingDuration -= Time.deltaTime;
+            if (statusEffect.remainingDuration < 0)
+            {
+                statusEffects.RemoveAt(i);
+                continue;
+            }
             if (Time.time - statusEffect.lastTimeEffectWasApplied > statusEffect.timeBetweenApplyEffect)
             {
                 switch (statusEffect.type)
@@ -80,7 +89,9 @@ public class StatusEffects : MonoBehaviour
                     case StatusEffectType.Poison:
                         enemy.TakeDamage(statusEffect.value);
                         break;
+                    case StatusEffectType.NoEffect:
                     case StatusEffectType.Slow:
+                    case StatusEffectType.Knockback:
                         // For now, do nothing
                         break;
                     default:
@@ -88,6 +99,8 @@ public class StatusEffects : MonoBehaviour
                         break;
                 }
             }
+
+            ++i;
         }
     }
 }
