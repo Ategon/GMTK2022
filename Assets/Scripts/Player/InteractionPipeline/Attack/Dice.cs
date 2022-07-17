@@ -111,7 +111,10 @@ public class Dice : MonoBehaviour
             return;
 
         // TODO (GnoxNahte): Replace with pool
-        GameObject diceEffectObj = GameObject.Instantiate(diceEffectSetting.diceEffectPrefab, transform.position, Quaternion.identity);
+        Vector3 spawnPos = transform.position;
+        spawnPos.y = 0.01f;
+
+        GameObject diceEffectObj = GameObject.Instantiate(diceEffectSetting.diceEffectPrefab, spawnPos, Quaternion.identity);
         DiceEffect diceEffect = diceEffectObj.GetComponent<DiceEffect>();
         diceEffect.Init(diceEffectSetting);
     }

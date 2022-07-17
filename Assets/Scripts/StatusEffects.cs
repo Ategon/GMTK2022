@@ -89,6 +89,48 @@ public class StatusEffects : MonoBehaviour
         enemy.UpdateTint(GetTint());
     }
 
+    public void RemoveStatusEffect(StatusEffectType type)
+    {
+        int index = GetStatusEffect(type);
+
+        if (index != -1)
+        {
+            RemoveStatusEffect(index);
+        }
+        else
+        {
+            Debug.Log("Status effect: " + type.ToString() + " doesn't exists");
+        }
+    }
+
+    // parameter: index is the index in statusEffect
+    private void RemoveStatusEffect(int index)
+    {
+        if (index >= statusEffects.Count)
+        {
+            Debug.LogError("RemoveStatusEffect(int index): index >= statusEffects.Count");
+            return;
+        }
+        switch (statusEffects[index].type)
+        {
+            case StatusEffectType.Slow:
+                walkingSpeedMultiplier = 1f;
+                break;
+            case StatusEffectType.Knockback:
+            case StatusEffectType.Burn:
+            case StatusEffectType.Poison:
+            case StatusEffectType.NoEffect:
+                break;
+            default:
+                Debug.LogError("StatusEffects.AddStatusEffect: Status effect not implemented");
+                return;
+        }
+
+        statusEffects.RemoveAt(index);
+
+        enemy.UpdateTint(GetTint());
+    }
+
     private void Update()
     {
         for (int i = 0; i < statusEffects.Count; )
@@ -97,12 +139,7 @@ public class StatusEffects : MonoBehaviour
             statusEffect.duration -= Time.deltaTime;
             if (statusEffect.duration < 0)
             {
-                if (statusEffect.type == StatusEffectType.Slow)
-                    walkingSpeedMultiplier = 1f;
-
-                statusEffects.RemoveAt(i);
-
-                enemy.UpdateTint(GetTint());
+                RemoveStatusEffect(i);
 
                 continue;
             }

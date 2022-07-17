@@ -10,5 +10,7 @@ public class DiceEffectSettings : ScriptableObject
     public float damage;
     public float effectDuration;
 
+    public bool ifRemoveEffectOnLeaveCollider;
+
     public StatusEffect statusEffect;
 }

@@ -29,9 +29,17 @@ public class DiceEffect : MonoBehaviour
 
             StatusEffects statusEffects = other.GetComponent<StatusEffects>();
             if (statusEffects != null)
-            {
                 statusEffects.AddStatusEffect(new StatusEffect(effectSettings.statusEffect), transform.position);
-            }
         }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (!effectSettings.ifRemoveEffectOnLeaveCollider)
+            return;
+
+        StatusEffects statusEffects = other.GetComponent<StatusEffects>();
+        if (statusEffects != null)
+            statusEffects.RemoveStatusEffect(effectSettings.statusEffect.type);
     }
 }

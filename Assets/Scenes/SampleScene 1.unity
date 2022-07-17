@@ -1959,35 +1959,53 @@ PrefabInstance:
     - target: {fileID: 2775595524231004637, guid: 775604b1fca889349901af27617e1096,
         type: 3}
       propertyPath: initialPlayerState.PlayerAttackSettings.DiceEffects.Array.size
-      value: 5
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 2775595524231004637, guid: 775604b1fca889349901af27617e1096,
         type: 3}
       propertyPath: initialPlayerState.PlayerAttackSettings.DiceEffects.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: 2e9c57f1c2bf0ae419e091bfb9580c03,
+      objectReference: {fileID: 11400000, guid: b8c456bf6b87a7447bf992c750f05ce4,
         type: 2}
     - target: {fileID: 2775595524231004637, guid: 775604b1fca889349901af27617e1096,
         type: 3}
       propertyPath: initialPlayerState.PlayerAttackSettings.DiceEffects.Array.data[1]
       value: 
-      objectReference: {fileID: 11400000, guid: c699c9cf262ef1141befd2ea42ac348e,
+      objectReference: {fileID: 11400000, guid: 009dce41aa1a99f46a45d0fb47a011bc,
         type: 2}
     - target: {fileID: 2775595524231004637, guid: 775604b1fca889349901af27617e1096,
         type: 3}
       propertyPath: initialPlayerState.PlayerAttackSettings.DiceEffects.Array.data[2]
       value: 
-      objectReference: {fileID: 11400000, guid: cdd324ec1cd2d9143aac0c2bc2d673a2,
+      objectReference: {fileID: 11400000, guid: 2e9c57f1c2bf0ae419e091bfb9580c03,
         type: 2}
     - target: {fileID: 2775595524231004637, guid: 775604b1fca889349901af27617e1096,
         type: 3}
       propertyPath: initialPlayerState.PlayerAttackSettings.DiceEffects.Array.data[3]
       value: 
-      objectReference: {fileID: 11400000, guid: f2b7a028251a44d49a81923bdca5fe4a,
+      objectReference: {fileID: 11400000, guid: 471b53fd574ef074daa067c3b0a88def,
         type: 2}
     - target: {fileID: 2775595524231004637, guid: 775604b1fca889349901af27617e1096,
         type: 3}
       propertyPath: initialPlayerState.PlayerAttackSettings.DiceEffects.Array.data[4]
+      value: 
+      objectReference: {fileID: 11400000, guid: c699c9cf262ef1141befd2ea42ac348e,
+        type: 2}
+    - target: {fileID: 2775595524231004637, guid: 775604b1fca889349901af27617e1096,
+        type: 3}
+      propertyPath: initialPlayerState.PlayerAttackSettings.DiceEffects.Array.data[5]
+      value: 
+      objectReference: {fileID: 11400000, guid: cdd324ec1cd2d9143aac0c2bc2d673a2,
+        type: 2}
+    - target: {fileID: 2775595524231004637, guid: 775604b1fca889349901af27617e1096,
+        type: 3}
+      propertyPath: initialPlayerState.PlayerAttackSettings.DiceEffects.Array.data[6]
+      value: 
+      objectReference: {fileID: 11400000, guid: f2b7a028251a44d49a81923bdca5fe4a,
+        type: 2}
+    - target: {fileID: 2775595524231004637, guid: 775604b1fca889349901af27617e1096,
+        type: 3}
+      propertyPath: initialPlayerState.PlayerAttackSettings.DiceEffects.Array.data[7]
       value: 
       objectReference: {fileID: 11400000, guid: 1f25d9a0c6e6c3742b84c4cecdc5f5e2,
         type: 2}
