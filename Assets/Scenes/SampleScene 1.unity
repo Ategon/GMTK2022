@@ -1956,6 +1956,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 2775595524231004637, guid: 775604b1fca889349901af27617e1096,
+        type: 3}
+      propertyPath: initialPlayerState.PlayerAttackSettings.DiceEffects.Array.size
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 775604b1fca889349901af27617e1096, type: 3}

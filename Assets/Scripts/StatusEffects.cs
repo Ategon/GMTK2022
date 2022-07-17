@@ -44,7 +44,7 @@ public class StatusEffect
 
 public class StatusEffects : MonoBehaviour
 {
-    List<StatusEffect> statusEffects;
+    private List<StatusEffect> statusEffects;
 
     private Enemy enemy;
     private Rigidbody rb;
