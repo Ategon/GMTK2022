@@ -121,5 +121,7 @@ public class Dice : MonoBehaviour
         int chosenSide = GetRolledNumber();
 
         SpawnEffect(chosenSide);
+
+        dicePool.Release(this.gameObject);
     }
 }
