@@ -28,13 +28,13 @@ public class DiceEnemy : Enemy
             else
             {
                 rb.MovePosition(transform.position + direction * 1.5f * walkingSpeed * deltaTime);
-                animator.Play("dice-enemy-walk");
+                animator.Play("dicebullywalk");
 
                 if (distance <= 5)
                 {
                     quicker = true;
                     pauseTimer = pauseTime;
-                    animator.Play("dice-enemy-charge");
+                    animator.Play("dicebullycharge");
                     currentBoost = boostVelocity;
                 }
             }

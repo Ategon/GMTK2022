@@ -53,7 +53,8 @@ public class EnemySpawner : MonoBehaviour
 
     public void SpawnEnemy()
     {
-        int totalPriority = waves[(int) Math.Floor(gameTimer / 60)].enemies.Sum(enemy => enemy.weight);
+        int waveNum = (int)Math.Floor(gameTimer / 60);
+        int totalPriority = waves[waveNum].enemies.Sum(enemy => enemy.weight);
         int randomSide = UnityEngine.Random.Range(0, 4);
         int enemyType = UnityEngine.Random.Range(0, totalPriority);
         float enemySpawned = UnityEngine.Random.Range(0, enemySpawnChanceBase + enemySpawnChanceDecrease * (float) gameTimer);
@@ -63,7 +64,14 @@ public class EnemySpawner : MonoBehaviour
         {
             GameObject enemy;
 
-            enemy = waves[0].enemies[0].gameObject; // TODO Change to selecting from wave info instead of static.
+            int i = 0;
+            int j = 0;
+            while (i < enemyType) {
+                i += waves[waveNum].enemies[j].weight;
+                ++j;
+            }
+
+            enemy = waves[waveNum].enemies[j].gameObject;
 
             int enemyAmount = hordeSpawned < 1 ? hordeSize : 1;
             SpawnHelper(randomSide, enemy, enemyAmount);
