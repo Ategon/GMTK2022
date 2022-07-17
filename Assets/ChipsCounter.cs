@@ -59,6 +59,7 @@ public class ChipsCounter : MonoBehaviour
         {
             powerUpCanvas.SetActive(true);
             Time.timeScale = 0f;
+            powerUpCanvas.GetComponent<PowerUpPool>().FillTextWithPowerUps();
             Level++;
             NumberOfChips = 1;
             SetNewMaxOfChips();
