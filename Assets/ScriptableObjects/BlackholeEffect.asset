@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 240bb0df535b4fd4bb688e088f5aff71, type: 3}
   m_Name: BlackholeEffect
   m_EditorClassIdentifier: 
-  ifEnabled: 1
-  effectName: Air
+  ifEnabled: 0
+  effectName: Gravity
   diceEffectPrefab: {fileID: 3647911020318032192, guid: 4446ef2814699cc46b34090da5b619a0,
     type: 3}
   diceEffectGlyph: {fileID: -1936956829, guid: ca03bbd482082d34b994ea17ec390a85, type: 3}

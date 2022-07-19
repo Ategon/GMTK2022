@@ -126,8 +126,8 @@ public class PowerUpPool : MonoBehaviour
                         case "Ice": effectSetting.floatMultiplier = 1 + 0.2f * powerUp.level; break;
                         case "Poison": effectSetting.floatMultiplier = 1 + 0.2f * powerUp.level; break;
                         case "Lightning": effectSetting.intValue = 3 + powerUp.level; break;
-                        case "Time": effectSetting.floatMultiplier = 1 + 0.2f * powerUp.level; break;
-                        case "Air": /* Do Nothing */ break;
+                        case "Magic Circle": effectSetting.floatMultiplier = 1 + 0.2f * powerUp.level; break;
+                        case "Gravity": /* Do Nothing */ break;
                         default: Debug.LogError("PowerUpPool.UpdatePowerUps(): Can't find name"); break;
                     }
 
