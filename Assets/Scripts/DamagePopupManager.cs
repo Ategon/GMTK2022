@@ -31,6 +31,6 @@ public class DamagePopupManager : MonoBehaviour
     {
         GameObject damagePopupObj = damagePopupPool.Get();
         damagePopupObj.transform.position = position;
-        damagePopupObj.GetComponent<DamagePopup>().Init(damageAmount);
+        damagePopupObj.GetComponent<DamagePopup>().Init(damagePopupPool, damageAmount, 1);
     }
 }
