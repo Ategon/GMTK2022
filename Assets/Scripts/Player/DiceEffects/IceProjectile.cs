@@ -25,6 +25,6 @@ public class IceProjectile : MonoBehaviour
     {
         Enemy enemy = other.GetComponent<Enemy>();
         if (enemy != null)
-            enemy.TakeDamage(damage);
+            enemy.TakeDamage(damage, StatusEffectType.Slow);
     }
 }

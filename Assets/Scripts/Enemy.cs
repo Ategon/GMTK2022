@@ -84,7 +84,7 @@ public class Enemy : MonoBehaviour
         LoopMap();
     }
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(float damage, StatusEffectType statusEffectType = StatusEffectType.NoEffect)
     {
         health -= damage;
 
@@ -94,7 +94,7 @@ public class Enemy : MonoBehaviour
             Destroy(this.gameObject);
         }
 
-        DamagePopupManager.OnDamage(transform.position, damage);
+        DamagePopupManager.OnDamage(transform.position, damage, statusEffectType);
     }
 
     public void UpdateTint(Color color)
