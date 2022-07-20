@@ -21,7 +21,7 @@ public class DamagePopup : MonoBehaviour
     public void Init(ObjectPool objectPool, float damageAmount, float duration, in Color color)
     {
         this.objectPool = objectPool;
-        text.text = damageAmount.ToString();
+        text.text = ((int)damageAmount).ToString();
 
         this.duration = duration;
         this.remainingDuration = duration;
