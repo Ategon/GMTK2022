@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 240bb0df535b4fd4bb688e088f5aff71, type: 3}
-  m_Name: ExplosionPowerup
+  m_Name: FirePowerup
   m_EditorClassIdentifier: 
   ifEnabled: 0
-  powerupName: Fire
+  effectName: Fire
   powerupPrefab: {fileID: 935016883441691472, guid: d42a6e8f722b47347bbda9c8a86038dc,
     type: 3}
   powerupGlyph: {fileID: -935903455, guid: ca03bbd482082d34b994ea17ec390a85, type: 3}

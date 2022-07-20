@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 240bb0df535b4fd4bb688e088f5aff71, type: 3}
-  m_Name: BlackholePowerup
+  m_Name: GravityPowerup
   m_EditorClassIdentifier: 
   ifEnabled: 0
-  powerupName: Gravity
+  effectName: Gravity
   powerupPrefab: {fileID: 3647911020318032192, guid: 4446ef2814699cc46b34090da5b619a0,
     type: 3}
   powerupGlyph: {fileID: -1936956829, guid: ca03bbd482082d34b994ea17ec390a85, type: 3}

@@ -7,7 +7,7 @@ public class PowerupSettings : ScriptableObject
 {
     public bool ifEnabled = false;
 
-    public string powerupName;
+    public string effectName;
     public GameObject powerupPrefab;
     public Sprite powerupGlyph;
     public float damage;
