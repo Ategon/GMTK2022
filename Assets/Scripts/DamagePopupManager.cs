@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DamagePopupManager : MonoBehaviour
 {
+    [SerializeField] Transform playerTransform;
     [SerializeField] GameObject damagePopupPrefab;
 
     [SerializeField] StatusEffectColor[] statusEffectColors;
@@ -15,6 +16,8 @@ public class DamagePopupManager : MonoBehaviour
     [SerializeField] float maxDamagePopupSize;
 
     [SerializeField] float duration;
+
+    [SerializeField] float damagePopupOffset;
 
     [System.Serializable]
     public class StatusEffectColor
@@ -65,7 +68,7 @@ public class DamagePopupManager : MonoBehaviour
             color = statusEffectColors_Dictionary[StatusEffectType.NoEffect];
 
         GameObject damagePopupObj = damagePopupPool.Get();
-        damagePopupObj.transform.position = position;
+        damagePopupObj.transform.position = position + (position - instance.playerTransform.position).normalized * instance.damagePopupOffset;
         damagePopupObj.GetComponent<DamagePopup>().Init(
             damagePopupPool, damageAmount, instance.duration, 
             Mathf.Lerp(instance.minPopupSize, instance.maxPopupSize, damageAmount / instance.maxDamagePopupSize), 
