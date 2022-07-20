@@ -35,11 +35,6 @@ public class PowerUpPool : MonoBehaviour
         powerups.Add(new PowerUp { name = "Lightning", description = "Lightning strikes down on random enemies dealing damage to all those around." });
         powerups.Add(new PowerUp { name = "Magic Circle", description = "Spawns a magic circle that slows enemies and hastens player attack speed." });
         powerups.Add(new PowerUp { name = "Gravity", description = "Creates a black hole, pulling all enemies near inside." });
-        powerups.Add(new PowerUp { name = "Air", description = "---" });
-        powerups.Add(new PowerUp { name = "Building", description = "---" });
-        powerups.Add(new PowerUp { name = "Temp Name 1", description = "---" });
-        powerups.Add(new PowerUp { name = "Temp Name 2", description = "---" });
-        powerups.Add(new PowerUp { name = "Temp Name 3", description = "---" });
 
         FillTextWithPowerUps();
 
