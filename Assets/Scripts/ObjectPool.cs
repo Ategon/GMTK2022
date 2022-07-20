@@ -20,10 +20,62 @@ public class ObjectPool
     // If check the collection
     public bool ifCheckBeforeReleasing;
 
+    /// <summary>
+    /// Initialises the pool, setting the parent of all the instantiated prefabs as a new gameobject with poolName
+    /// </summary>
+    /// <param name="poolName">
+    ///     If poolPrefabParent == null, create a new Transform using poolName and set that as the poolPrefabParent
+    /// </param>
+    /// <param name="prefab">Prefab to spawn</param>
+    /// <param name="startCount">Start number to instantiate</param>
+    /// <param name="ifCheckBeforeReleasing">
+    ///     For debugging, might have some errors when releasing a game object
+    /// </param>
     public void InitPool(string poolName, GameObject prefab, int startCount, bool ifCheckBeforeReleasing = true)
     {
-        GameObject poolParentGameObject = new GameObject(poolName);
-        poolParent = poolParentGameObject.transform;
+        InitPool(null, poolName, prefab, startCount, ifCheckBeforeReleasing);
+    }
+
+    /// <summary>
+    /// Initialises the pool, setting the parent of all the instantiated prefabs as a poolPrefabParent
+    /// </summary>
+    /// <param name="poolName">
+    ///     If poolPrefabParent == null, create a new Transform using poolName and set that as the poolPrefabParent
+    /// </param>
+    /// <param name="prefab">Prefab to spawn</param>
+    /// <param name="startCount">Start number to instantiate</param>
+    /// <param name="ifCheckBeforeReleasing">
+    ///     For debugging, might have some errors when releasing a game object
+    /// </param>
+    public void InitPool(Transform poolPrefabParent, GameObject prefab, int startCount, bool ifCheckBeforeReleasing = true)
+    {
+        InitPool(poolPrefabParent, null, prefab, startCount, ifCheckBeforeReleasing);
+    }
+
+    /// <summary>
+    /// Initialises the pool
+    /// </summary>
+    /// <param name="poolPrefabParent">
+    ///     Instantiate all the gameobjects under the parent
+    ///     If poolPrefabParent == null, create a new Transform using poolName and set that as the poolPrefabParent
+    /// </param>
+    /// <param name="poolName">If poolPrefabParent == null, create a new Transform using poolName and set that as the poolPrefabParent</param>
+    /// <param name="prefab">Prefab to spawn</param>
+    /// <param name="startCount">Start number to instantiate</param>
+    /// <param name="ifCheckBeforeReleasing">
+    ///     For debugging, might have some errors when releasing a game object
+    /// </param>
+    private void InitPool(Transform poolPrefabParent, string poolName, GameObject prefab, int startCount, bool ifCheckBeforeReleasing = true)
+    {
+        if (poolPrefabParent == null)
+        {
+            GameObject poolPrefabParentObj = new GameObject(poolName);
+            poolParent = poolPrefabParentObj.transform;
+        }
+        else
+        {
+            poolParent = poolPrefabParent;
+        }
 
         this.prefab = prefab;
 
@@ -37,12 +89,6 @@ public class ObjectPool
             stack.Push(gameObject);
             ++totalCount;
             prefab.SetActive(ifActive);
-
-            //Get();
-
-            //GameObject gameObject = GameObject.Instantiate(prefab, poolParent);
-            //gameObject.SetActive(false);
-            //stack.Push(gameObject);
         }
 
         this.ifCheckBeforeReleasing = ifCheckBeforeReleasing;
@@ -61,13 +107,17 @@ public class ObjectPool
         }
         else
         {
-            return stack.Pop();
+            GameObject gameObject = stack.Pop();
+            gameObject.SetActive(true);
+            return gameObject;
         }
     }
 
     // Called to release the prefab from the pool
     public void Release(GameObject gameObject)
     {
+        // Shouldn't happen but check for safety.
+        // Set ifCheckBeforeReleasing to false when not debugging as it might be expensive since checking every element in the stack
         if (ifCheckBeforeReleasing && stack.Contains(gameObject))
         {
             Debug.LogError("Releasing a object that's already in the pool. GameObject name: " + gameObject.name);

@@ -41,7 +41,6 @@ public class PlayerAttackDiceEffectGenerator : MonoBehaviour, IGenerator<PlayerI
         {
             playerAttackSpeedMultiplier = (1 / diceEffect.EffectSettings.statusEffect.value) * diceEffect.EffectSettings.floatMultiplier;
             currTimeEffect = diceEffect;
-            print("1 playerAttackSpeedMultiplier: " + playerAttackSpeedMultiplier);
         }
     }
 
