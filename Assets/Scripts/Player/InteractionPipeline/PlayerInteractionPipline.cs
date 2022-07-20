@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DataPipeline;
+using Cinemachine;
 
 public class PlayerInteractionPipline : MonoBehaviour
 {
@@ -10,6 +11,9 @@ public class PlayerInteractionPipline : MonoBehaviour
 
     [SerializeField]
     private InteractionPipeline<PlayerInteractionState> pipeline;
+
+    [SerializeField]
+    private CinemachineVirtualCamera virtualCamera;
 
     private void Awake()
     {
@@ -33,6 +37,7 @@ public class PlayerInteractionPipline : MonoBehaviour
 
         initialPlayerState.sharedData.PlayerTransform = transform;
         initialPlayerState.sharedData.MainCamera = Camera.main;
+        initialPlayerState.sharedData.VirtualCamera = virtualCamera;
     }
 
     public void Start()

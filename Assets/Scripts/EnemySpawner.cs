@@ -42,14 +42,7 @@ public class EnemySpawner : MonoBehaviour
             SpawnHelper(UnityEngine.Random.Range(0, 4), kingDice, 1);
         }
 
-        if (gameTimer >= 60 * 10 && kings == 1)
-        {
-            kings++;
-            SpawnHelper(UnityEngine.Random.Range(0, 4), kingDice, 1);
-            SpawnHelper(UnityEngine.Random.Range(0, 4), kingDice, 1);
-        }
-
-        if(gameTimer >= 60 * 15)
+        if(gameTimer >= 60 * 10)
         {
             Time.timeScale = 0;
             winScreen.SetActive(true);
@@ -113,19 +106,19 @@ public class EnemySpawner : MonoBehaviour
             switch (side)
             {
                 case 0:
-                    spawned = Instantiate(spawnedThing, new Vector3(20f + player.transform.position.x, 0, UnityEngine.Random.Range(20f + player.transform.position.z, -20f + player.transform.position.z)), Quaternion.identity);
+                    spawned = Instantiate(spawnedThing, new Vector3(10f + player.transform.position.x, 0, UnityEngine.Random.Range(10f + player.transform.position.z, -10f + player.transform.position.z)), Quaternion.identity);
                     spawned.transform.SetParent(transform);
                     break;
                 case 1:
-                    spawned = Instantiate(spawnedThing, new Vector3(-20f + player.transform.position.x, 0, UnityEngine.Random.Range(20f + player.transform.position.z, -20f + player.transform.position.z)), Quaternion.identity);
+                    spawned = Instantiate(spawnedThing, new Vector3(-10f + player.transform.position.x, 0, UnityEngine.Random.Range(10f + player.transform.position.z, -10f + player.transform.position.z)), Quaternion.identity);
                     spawned.transform.SetParent(transform);
                     break;
                 case 2:
-                    spawned = Instantiate(spawnedThing, new Vector3(UnityEngine.Random.Range(20f + player.transform.position.x, -20f + player.transform.position.x), 0, 20f + player.transform.position.z), Quaternion.identity);
+                    spawned = Instantiate(spawnedThing, new Vector3(UnityEngine.Random.Range(10f + player.transform.position.x, -10f + player.transform.position.x), 0, 10f + player.transform.position.z), Quaternion.identity);
                     spawned.transform.SetParent(transform);
                     break;
                 case 3:
-                    spawned = Instantiate(spawnedThing, new Vector3(UnityEngine.Random.Range(20f + player.transform.position.x, -20f + player.transform.position.x), 0, -20f + player.transform.position.z), Quaternion.identity);
+                    spawned = Instantiate(spawnedThing, new Vector3(UnityEngine.Random.Range(10f + player.transform.position.x, -10f + player.transform.position.x), 0, -10f + player.transform.position.z), Quaternion.identity);
                     spawned.transform.SetParent(transform);
                     break;
                 default:
