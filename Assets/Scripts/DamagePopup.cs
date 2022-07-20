@@ -8,6 +8,7 @@ public class DamagePopup : MonoBehaviour
 {
     float duration;
     float remainingDuration;
+    [SerializeField] float moveUpSpeed;
 
     TextMeshPro text;
     ObjectPool objectPool;
@@ -34,7 +35,7 @@ public class DamagePopup : MonoBehaviour
             objectPool.Release(this.gameObject);
             return;
         }
-
+        transform.localPosition += new Vector3(0, 0, moveUpSpeed * Time.deltaTime);
         transform.localScale = Vector3.one * remainingDuration / duration;
     }
 }
