@@ -12,7 +12,7 @@ public class PlayerAttackHandler : IHandler<PlayerInteractionState>
         {
             Vector3 shootDir = data.PlayerAttackState.ShootDir;
             GameObject diceObj = data.PlayerAttackState.dicePool.Get();
-            diceObj.SetActive(true);
+            //diceObj.SetActive(true);
             diceObj.transform.position = data.sharedData.PlayerTransform.position + shootDir;
             diceObj.transform.rotation = data.sharedData.PlayerTransform.rotation;
             Dice dice = diceObj.GetComponent<Dice>();

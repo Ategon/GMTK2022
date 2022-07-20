@@ -93,6 +93,8 @@ public class Enemy : MonoBehaviour
             Instantiate(exp, transform.position, Quaternion.identity);
             Destroy(this.gameObject);
         }
+
+        DamagePopupManager.OnDamage(transform.position, damage);
     }
 
     public void UpdateTint(Color color)
