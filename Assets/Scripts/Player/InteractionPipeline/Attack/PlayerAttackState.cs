@@ -11,7 +11,7 @@ public struct PlayerAttackState
 
     public bool throwTriggered;
 
-    public PowerupSettings[] equippedEffects;
+    public PowerupSettings[] equippedPowerups;
 
     public float playerAttackSpeedMultiplier;
 }

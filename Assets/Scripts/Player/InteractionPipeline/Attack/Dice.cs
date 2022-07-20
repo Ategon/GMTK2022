@@ -103,7 +103,7 @@ public class Dice : MonoBehaviour
         return numRolled;
     }
 
-    private void SpawnEffect(int numberRolled)
+    private void SpawnPowerup(int numberRolled)
     {
         PowerupSettings powerupSetting = equippedPowerups[numberRolled - 1];
 
@@ -139,7 +139,7 @@ public class Dice : MonoBehaviour
                 enemy.TakeDamage(diceSettings.AttackDamge);
 
                 int chosenSide = GetRolledNumber();
-                SpawnEffect(chosenSide);
+                SpawnPowerup(chosenSide);
 
                 dicePool.Release(this.gameObject);
             }

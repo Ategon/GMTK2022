@@ -114,28 +114,28 @@ public class PowerUpPool : MonoBehaviour
     [ContextMenu("Reset Powerups")]
     public void UpdatePowerUps()
     {
-        foreach (PowerupSettings effectSetting in powerupSettings)
+        foreach (PowerupSettings powerupSetting in powerupSettings)
         {
             foreach (PowerUp powerUp in powerups)
             {
-                if (effectSetting.effectName == powerUp.name)
+                if (powerupSetting.powerupName == powerUp.name)
                 {
-                    switch (effectSetting.effectName)
+                    switch (powerupSetting.powerupName)
                     {
-                        case "Fire": effectSetting.floatMultiplier = 1 + 0.2f * powerUp.level; break;
-                        case "Ice": effectSetting.floatMultiplier = 1 + 0.2f * powerUp.level; break;
-                        case "Poison": effectSetting.floatMultiplier = 1 + 0.2f * powerUp.level; break;
+                        case "Fire": powerupSetting.floatMultiplier = 1 + 0.2f * powerUp.level; break;
+                        case "Ice": powerupSetting.floatMultiplier = 1 + 0.2f * powerUp.level; break;
+                        case "Poison": powerupSetting.floatMultiplier = 1 + 0.2f * powerUp.level; break;
                         case "Lightning":
-                            effectSetting.floatMultiplier = 1;
-                            effectSetting.intValue = 3 + powerUp.level; 
+                            powerupSetting.floatMultiplier = 1;
+                            powerupSetting.intValue = 3 + powerUp.level; 
                             break;
-                        case "Magic Circle": effectSetting.floatMultiplier = 1 + 0.2f * powerUp.level; break;
+                        case "Magic Circle": powerupSetting.floatMultiplier = 1 + 0.2f * powerUp.level; break;
                         case "Gravity": /* Do Nothing */ break;
                         default: Debug.LogError("PowerUpPool.UpdatePowerUps(): Can't find name"); break;
                     }
 
 
-                    effectSetting.ifEnabled = powerUp.level != 0;
+                    powerupSetting.ifEnabled = powerUp.level != 0;
                 }
 
             }

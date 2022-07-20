@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LightningEffect : MonoBehaviour
+public class LightningPowerup : MonoBehaviour
 {
     public int NumOfStrikes;
     public float Damage;

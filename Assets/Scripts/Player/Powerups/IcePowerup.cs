@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IceEffect : MonoBehaviour
+public class IcePowerup : MonoBehaviour
 {
     public float radius;
 

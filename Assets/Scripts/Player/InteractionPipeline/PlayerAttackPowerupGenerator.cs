@@ -37,9 +37,9 @@ public class PlayerAttackPowerupGenerator : MonoBehaviour, IGenerator<PlayerInte
     private void OnTriggerEnter(Collider other)
     {
         PowerupGameObject powerup = other.GetComponent<PowerupGameObject>();
-        if (powerup != null && powerup.EffectSettings.effectName == "Magic Circle")
+        if (powerup != null && powerup.PowerupSettings.powerupName == "Magic Circle")
         {
-            playerAttackSpeedMultiplier = (1 / powerup.EffectSettings.statusEffect.value) * powerup.EffectSettings.floatMultiplier;
+            playerAttackSpeedMultiplier = (1 / powerup.PowerupSettings.statusEffect.value) * powerup.PowerupSettings.floatMultiplier;
             currTimeEffect = powerup;
         }
     }
@@ -47,7 +47,7 @@ public class PlayerAttackPowerupGenerator : MonoBehaviour, IGenerator<PlayerInte
     private void OnTriggerExit(Collider other)
     {
         PowerupGameObject powerup = other.GetComponent<PowerupGameObject>();
-        if (powerup != null && powerup.EffectSettings.effectName == "Magic Circle")
+        if (powerup != null && powerup.PowerupSettings.powerupName == "Magic Circle")
         {
             currTimeEffect = null;
             playerAttackSpeedMultiplier = 1f;

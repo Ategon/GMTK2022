@@ -7,11 +7,11 @@ public class PowerupSettings : ScriptableObject
 {
     public bool ifEnabled = false;
 
-    public string effectName;
+    public string powerupName;
     public GameObject powerupPrefab;
     public Sprite powerupGlyph;
     public float damage;
-    public float effectDuration;
+    public float duration;
 
     public bool ifRemoveEffectOnLeaveCollider;
 

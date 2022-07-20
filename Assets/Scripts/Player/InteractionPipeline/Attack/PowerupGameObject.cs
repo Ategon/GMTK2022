@@ -4,25 +4,25 @@ using UnityEngine;
 
 public class PowerupGameObject : MonoBehaviour
 {
-    PowerupSettings effectSettings;
-    public PowerupSettings EffectSettings { get { return effectSettings; } }
+    PowerupSettings powerupSettings;
+    public PowerupSettings PowerupSettings { get { return powerupSettings; } }
     
     private List<GameObject> enemies = new List<GameObject>();
 
     public void Init(PowerupSettings powerupSettings)
     {
-        effectSettings = powerupSettings;
+        this.powerupSettings = powerupSettings;
 
-        LightningEffect lightningEffect = GetComponent<LightningEffect>();
-        if (lightningEffect != null)
+        LightningPowerup lightningPowerup = GetComponent<LightningPowerup>();
+        if (lightningPowerup != null)
         {
-            lightningEffect.Damage = effectSettings.damage * effectSettings.floatMultiplier;
-            lightningEffect.NumOfStrikes = effectSettings.intValue;
+            lightningPowerup.Damage = this.powerupSettings.damage * this.powerupSettings.floatMultiplier;
+            lightningPowerup.NumOfStrikes = this.powerupSettings.intValue;
         }
-        IceEffect iceEffect = GetComponent<IceEffect>();
-        if (iceEffect != null)
+        IcePowerup icePowerup = GetComponent<IcePowerup>();
+        if (icePowerup != null)
         {
-            iceEffect.damage = effectSettings.damage * effectSettings.floatMultiplier;
+            icePowerup.damage = this.powerupSettings.damage * this.powerupSettings.floatMultiplier;
         }
 
         StartCoroutine(EndPowerup());
@@ -30,9 +30,9 @@ public class PowerupGameObject : MonoBehaviour
 
     IEnumerator EndPowerup()
     {
-        yield return new WaitForSeconds(effectSettings.effectDuration);
+        yield return new WaitForSeconds(powerupSettings.duration);
 
-        if (effectSettings.ifRemoveEffectOnLeaveCollider)
+        if (powerupSettings.ifRemoveEffectOnLeaveCollider)
         {
             foreach (GameObject enemy in enemies)
             {
@@ -41,7 +41,7 @@ public class PowerupGameObject : MonoBehaviour
 
                 StatusEffects statusEffects = enemy.GetComponent<StatusEffects>();
                 if (statusEffects != null)
-                    statusEffects.RemoveStatusEffect(effectSettings.statusEffect.type);
+                    statusEffects.RemoveStatusEffect(powerupSettings.statusEffect.type);
             }
         }
 
@@ -53,12 +53,12 @@ public class PowerupGameObject : MonoBehaviour
         Enemy enemy = other.GetComponent<Enemy>();
         if (enemy != null)
         {
-            enemy.TakeDamage(effectSettings.damage * effectSettings.floatMultiplier);
+            enemy.TakeDamage(powerupSettings.damage * powerupSettings.floatMultiplier);
 
             StatusEffects statusEffects = other.GetComponent<StatusEffects>();
             if (statusEffects != null)
             {
-                statusEffects.AddStatusEffect(new StatusEffect(effectSettings.statusEffect, effectSettings.floatMultiplier), transform.position);
+                statusEffects.AddStatusEffect(new StatusEffect(powerupSettings.statusEffect, powerupSettings.floatMultiplier), transform.position);
 
                 enemies.Add(other.gameObject);
             }
@@ -67,12 +67,12 @@ public class PowerupGameObject : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (!effectSettings.ifRemoveEffectOnLeaveCollider)
+        if (!powerupSettings.ifRemoveEffectOnLeaveCollider)
             return;
 
         StatusEffects statusEffects = other.GetComponent<StatusEffects>();
         if (statusEffects != null)
-            statusEffects.RemoveStatusEffect(effectSettings.statusEffect.type);
+            statusEffects.RemoveStatusEffect(powerupSettings.statusEffect.type);
 
         enemies.Remove(other.gameObject);
     }
