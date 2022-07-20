@@ -29,8 +29,9 @@ public class PlayerAttackGenerator : IGenerator<PlayerInteractionState>
     public void Handle(ref PlayerInteractionState data)
     {
         data.PlayerAttackState.throwTriggered = false;
+        Debug.Log("2 playerAttackSpeedMultiplier: " + data.PlayerAttackState.playerAttackSpeedMultiplier);
 
-        float timeBetweenAttacks = 1 / data.PlayerAttackSettings.AttackSpeed;
+        float timeBetweenAttacks = 1 / (data.PlayerAttackSettings.AttackSpeed * data.PlayerAttackState.playerAttackSpeedMultiplier);
         if (data.PlayerState.Fire && Time.time - data.PlayerAttackState.lastAttackedTime >= timeBetweenAttacks)
         {
             RaycastHit hitInfo;

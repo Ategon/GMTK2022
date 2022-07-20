@@ -40,6 +40,7 @@ public class PlayerInteractionPipline : MonoBehaviour
         pipeline = new InteractionPipeline<PlayerInteractionState>(initialPlayerState);
 
         InputReader inputReader = GetComponent<InputReader>();
+        PlayerAttackDiceEffectGenerator playerAttackDiceEffectGenerator = GetComponentInChildren<PlayerAttackDiceEffectGenerator>();
 
         PlayerVisuals playerVisuals = transform.Find("Visuals").GetComponent<PlayerVisuals>();
 
@@ -47,6 +48,7 @@ public class PlayerInteractionPipline : MonoBehaviour
         pipeline.AddGenerator(new GravityMovments());
         pipeline.AddGenerator(new PlayerMovementGenerator());
         pipeline.AddGenerator(new PlayerAttackGenerator());
+        pipeline.AddGenerator(playerAttackDiceEffectGenerator);
 
         pipeline.AddHandler(new PlayerMovementHandler());
         pipeline.AddHandler(new PlayerCameraHandler());

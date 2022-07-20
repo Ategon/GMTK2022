@@ -12,6 +12,8 @@ public struct PlayerAttackState
     public bool throwTriggered;
 
     public DiceEffectSettings[] equippedEffects;
+
+    public float playerAttackSpeedMultiplier;
 }
 
 [Serializable]
