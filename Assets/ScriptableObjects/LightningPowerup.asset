@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: LightningPowerup
   m_EditorClassIdentifier: 
   ifEnabled: 0
-  effectName: Lightning
-  diceEffectPrefab: {fileID: 5167845823713707213, guid: 82cb59d983fcc1748937fac6ca7dc708,
+  powerupName: Lightning
+  powerupPrefab: {fileID: 5167845823713707213, guid: 82cb59d983fcc1748937fac6ca7dc708,
     type: 3}
-  diceEffectGlyph: {fileID: -1661143991, guid: ca03bbd482082d34b994ea17ec390a85, type: 3}
+  powerupGlyph: {fileID: 0}
   damage: 20
-  effectDuration: 0
+  duration: 0
   ifRemoveEffectOnLeaveCollider: 0
   floatMultiplier: 0
   intValue: 3

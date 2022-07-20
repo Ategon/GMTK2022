@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: ExplosionPowerup
   m_EditorClassIdentifier: 
   ifEnabled: 0
-  effectName: Fire
-  diceEffectPrefab: {fileID: 935016883441691472, guid: d42a6e8f722b47347bbda9c8a86038dc,
+  powerupName: Fire
+  powerupPrefab: {fileID: 935016883441691472, guid: d42a6e8f722b47347bbda9c8a86038dc,
     type: 3}
-  diceEffectGlyph: {fileID: -935903455, guid: ca03bbd482082d34b994ea17ec390a85, type: 3}
+  powerupGlyph: {fileID: -935903455, guid: ca03bbd482082d34b994ea17ec390a85, type: 3}
   damage: 20
-  effectDuration: 0.4
+  duration: 0.4
   ifRemoveEffectOnLeaveCollider: 0
   floatMultiplier: 1
   intValue: 0
