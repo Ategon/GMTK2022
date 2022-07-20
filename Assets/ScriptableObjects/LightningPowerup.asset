@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: LightningPowerup
   m_EditorClassIdentifier: 
   ifEnabled: 0
+  powerupType: 3
   effectName: Lightning
   powerupPrefab: {fileID: 5167845823713707213, guid: 82cb59d983fcc1748937fac6ca7dc708,
     type: 3}

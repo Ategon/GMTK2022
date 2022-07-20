@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 240bb0df535b4fd4bb688e088f5aff71, type: 3}
   m_Name: FirePowerup
   m_EditorClassIdentifier: 
-  ifEnabled: 0
+  ifEnabled: 1
+  powerupType: 0
   effectName: Fire
   powerupPrefab: {fileID: 935016883441691472, guid: d42a6e8f722b47347bbda9c8a86038dc,
     type: 3}
@@ -20,7 +21,7 @@ MonoBehaviour:
   damage: 20
   duration: 0.4
   ifRemoveEffectOnLeaveCollider: 0
-  floatMultiplier: 1
+  floatMultiplier: 1.2
   intValue: 0
   statusEffect:
     type: 4

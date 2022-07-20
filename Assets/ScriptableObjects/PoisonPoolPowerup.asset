@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: PoisonPoolPowerup
   m_EditorClassIdentifier: 
   ifEnabled: 1
+  powerupType: 2
   effectName: Poison
   powerupPrefab: {fileID: 246334279247630241, guid: bf783a883a1abf54cbf6c51660a69ad0,
     type: 3}

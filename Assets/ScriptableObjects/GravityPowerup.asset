@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: GravityPowerup
   m_EditorClassIdentifier: 
   ifEnabled: 0
+  powerupType: 5
   effectName: Gravity
   powerupPrefab: {fileID: 3647911020318032192, guid: 4446ef2814699cc46b34090da5b619a0,
     type: 3}

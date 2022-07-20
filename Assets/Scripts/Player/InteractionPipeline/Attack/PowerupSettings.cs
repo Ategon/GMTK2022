@@ -2,11 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum PowerupType
+{
+    Fire,
+    Ice,
+    Poison,
+    Lightning,
+    MagicCircle,
+    Gravity,
+
+    NUM_POWERUPS
+}
+
 [CreateAssetMenu(fileName = "PowerupSettings", menuName = "ScriptableObjects/PowerupSettings")]
 public class PowerupSettings : ScriptableObject
 {
     public bool ifEnabled = false;
 
+    public PowerupType powerupType;
     public string effectName;
     public GameObject powerupPrefab;
     public Sprite powerupGlyph;

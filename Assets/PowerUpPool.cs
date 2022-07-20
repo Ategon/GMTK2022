@@ -3,13 +3,20 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-[System.Serializable] // TempDebug
 public class PowerUp
 {
+    public PowerupType powerupType;
     public string name;
     public string description;
     public bool chosenThatTime = false;
     public int level = 0;
+
+    public PowerUp(PowerupType powerupType, string description)
+    {
+        this.powerupType = powerupType;
+        this.name = powerupType.ToString();
+        this.description = description;
+    }
 }
 
 public class PowerUpPool : MonoBehaviour
@@ -29,12 +36,12 @@ public class PowerUpPool : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
-        powerups.Add(new PowerUp { name = "Fire", description = "Creates an explosion that deals damage to nearby enemies" });
-        powerups.Add(new PowerUp { name = "Ice", description = "Fires 5 ice spears at nearby enemies, piercing through." });
-        powerups.Add(new PowerUp { name = "Poison", description = "Spawns a pool of poison which poisons enemies trapped inside." });
-        powerups.Add(new PowerUp { name = "Lightning", description = "Lightning strikes down on random enemies dealing damage to all those around." });
-        powerups.Add(new PowerUp { name = "Magic Circle", description = "Spawns a magic circle that slows enemies and hastens player attack speed." });
-        powerups.Add(new PowerUp { name = "Gravity", description = "Creates a black hole, pulling all enemies near inside." });
+        powerups.Add(new PowerUp(PowerupType.Fire, "Creates an explosion that deals damage to nearby enemies"));
+        powerups.Add(new PowerUp(PowerupType.Ice, "Fires 5 ice spears at nearby enemies, piercing through."));
+        powerups.Add(new PowerUp(PowerupType.Poison, "Spawns a pool of poison which poisons enemies trapped inside."));
+        powerups.Add(new PowerUp(PowerupType.Lightning, "Lightning strikes down on random enemies dealing damage to all those around."));
+        powerups.Add(new PowerUp(PowerupType.MagicCircle, "Spawns a magic circle that slows enemies and hastens player attack speed."));
+        powerups.Add(new PowerUp(PowerupType.Gravity, "Creates a black hole, pulling all enemies near inside."));
 
         FillTextWithPowerUps();
 
@@ -118,19 +125,19 @@ public class PowerUpPool : MonoBehaviour
         {
             foreach (PowerUp powerUp in powerups)
             {
-                if (effectSetting.effectName == powerUp.name)
+                if (effectSetting.powerupType == powerUp.powerupType)
                 {
-                    switch (effectSetting.effectName)
+                    switch (effectSetting.powerupType)
                     {
-                        case "Fire": effectSetting.floatMultiplier = 1 + 0.2f * powerUp.level; break;
-                        case "Ice": effectSetting.floatMultiplier = 1 + 0.2f * powerUp.level; break;
-                        case "Poison": effectSetting.floatMultiplier = 1 + 0.2f * powerUp.level; break;
-                        case "Lightning":
+                        case PowerupType.Fire: effectSetting.floatMultiplier = 1 + 0.2f * powerUp.level; break;
+                        case PowerupType.Ice: effectSetting.floatMultiplier = 1 + 0.2f * powerUp.level; break;
+                        case PowerupType.Poison: effectSetting.floatMultiplier = 1 + 0.2f * powerUp.level; break;
+                        case PowerupType.Lightning:
                             effectSetting.floatMultiplier = 1;
                             effectSetting.intValue = 3 + powerUp.level; 
                             break;
-                        case "Magic Circle": effectSetting.floatMultiplier = 1 + 0.2f * powerUp.level; break;
-                        case "Gravity": /* Do Nothing */ break;
+                        case PowerupType.MagicCircle: effectSetting.floatMultiplier = 1 + 0.2f * powerUp.level; break;
+                        case PowerupType.Gravity: /* Do Nothing */ break;
                         default: Debug.LogError("PowerUpPool.UpdatePowerUps(): Can't find name"); break;
                     }
 
