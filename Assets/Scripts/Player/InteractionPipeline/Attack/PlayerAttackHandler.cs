@@ -14,7 +14,7 @@ public class PlayerAttackHandler : IHandler<PlayerInteractionState>
             GameObject diceObj = data.PlayerAttackState.dicePool.Get();
             //diceObj.SetActive(true);
             diceObj.transform.position = data.sharedData.PlayerTransform.position + shootDir;
-            diceObj.transform.rotation = data.sharedData.PlayerTransform.rotation;
+            diceObj.transform.rotation = Random.rotationUniform;
             Dice dice = diceObj.GetComponent<Dice>();
             dice.Init(data.DiceAttackSettings, data.PlayerAttackState.equippedEffects, data.PlayerAttackState.dicePool, shootDir);
         }
