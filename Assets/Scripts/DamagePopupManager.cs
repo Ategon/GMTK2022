@@ -8,6 +8,14 @@ public class DamagePopupManager : MonoBehaviour
 
     [SerializeField] StatusEffectColor[] statusEffectColors;
 
+    [SerializeField] float minPopupSize;
+    [SerializeField] float maxPopupSize;
+    // TODO (GnoxNahte): Rename
+    // any damage above maxDamagePopupSize will set the text size to maxPopupSize
+    [SerializeField] float maxDamagePopupSize;
+
+    [SerializeField] float duration;
+
     [System.Serializable]
     public class StatusEffectColor
     {
@@ -47,6 +55,9 @@ public class DamagePopupManager : MonoBehaviour
 
     public static void OnDamage(Vector3 position, float damageAmount, StatusEffectType statusEffectType)
     {
+        if (damageAmount == 0f)
+            return;
+
         Color color;
         // Try to get the color for the status effect.
         // If can't get the color, default to no effect
@@ -55,6 +66,9 @@ public class DamagePopupManager : MonoBehaviour
 
         GameObject damagePopupObj = damagePopupPool.Get();
         damagePopupObj.transform.position = position;
-        damagePopupObj.GetComponent<DamagePopup>().Init(damagePopupPool, damageAmount, 1, color);
+        damagePopupObj.GetComponent<DamagePopup>().Init(
+            damagePopupPool, damageAmount, instance.duration, 
+            Mathf.Lerp(instance.minPopupSize, instance.maxPopupSize, damageAmount / instance.maxDamagePopupSize), 
+            in color);
     }
 }

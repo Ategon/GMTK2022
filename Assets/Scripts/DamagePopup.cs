@@ -18,14 +18,14 @@ public class DamagePopup : MonoBehaviour
         text = GetComponent<TextMeshPro>();
     }
 
-    public void Init(ObjectPool objectPool, float damageAmount, float duration, in Color color)
+    public void Init(ObjectPool objectPool, float damageAmount, float duration, float fontSize, in Color color)
     {
         this.objectPool = objectPool;
         text.text = ((int)damageAmount).ToString();
 
         this.duration = duration;
         this.remainingDuration = duration;
-
+        text.fontSize = fontSize;
         text.color = color;
     }
 
