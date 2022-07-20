@@ -4,10 +4,12 @@ using DataPipeline;
 [Serializable]
 public struct PlayerInteractionState : IData
 {
+    [ReadOnly]
     public PlayerState PlayerState;
     public EntityMovementSettings EntityMovementSettings;
     public PlayerCameraState PlayerCameraState;
 
+    [ReadOnly]
     public PlayerAttackState PlayerAttackState;
     public PlayerAttackSettings PlayerAttackSettings;
     public DiceAttackSettings DiceAttackSettings;

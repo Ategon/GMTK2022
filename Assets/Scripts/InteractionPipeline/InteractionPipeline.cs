@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace DataPipeline
 {
+    [System.Serializable]
     public class InteractionPipeline<T> where T : IData
     {
         private List<IGenerator<T>> generators;
