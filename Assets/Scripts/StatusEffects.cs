@@ -155,7 +155,7 @@ public class StatusEffects : MonoBehaviour
                 {
                     case StatusEffectType.Burn:
                     case StatusEffectType.Poison:
-                        enemy.TakeDamage(statusEffect.value * statusEffect.floatMultiplier);
+                        enemy.TakeDamage(statusEffect.value * statusEffect.floatMultiplier, statusEffect.type);
                         statusEffect.lastTimeEffectWasApplied = Time.time;
                         break;
                     case StatusEffectType.NoEffect:

@@ -19,9 +19,9 @@ public class GlobalControl : MonoBehaviour
         {
             DontDestroyOnLoad(gameObject);
             Instance = this;
-            MasterVolume = 1;
-            MusicVolume = 0.8797727f;
-            SoundEffectVolume = 0.8797727f;
+            MasterVolume = 0.5f;
+            MusicVolume = 0.5f;
+            SoundEffectVolume = 0.5f;
         }
         else if (Instance != this)
         {

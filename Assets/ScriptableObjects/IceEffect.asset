@@ -20,7 +20,7 @@ MonoBehaviour:
   damage: 0
   effectDuration: 1
   ifRemoveEffectOnLeaveCollider: 0
-  floatMultiplier: 1.4
+  floatMultiplier: 1.2
   intValue: 0
   statusEffect:
     type: 0

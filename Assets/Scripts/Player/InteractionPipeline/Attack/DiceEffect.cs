@@ -5,7 +5,8 @@ using UnityEngine;
 public class DiceEffect : MonoBehaviour
 {
     DiceEffectSettings effectSettings;
-
+    public DiceEffectSettings EffectSettings { get { return effectSettings; } }
+    
     private List<GameObject> enemies = new List<GameObject>();
 
     public void Init(DiceEffectSettings diceEffectSettings)

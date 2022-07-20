@@ -18,7 +18,7 @@ TagManager:
   - Enemy
   - DieEffect
   - EXP
-  - 
+  - Pixel
   - 
   - 
   - 
@@ -45,4 +45,7 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 1453209733
+    locked: 0
+  - name: DamageNumbers
+    uniqueID: 3438366833
     locked: 0

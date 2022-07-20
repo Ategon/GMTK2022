@@ -110,12 +110,10 @@ public class Dice : MonoBehaviour
         if (diceEffectSetting == null || !diceEffectSetting.ifEnabled)
             return;
 
-        print("effect settings: " + diceEffectSetting.effectName);
-
-        // TODO (GnoxNahte): Replace with pool
         Vector3 spawnPos = transform.position;
         spawnPos.y = 0.01f;
 
+        // TODO (GnoxNahte): Replace with pool
         GameObject diceEffectObj = GameObject.Instantiate(diceEffectSetting.diceEffectPrefab, spawnPos, Quaternion.identity);
         DiceEffect diceEffect = diceEffectObj.GetComponent<DiceEffect>();
         diceEffect.Init(diceEffectSetting);

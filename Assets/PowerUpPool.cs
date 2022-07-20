@@ -7,9 +7,9 @@ using UnityEngine.UI;
 public class PowerUp
 {
     public string name;
-    public int level;
-    public bool chosenThatTime;
     public string description;
+    public bool chosenThatTime = false;
+    public int level = 0;
 }
 
 public class PowerUpPool : MonoBehaviour
@@ -29,12 +29,12 @@ public class PowerUpPool : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
-        powerups.Add(new PowerUp { name = "Fire", level = 0, chosenThatTime = false, description = "Creates an explosion that deals damage to nearby enemies" });
-        powerups.Add(new PowerUp { name = "Ice", level = 0, chosenThatTime = false, description = "Fires 5 ice spears at nearby enemies, piercing through." });
-        powerups.Add(new PowerUp { name = "Poison", level = 0, chosenThatTime = false, description = "Spawns a pool of poison which poisons enemies trapped inside." });
-        powerups.Add(new PowerUp { name = "Lightning", level = 0, chosenThatTime = false, description = "Lightning strikes down on random enemies dealing damage to all those around." });
-        powerups.Add(new PowerUp { name = "Magic Circle", level = 0, chosenThatTime = false, description = "Spawns a magic circle that slows enemies and hastens player attack speed." });
-        powerups.Add(new PowerUp { name = "Gravity", level = 0, chosenThatTime = false, description = "Creates a black hole, pulling all enemies near inside." });
+        powerups.Add(new PowerUp { name = "Fire", description = "Creates an explosion that deals damage to nearby enemies" });
+        powerups.Add(new PowerUp { name = "Ice", description = "Fires 5 ice spears at nearby enemies, piercing through." });
+        powerups.Add(new PowerUp { name = "Poison", description = "Spawns a pool of poison which poisons enemies trapped inside." });
+        powerups.Add(new PowerUp { name = "Lightning", description = "Lightning strikes down on random enemies dealing damage to all those around." });
+        powerups.Add(new PowerUp { name = "Magic Circle", description = "Spawns a magic circle that slows enemies and hastens player attack speed." });
+        powerups.Add(new PowerUp { name = "Gravity", description = "Creates a black hole, pulling all enemies near inside." });
 
         FillTextWithPowerUps();
 
@@ -126,8 +126,8 @@ public class PowerUpPool : MonoBehaviour
                         case "Ice": effectSetting.floatMultiplier = 1 + 0.2f * powerUp.level; break;
                         case "Poison": effectSetting.floatMultiplier = 1 + 0.2f * powerUp.level; break;
                         case "Lightning": effectSetting.intValue = 3 + powerUp.level; break;
-                        case "Time": effectSetting.floatMultiplier = 1 + 0.2f * powerUp.level; break;
-                        case "Air": /* Do Nothing */ break;
+                        case "Magic Circle": effectSetting.floatMultiplier = 1 + 0.2f * powerUp.level; break;
+                        case "Gravity": /* Do Nothing */ break;
                         default: Debug.LogError("PowerUpPool.UpdatePowerUps(): Can't find name"); break;
                     }
 

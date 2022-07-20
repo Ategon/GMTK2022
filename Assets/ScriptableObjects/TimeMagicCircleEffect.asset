@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 240bb0df535b4fd4bb688e088f5aff71, type: 3}
   m_Name: TimeMagicCircleEffect
   m_EditorClassIdentifier: 
-  ifEnabled: 0
-  effectName: Time
+  ifEnabled: 1
+  effectName: Magic Circle
   diceEffectPrefab: {fileID: 439533966783478348, guid: dbb9a346365cb754695594e69ce0d4f3,
     type: 3}
   diceEffectGlyph: {fileID: 1052335657, guid: ca03bbd482082d34b994ea17ec390a85, type: 3}
   damage: 0
   effectDuration: 5
   ifRemoveEffectOnLeaveCollider: 1
-  floatMultiplier: 1
+  floatMultiplier: 1.2
   intValue: 0
   statusEffect:
     type: 3

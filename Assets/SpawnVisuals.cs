@@ -10,10 +10,13 @@ public class SpawnVisuals : MonoBehaviour
     {
         GameObject selected = GameObject.Find("SelectedId");
 
-        int playerIndex = selected.GetComponent<SelectCanvas>().userIndex;
+        int? playerIndex = selected?.GetComponent<SelectCanvas>()?.userIndex;
 
-        GameObject.Find("Player").GetComponent<Health>().chosenCharacterIndex = playerIndex;
+        if (playerIndex != null)
+        {
+            GameObject.Find("Player").GetComponent<Health>().chosenCharacterIndex = (int) playerIndex;
 
-        GameObject.Find("Visuals").GetComponent<PlayerVisuals>().playerIndex = playerIndex;
+            GameObject.Find("Visuals").GetComponent<PlayerVisuals>().playerIndex = (int) playerIndex;
+        }
     }
 }
