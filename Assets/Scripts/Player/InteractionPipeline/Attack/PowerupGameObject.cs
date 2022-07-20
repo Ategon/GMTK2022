@@ -2,16 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DiceEffect : MonoBehaviour
+public class PowerupGameObject : MonoBehaviour
 {
-    DiceEffectSettings effectSettings;
-    public DiceEffectSettings EffectSettings { get { return effectSettings; } }
+    PowerupSettings effectSettings;
+    public PowerupSettings EffectSettings { get { return effectSettings; } }
     
     private List<GameObject> enemies = new List<GameObject>();
 
-    public void Init(DiceEffectSettings diceEffectSettings)
+    public void Init(PowerupSettings powerupSettings)
     {
-        effectSettings = diceEffectSettings;
+        effectSettings = powerupSettings;
 
         LightningEffect lightningEffect = GetComponent<LightningEffect>();
         if (lightningEffect != null)
@@ -25,10 +25,10 @@ public class DiceEffect : MonoBehaviour
             iceEffect.damage = effectSettings.damage * effectSettings.floatMultiplier;
         }
 
-        StartCoroutine(EndDiceEffect());
+        StartCoroutine(EndPowerup());
     }
 
-    IEnumerator EndDiceEffect()
+    IEnumerator EndPowerup()
     {
         yield return new WaitForSeconds(effectSettings.effectDuration);
 

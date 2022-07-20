@@ -11,7 +11,7 @@ public struct PlayerAttackState
 
     public bool throwTriggered;
 
-    public DiceEffectSettings[] equippedEffects;
+    public PowerupSettings[] equippedEffects;
 
     public float playerAttackSpeedMultiplier;
 }
@@ -20,9 +20,9 @@ public struct PlayerAttackState
 public struct PlayerAttackSettings
 {
     public GameObject DicePrefab;
-    public DiceEffectSettings[] DiceEffects;
+    public PowerupSettings[] Powerups;
 
-    public int StartingDiceEffectIndex;
+    public int StartingPowerupIndex;
 
     // Number of attacks per second
     public float AttackSpeed;

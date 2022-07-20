@@ -24,7 +24,7 @@ public class PowerUpPool : MonoBehaviour
 
     [SerializeField] private Sprite[] sprites;
 
-    [SerializeField] List<DiceEffectSettings> diceEffectSettings;
+    [SerializeField] List<PowerupSettings> powerupSettings;
 
     // Start is called before the first frame update
     private void Awake()
@@ -114,7 +114,7 @@ public class PowerUpPool : MonoBehaviour
     [ContextMenu("Reset Powerups")]
     public void UpdatePowerUps()
     {
-        foreach (DiceEffectSettings effectSetting in diceEffectSettings)
+        foreach (PowerupSettings effectSetting in powerupSettings)
         {
             foreach (PowerUp powerUp in powerups)
             {

@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "DiceEffect", menuName = "ScriptableObjects/DiceEffect")]
-public class DiceEffectSettings : ScriptableObject
+[CreateAssetMenu(fileName = "PowerupSettings", menuName = "ScriptableObjects/PowerupSettings")]
+public class PowerupSettings : ScriptableObject
 {
     public bool ifEnabled = false;
 
     public string effectName;
-    public GameObject diceEffectPrefab;
-    public Sprite diceEffectGlyph;
+    public GameObject powerupPrefab;
+    public Sprite powerupGlyph;
     public float damage;
     public float effectDuration;
 

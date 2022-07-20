@@ -28,11 +28,11 @@ public class PlayerInteractionPipline : MonoBehaviour
         initialPlayerState.PlayerAttackState.dicePool = new ObjectPool();
         initialPlayerState.PlayerAttackState.dicePool.InitPool("DicePool", initialPlayerState.PlayerAttackSettings.DicePrefab, 30);
 
-        //initialPlayerState.PlayerAttackState.equippedEffects = new DiceEffectSettings[DiceAttackSettings.numOfSides];
+        //initialPlayerState.PlayerAttackState.equippedEffects = new PowerupSettings[DiceAttackSettings.numOfSides];
         //initialPlayerState.PlayerAttackState.equippedEffects[0] =
-        //    initialPlayerState.PlayerAttackSettings.DiceEffects[initialPlayerState.PlayerAttackSettings.StartingDiceEffectIndex];
+        //    initialPlayerState.PlayerAttackSettings.Powerups[initialPlayerState.PlayerAttackSettings.StartingPowerupIndex];
 
-        foreach (DiceEffectSettings effectSettings in initialPlayerState.PlayerAttackState.equippedEffects)
+        foreach (PowerupSettings effectSettings in initialPlayerState.PlayerAttackState.equippedEffects)
             effectSettings.ifEnabled = false;
 
         initialPlayerState.sharedData.PlayerTransform = transform;
@@ -45,7 +45,7 @@ public class PlayerInteractionPipline : MonoBehaviour
         pipeline = new InteractionPipeline<PlayerInteractionState>(initialPlayerState);
 
         InputReader inputReader = GetComponent<InputReader>();
-        PlayerAttackDiceEffectGenerator playerAttackDiceEffectGenerator = GetComponentInChildren<PlayerAttackDiceEffectGenerator>();
+        PlayerAttackPowerupGenerator playerAttackPowerupGenerator = GetComponentInChildren<PlayerAttackPowerupGenerator>();
 
         PlayerVisuals playerVisuals = transform.Find("Visuals").GetComponent<PlayerVisuals>();
 
@@ -53,7 +53,7 @@ public class PlayerInteractionPipline : MonoBehaviour
         pipeline.AddGenerator(new GravityMovments());
         pipeline.AddGenerator(new PlayerMovementGenerator());
         pipeline.AddGenerator(new PlayerAttackGenerator());
-        pipeline.AddGenerator(playerAttackDiceEffectGenerator);
+        pipeline.AddGenerator(playerAttackPowerupGenerator);
 
         pipeline.AddHandler(new PlayerMovementHandler());
         pipeline.AddHandler(new PlayerCameraHandler());
