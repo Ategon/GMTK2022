@@ -36,6 +36,7 @@ public struct DiceAttackSettings
     public float Speed;
     public float Lifetime;
     public float Size;
+    public float KnockbackForce;
     public float CritChance;
     // If Crit, Damage = AttackDamage * CritDamageMultiplier
     public float CritDamageMultiplier;

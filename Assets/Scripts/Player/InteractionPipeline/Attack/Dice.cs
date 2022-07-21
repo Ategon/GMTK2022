@@ -136,7 +136,7 @@ public class Dice : MonoBehaviour
             }
             else
             {
-                enemy.TakeDamage(diceSettings.AttackDamge);
+                enemy.TakeDamageWithKnockback(diceSettings.AttackDamge, rb.velocity, diceSettings.KnockbackForce);
 
                 int chosenSide = GetRolledNumber();
                 SpawnPowerup(chosenSide);
