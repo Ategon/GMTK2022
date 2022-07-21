@@ -12,8 +12,6 @@ public struct PlayerAttackState
     public bool throwTriggered;
 
     public PowerupSettings[] equippedPowerups;
-
-    public float playerAttackSpeedMultiplier;
 }
 
 [Serializable]

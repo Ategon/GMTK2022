@@ -9,6 +9,8 @@ public class PowerupGameObject : MonoBehaviour
     
     private List<GameObject> enemies = new List<GameObject>();
 
+    private PlayerStatsModifierGenerator playerStatsModifier;
+
     public void Init(PowerupSettings powerupSettings)
     {
         this.powerupSettings = powerupSettings;
@@ -34,16 +36,22 @@ public class PowerupGameObject : MonoBehaviour
 
         if (powerupSettings.ifRemoveEffectOnLeaveCollider)
         {
-            foreach (GameObject enemy in enemies)
+            foreach (GameObject obj in enemies)
             {
-                if (enemy == null)
+                if (obj == null)
                     continue;
 
-                StatusEffects statusEffects = enemy.GetComponent<StatusEffects>();
+                StatusEffects statusEffects = obj.GetComponent<StatusEffects>();
                 if (statusEffects != null)
+                {
                     statusEffects.RemoveStatusEffect(powerupSettings.statusEffect.type);
+                    continue;
+                }
             }
         }
+
+        if (playerStatsModifier != null)
+            playerStatsModifier.RemovePowerup(this);
 
         Destroy(this.gameObject);
     }
@@ -61,12 +69,23 @@ public class PowerupGameObject : MonoBehaviour
                 statusEffects.AddStatusEffect(new StatusEffect(powerupSettings.statusEffect, powerupSettings.floatMultiplier), transform.position);
 
                 enemies.Add(other.gameObject);
+                return;
             }
+        }
+
+        PlayerStatsModifierGenerator playerStatsModifierGenerator = other.GetComponent<PlayerStatsModifierGenerator>(); 
+        if (playerStatsModifierGenerator != null)
+        {
+            playerStatsModifier = playerStatsModifierGenerator;
+            playerStatsModifierGenerator.AddPowerup(this);
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
+        if (playerStatsModifier != null)
+            playerStatsModifier.RemovePowerup(this);
+
         if (!powerupSettings.ifRemoveEffectOnLeaveCollider)
             return;
 

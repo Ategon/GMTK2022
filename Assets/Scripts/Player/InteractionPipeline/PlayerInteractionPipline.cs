@@ -45,7 +45,7 @@ public class PlayerInteractionPipline : MonoBehaviour
         pipeline = new InteractionPipeline<PlayerInteractionState>(initialPlayerState);
 
         InputReader inputReader = GetComponent<InputReader>();
-        PlayerAttackPowerupGenerator playerAttackPowerupGenerator = GetComponentInChildren<PlayerAttackPowerupGenerator>();
+        PlayerStatsModifierGenerator playerAttackPowerupGenerator = GetComponentInChildren<PlayerStatsModifierGenerator>();
 
         PlayerVisuals playerVisuals = transform.Find("Visuals").GetComponent<PlayerVisuals>();
 
