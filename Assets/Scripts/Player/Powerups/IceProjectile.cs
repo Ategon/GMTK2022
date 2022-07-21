@@ -6,6 +6,7 @@ public class IceProjectile : MonoBehaviour
 {
     public float damage;
     public float speed;
+    public float knockbackForce;
     private Rigidbody rb;
 
     private void Awake()
@@ -13,11 +14,12 @@ public class IceProjectile : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
-    public void Init(float damage, Vector3 dir)
+    public void Init(float damage, Vector3 dir, float knockbackForce)
     {
         dir.y = 0;
         transform.forward = dir;
         this.damage = damage;
+        this.knockbackForce = knockbackForce;
         rb.AddForce(dir.normalized * speed, ForceMode.VelocityChange);
     }
 
@@ -25,6 +27,6 @@ public class IceProjectile : MonoBehaviour
     {
         Enemy enemy = other.GetComponent<Enemy>();
         if (enemy != null)
-            enemy.TakeDamage(damage, StatusEffectType.Slow);
+            enemy.TakeDamageWithKnockback(damage, rb.velocity, knockbackForce, StatusEffectType.Slow);
     }
 }

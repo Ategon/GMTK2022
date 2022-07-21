@@ -12,7 +12,7 @@ public class IcePowerup : MonoBehaviour
 
     public GameObject iceProjectile;
 
-    public float damage;
+    public PowerupSettings powerupSettings;
 
     [System.Serializable]
     // TODO(GnoxNahte): Refactor / rename this
@@ -75,16 +75,20 @@ public class IcePowerup : MonoBehaviour
                 if (targetedEnemies[0] != null)
                 {
                     GameObject projectileObj2 = Instantiate(iceProjectile, transform.position, Quaternion.identity);
-                    projectileObj2.GetComponent<IceProjectile>().Init(damage,
-                        targetedEnemies[0].pos - transform.position);
+                    projectileObj2.GetComponent<IceProjectile>().Init(
+                        powerupSettings.damage * powerupSettings.floatMultiplier,
+                        targetedEnemies[0].pos - transform.position,
+                        powerupSettings.knockbackForce);
                 }
 
                 continue;
             }
 
             GameObject projectileObj = Instantiate(iceProjectile, transform.position, Quaternion.identity);
-            projectileObj.GetComponent<IceProjectile>().Init(damage,
-                targetedEnemies[i].pos - transform.position);
+            projectileObj.GetComponent<IceProjectile>().Init(
+                powerupSettings.damage * powerupSettings.floatMultiplier,
+                targetedEnemies[i].pos - transform.position,
+                powerupSettings.knockbackForce);
 
             yield return new WaitForSeconds(0.2f);
         }

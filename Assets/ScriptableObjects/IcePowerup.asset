@@ -19,9 +19,10 @@ MonoBehaviour:
     type: 3}
   powerupGlyph: {fileID: -1631817135, guid: ca03bbd482082d34b994ea17ec390a85, type: 3}
   damage: 20
+  knockbackForce: 7.5
   duration: 1
   ifRemoveEffectOnLeaveCollider: 0
-  floatMultiplier: 1.2
+  floatMultiplier: 1.4
   intValue: 0
   statusEffect:
     type: 0

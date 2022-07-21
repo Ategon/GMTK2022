@@ -24,6 +24,7 @@ public class PowerupSettings : ScriptableObject
     public GameObject powerupPrefab;
     public Sprite powerupGlyph;
     public float damage;
+    public float knockbackForce;
     public float duration;
 
     public bool ifRemoveEffectOnLeaveCollider;

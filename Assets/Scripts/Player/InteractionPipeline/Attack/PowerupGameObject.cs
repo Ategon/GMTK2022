@@ -24,7 +24,7 @@ public class PowerupGameObject : MonoBehaviour
         IcePowerup icePowerup = GetComponent<IcePowerup>();
         if (icePowerup != null)
         {
-            icePowerup.damage = this.powerupSettings.damage * this.powerupSettings.floatMultiplier;
+            icePowerup.powerupSettings = powerupSettings;
         }
 
         StartCoroutine(EndPowerup());
