@@ -162,6 +162,8 @@ public class Health : MonoBehaviour
                 Time.timeScale = 0f;
                 powerUpCanvas.GetComponent<PowerUpPool>().FillTextWithPowerUps();
                 level++;
+
+                KnockbackOnDamage();
             }
         }
     }
