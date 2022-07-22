@@ -13,6 +13,9 @@ public class Health : MonoBehaviour
     private float flashingTimer;
     private bool dashFlash;
     private int collidingEnemies;
+    private float knockbackAmount = 40;
+    private float knockbackDamage = 25;
+    private float knockbackRadius = 15;
 
     [SerializeField] private Image chipbar;
 
@@ -144,6 +147,7 @@ public class Health : MonoBehaviour
             {
                 health--;
                 invulnerableTimer = invulnerableTime;
+                KnockbackOnDamage();
             }
         }
         else if (hit.gameObject.tag == "EXP")
@@ -158,6 +162,23 @@ public class Health : MonoBehaviour
                 Time.timeScale = 0f;
                 powerUpCanvas.GetComponent<PowerUpPool>().FillTextWithPowerUps();
                 level++;
+            }
+        }
+    }
+
+    private void KnockbackOnDamage()
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, knockbackRadius);
+        foreach (var hitCollider in hitColliders)
+        {
+            Enemy enemy = hitCollider.GetComponent<Enemy>();
+            if (enemy != null)
+            {
+                Vector3 distance = hitCollider.transform.position - transform.position;
+                float magnitude = distance.magnitude;
+                if (magnitude < 2) magnitude = 2;
+                distance.Normalize();
+                enemy.TakeDamageWithKnockback(knockbackDamage, distance, knockbackAmount / magnitude);
             }
         }
     }
