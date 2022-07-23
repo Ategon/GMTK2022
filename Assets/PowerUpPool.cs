@@ -128,20 +128,24 @@ public class PowerUpPool : MonoBehaviour
             {
                 if (effectSetting.powerupType == powerUp.powerupType)
                 {
+                    // -1 because
+                    // level 0 = unlocked powerup
+                    // level 1 starts the leveling up effect
+                    effectSetting.level = powerUp.level - 1;
+
                     switch (effectSetting.powerupType)
                     {
-                        case PowerupType.Fire: effectSetting.floatMultiplier = 1 + 0.2f * powerUp.level; break;
-                        case PowerupType.Ice: effectSetting.floatMultiplier = 1 + 0.2f * powerUp.level; break;
-                        case PowerupType.Poison: effectSetting.floatMultiplier = 1 + 0.2f * powerUp.level; break;
+                        case PowerupType.Fire: effectSetting.floatMultiplier = 1 + 0.2f * effectSetting.level; break;
+                        case PowerupType.Ice: effectSetting.floatMultiplier = 1 + 0.2f * effectSetting.level; break;
+                        case PowerupType.Poison: effectSetting.floatMultiplier = 1 + 0.2f * effectSetting.level; break;
                         case PowerupType.Lightning:
                             effectSetting.floatMultiplier = 1;
-                            effectSetting.intValue = 3 + powerUp.level; 
+                            effectSetting.intValue = 3 + effectSetting.level; 
                             break;
-                        case PowerupType.MagicCircle: effectSetting.floatMultiplier = 1 + 0.2f * powerUp.level; break;
+                        case PowerupType.MagicCircle: effectSetting.floatMultiplier = 1 + 0.2f * effectSetting.level; break;
                         case PowerupType.Gravity: /* Do Nothing */ break;
                         default: Debug.LogError("PowerUpPool.UpdatePowerUps(): Can't find name"); break;
                     }
-
 
                     effectSetting.ifEnabled = powerUp.level != 0;
                 }

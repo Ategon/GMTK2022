@@ -24,19 +24,12 @@ public class Dice : MonoBehaviour
         }
     }
 
-    DiceFace[] diceFaces;
+    DiceFace[] diceFaces = new DiceFace[0];
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
 
-        diceFaces = new DiceFace[6];
-        diceFaces[0] = new DiceFace(1, Vector3.up);
-        diceFaces[1] = new DiceFace(2, Vector3.right);
-        diceFaces[2] = new DiceFace(3, Vector3.back);
-        diceFaces[3] = new DiceFace(4, Vector3.forward);
-        diceFaces[4] = new DiceFace(5, Vector3.left);
-        diceFaces[5] = new DiceFace(6, Vector3.down);
     }
 
     // Reset the die
@@ -61,6 +54,9 @@ public class Dice : MonoBehaviour
         
         rb.AddForce(throwDirection * diceSettings.Speed, ForceMode.VelocityChange);
         rb.angularVelocity = Random.onUnitSphere * Random.Range(diceSettings.SpinSpeedRange.x, diceSettings.SpinSpeedRange.y);
+
+        if (diceFaces.Length != _equippedPowerups.Length)
+            SetDiceFaces(equippedPowerups.Length);
     }
 
     private void Update()
@@ -72,6 +68,41 @@ public class Dice : MonoBehaviour
         if (remainingLifetime < 0f)
         {
             dicePool.Release(this.gameObject);
+        }
+    }
+
+    private void SetDiceFaces(int numOfSides)
+    {
+        diceFaces = new DiceFace[numOfSides];
+        if (numOfSides == 4)
+        {
+            diceFaces[0] = new DiceFace(1, Vector3.up);
+            diceFaces[1] = new DiceFace(2, Vector3.right);
+            diceFaces[2] = new DiceFace(3, Vector3.back);
+            diceFaces[3] = new DiceFace(4, Vector3.forward);
+        }
+        else if (numOfSides == 6)
+        {
+            diceFaces[0] = new DiceFace(1, Vector3.up);
+            diceFaces[1] = new DiceFace(2, Vector3.right);
+            diceFaces[2] = new DiceFace(3, Vector3.back);
+            diceFaces[3] = new DiceFace(4, Vector3.forward);
+            diceFaces[4] = new DiceFace(5, Vector3.left);
+            diceFaces[5] = new DiceFace(6, Vector3.down);
+        }
+        else if (numOfSides == 8)
+        {
+            // Top half of the die
+            diceFaces[0] = new DiceFace(1, (Vector3.up + Vector3.forward) / 2);
+            diceFaces[1] = new DiceFace(2, (Vector3.up + Vector3.back) / 2);
+            diceFaces[2] = new DiceFace(3, (Vector3.up + Vector3.left) / 2);
+            diceFaces[3] = new DiceFace(4, (Vector3.up + Vector3.right) / 2);
+
+            // Bottom half of the die
+            diceFaces[4] = new DiceFace(5, (Vector3.down + Vector3.left) / 2);
+            diceFaces[5] = new DiceFace(6, (Vector3.down + Vector3.right) / 2);
+            diceFaces[6] = new DiceFace(7, (Vector3.down + Vector3.forward) / 2);
+            diceFaces[7] = new DiceFace(8, (Vector3.down + Vector3.back) / 2);
         }
     }
 
@@ -114,6 +145,7 @@ public class Dice : MonoBehaviour
         spawnPos.y = 0.01f;
 
         // TODO (GnoxNahte): Replace with pool
+        print("Instantiate: " + powerupSetting.effectName);
         GameObject powerupObj = GameObject.Instantiate(powerupSetting.powerupPrefab, spawnPos, Quaternion.identity);
         PowerupGameObject powerup = powerupObj.GetComponent<PowerupGameObject>();
         powerup.Init(powerupSetting);

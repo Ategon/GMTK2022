@@ -51,7 +51,8 @@ public class PlayerInteractionPipline : MonoBehaviour
         
 
         InputReader inputReader = GetComponent<InputReader>();
-        PlayerStatsModifierGenerator playerAttackPowerupGenerator = GetComponentInChildren<PlayerStatsModifierGenerator>();
+        PlayerStatsModifierGenerator playerStatsModifierGenerator = GetComponent<PlayerStatsModifierGenerator>();
+        PlayerDiceBuilderGenerator playerDiceBuilderGenerator = GetComponent<PlayerDiceBuilderGenerator>();
 
         PlayerVisuals playerVisuals = transform.Find("Visuals").GetComponent<PlayerVisuals>();
 
@@ -59,7 +60,8 @@ public class PlayerInteractionPipline : MonoBehaviour
         pipeline.AddGenerator(new GravityMovments());
         pipeline.AddGenerator(new PlayerMovementGenerator());
         pipeline.AddGenerator(new PlayerAttackGenerator());
-        pipeline.AddGenerator(playerAttackPowerupGenerator);
+        pipeline.AddGenerator(playerDiceBuilderGenerator);
+        pipeline.AddGenerator(playerStatsModifierGenerator);
 
         pipeline.AddHandler(new PlayerMovementHandler());
         pipeline.AddHandler(new PlayerCameraHandler());

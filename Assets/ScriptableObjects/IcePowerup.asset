@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 240bb0df535b4fd4bb688e088f5aff71, type: 3}
   m_Name: IcePowerup
   m_EditorClassIdentifier: 
-  ifEnabled: 1
+  ifEnabled: 0
   powerupType: 1
   effectName: Ice
+  powerupDescription: Fires 5 ice spears at nearby enemies, piercing through.
+  powerupUpgradeDescription: + 20% Damage
   powerupPrefab: {fileID: 354771392444338835, guid: cb84248dc8e55bb41bd268f0f369b019,
     type: 3}
   powerupGlyph: {fileID: -1631817135, guid: ca03bbd482082d34b994ea17ec390a85, type: 3}
@@ -22,6 +24,7 @@ MonoBehaviour:
   knockbackForce: 7.5
   duration: 1
   ifRemoveEffectOnLeaveCollider: 0
+  level: 0
   floatMultiplier: 1.4
   intValue: 0
   statusEffect:

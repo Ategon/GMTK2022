@@ -78,6 +78,10 @@ public class InputReader : PlayerInput, IGenerator<PlayerInteractionState>
                 ReadBool(context, ref playerState.Pause);
                 dirtyFields.Pause = true;
                 break;
+            case "DiceBuilder":
+                ReadBool(context, ref playerState.DiceBuilder);
+                break;
+
             default:
                 break;
         }

@@ -12,15 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 240bb0df535b4fd4bb688e088f5aff71, type: 3}
   m_Name: MagicCirclePowerup
   m_EditorClassIdentifier: 
-  ifEnabled: 1
+  ifEnabled: 0
   powerupType: 4
   effectName: Magic Circle
+  powerupDescription: Spawns a magic circle that slows enemies and hastens player
+    attack speed.
+  powerupUpgradeDescription: + 20% effect
   powerupPrefab: {fileID: 439533966783478348, guid: dbb9a346365cb754695594e69ce0d4f3,
     type: 3}
   powerupGlyph: {fileID: 1052335657, guid: ca03bbd482082d34b994ea17ec390a85, type: 3}
   damage: 0
+  knockbackForce: 0
   duration: 5
   ifRemoveEffectOnLeaveCollider: 1
+  level: 0
   floatMultiplier: 1.2
   intValue: 0
   statusEffect:
