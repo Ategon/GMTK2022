@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using System.Collections;
 using UnityEngine.UI;
 
 public class Health : MonoBehaviour
@@ -29,7 +30,7 @@ public class Health : MonoBehaviour
 
     [SerializeField]
     private Image[] hearts;
-    
+
     public int chosenCharacterIndex = 0;
 
     [SerializeField]
@@ -51,15 +52,15 @@ public class Health : MonoBehaviour
     private void FixedUpdate()
     {
         healthBlinkTimer += Time.deltaTime * healthBlinkMult;
-        healthBlinkIndex = (int) Math.Floor(healthBlinkTimer) % 4;
-        if((int) Math.Round(healthBlinkTimer) % 4 == healthBlinkIndex) hearts[healthBlinkIndex].rectTransform.sizeDelta = new Vector2(120, 120);
+        healthBlinkIndex = (int)Math.Floor(healthBlinkTimer) % 4;
+        if ((int)Math.Round(healthBlinkTimer) % 4 == healthBlinkIndex) hearts[healthBlinkIndex].rectTransform.sizeDelta = new Vector2(120, 120);
         else hearts[healthBlinkIndex].rectTransform.sizeDelta = new Vector2(80, 80);
         hearts[(healthBlinkIndex + 3) % 4].rectTransform.sizeDelta = new Vector2(100, 100);
         hearts[(healthBlinkIndex + 2) % 4].rectTransform.sizeDelta = new Vector2(100, 100);
         hearts[(healthBlinkIndex + 1) % 4].rectTransform.sizeDelta = new Vector2(100, 100);
 
-        chipbar.rectTransform.sizeDelta = new Vector2(640 * (float) exp / (100 + (20 * (level + 1))), 16);
-        chipbar.transform.localPosition = new Vector3((float) exp / (100 + 20 * (level + 1)) * 320 - 320, 0, 0);
+        chipbar.rectTransform.sizeDelta = new Vector2(640 * (float)exp / (100 + (20 * (level + 1))), 16);
+        chipbar.transform.localPosition = new Vector3((float)exp / (100 + 20 * (level + 1)) * 320 - 320, 0, 0);
 
         if (flashingTimer > 0)
         {
@@ -109,7 +110,7 @@ public class Health : MonoBehaviour
 
         for (int i = 0; i < hearts.Length; i++)
         {
-            if(i < health)
+            if (i < health)
             {
                 hearts[i].sprite = fullHearts[chosenCharacterIndex];
             } else {
@@ -149,6 +150,7 @@ public class Health : MonoBehaviour
                 health--;
                 invulnerableTimer = invulnerableTime;
                 KnockbackOnDamage();
+                StartCoroutine(HitStun());
             }
         }
         else if (hit.gameObject.tag == "EXP")
@@ -184,5 +186,12 @@ public class Health : MonoBehaviour
                 enemy.TakeDamageWithKnockback(knockbackDamage, distance, knockbackAmount / magnitude);
             }
         }
+    }
+
+    IEnumerator HitStun()
+    {
+        Time.timeScale = 0;
+        yield return new WaitForSecondsRealtime(0.5f);
+        Time.timeScale = 1;
     }
 }
