@@ -94,6 +94,7 @@ public struct PlayerState : IData
 
 public enum MoveState
 {
+    Undefined,
     Normal,
     Crouch,
     Dodging,
