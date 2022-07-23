@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DataPipeline;
+using TMPro;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -23,33 +24,64 @@ namespace Spellbound.Managers
 
         [SerializeField] private bool spawnBosses;
 
+        private void Start()
+        {
+            GameObject.Find("Player").GetComponent<PlayerInteractionPipline>().AddHandler(this);
+            GameObject.Find("Player").GetComponent<PlayerInteractionPipline>().AddGenerator(this);
+        }
+
         private void FixedUpdate()
         {
             gameTimer += Time.deltaTime;
             roundTimer += Time.deltaTime;
             waveTimer += Time.deltaTime;
 
-            if(waveTimer > waveLength)
+            if (waveTimer > waveLength)
             {
                 waveTimer -= waveLength;
                 wavesElapsed++;
             }
 
-            if (roundTimer > roundLength)
+            if (roundTimer > roundLength * 60)
             {
                 roundTimer -= roundLength;
-                roundsElapsed++;
+                waveTimer = roundTimer;
+                wavesElapsed++;
+                if (spawnBosses)
+                {
+                    roundPhase = RoundPhase.Boss;
+                }
+                else
+                {
+                    roundsElapsed++;
+                }
             }
         }
 
         public void Write(ref PlayerInteractionState data)
         {
-
+            data.GameState.roundLength = roundLength;
+            data.GameState.waveLength = waveLength;
+            data.GameState.numRounds = numRounds;
+            data.GameState.gameTimer = gameTimer;
+            data.GameState.roundTimer = roundTimer;
+            data.GameState.waveTimer = waveTimer;
+            data.GameState.roundLength = roundLength;
+            data.GameState.roundsElapsed = roundsElapsed;
+            data.GameState.wavesElapsed = wavesElapsed;
+            data.GameState.roundPhase = roundPhase;
+            data.GameState.spawnBosses = spawnBosses;
         }
 
         public void Handle(in PlayerInteractionState data)
         {
-
+            if (data.GameState.bossKilled)
+            {
+                roundsElapsed++;
+                roundPhase = RoundPhase.Wave;
+                roundTimer = 0;
+                waveTimer = 0;
+            }
         }
     }
 

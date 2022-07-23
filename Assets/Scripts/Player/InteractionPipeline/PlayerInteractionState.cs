@@ -17,6 +17,7 @@ public struct PlayerInteractionState : IData
     public PlayerAttackSettings PlayerAttackSettings;
     public DiceAttackSettings DiceAttackSettings;
     public PlayerAttackStatsModifier PlayerAttackStatsModifier;
+    public GameState GameState;
 
     public SharedData sharedData;
 
