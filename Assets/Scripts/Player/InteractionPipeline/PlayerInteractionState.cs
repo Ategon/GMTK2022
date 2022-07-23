@@ -12,7 +12,7 @@ public struct PlayerInteractionState : IData
 
     public PlayerCameraState PlayerCameraState;
 
-    [ReadOnly] public PlayerAttackState PlayerAttackState;
+    public PlayerAttackState PlayerAttackState;
     public PlayerAttackSettings PlayerAttackSettings;
     public DiceAttackSettings DiceAttackSettings;
     public PlayerAttackStatsModifier PlayerAttackStatsModifier;

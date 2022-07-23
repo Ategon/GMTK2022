@@ -182,7 +182,6 @@ public class Health : MonoBehaviour
                 Vector3 distance = hitCollider.transform.position - transform.position;
                 float magnitude = distance.magnitude;
                 if (magnitude < 2) magnitude = 2;
-                distance.Normalize();
                 enemy.TakeDamageWithKnockback(knockbackDamage, distance, knockbackAmount / magnitude);
             }
         }

@@ -65,14 +65,10 @@ public class PlayerInteractionPipline : MonoBehaviour
         pipeline.AddHandler(playerVisuals.getHandler());
     }
 
-    public void Update()
-    {
-        pipeline.WriteData(ref playerState);
-    }
-
     public void FixedUpdate()
     {
         playerState.deltaTime = Time.deltaTime;
         pipeline.HandleData(in playerState);
+        pipeline.WriteData(ref playerState);
     }
 }
