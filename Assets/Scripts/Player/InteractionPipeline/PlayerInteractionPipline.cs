@@ -42,11 +42,13 @@ public class PlayerInteractionPipline : MonoBehaviour
         playerState.sharedData.MainCamera = Camera.main;
         playerState.sharedData.VirtualCamera = virtualCamera;
         playerState.sharedData.GameAudio = gameAudio;
+
+        pipeline = new InteractionPipeline<PlayerInteractionState>(); // moved from start
     }
 
     public void Start()
     {
-        pipeline = new InteractionPipeline<PlayerInteractionState>();
+        
 
         InputReader inputReader = GetComponent<InputReader>();
         PlayerStatsModifierGenerator playerAttackPowerupGenerator = GetComponentInChildren<PlayerStatsModifierGenerator>();
@@ -75,5 +77,10 @@ public class PlayerInteractionPipline : MonoBehaviour
     public void AddGenerator(IGenerator<PlayerInteractionState> generator)
     {
         pipeline.AddGenerator(generator);
+    }
+
+    public void AddHandler(IHandler<PlayerInteractionState> handler)
+    {
+        pipeline.AddHandler(handler);
     }
 }
