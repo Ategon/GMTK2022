@@ -49,3 +49,6 @@ TagManager:
   - name: DamageNumbers
     uniqueID: 3438366833
     locked: 0
+  - name: Cursor
+    uniqueID: 313452195
+    locked: 0
