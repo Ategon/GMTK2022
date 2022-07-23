@@ -16,6 +16,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float maxHealth = 100;
     public float expAmount = 20;
 
+    public float heldOrbs = 0;
+
     protected float moveSpeed { get { return walkingSpeed * statusEffects.walkingSpeedMultiplier; } }
 
     private float health;
@@ -100,6 +102,10 @@ public class Enemy : MonoBehaviour
         if (health <= 0)
         {
             Instantiate(exp, transform.position, Quaternion.identity);
+            for(int i = 0; i < (int) heldOrbs; ++i)
+            {
+                Instantiate(exp, transform.position, Quaternion.identity);
+            }
             Destroy(this.gameObject);
         }
 
@@ -110,5 +116,14 @@ public class Enemy : MonoBehaviour
     {
         if (sr != null)
             sr.color = color;
+    }
+
+    private void OnCollisionEnter(Collision hit)
+    {
+        if (hit.gameObject.tag == "EXP")
+        {
+            Destroy(hit.gameObject);
+            heldOrbs++;
+        }
     }
 }
