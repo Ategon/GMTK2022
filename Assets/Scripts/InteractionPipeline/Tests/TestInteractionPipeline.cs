@@ -9,10 +9,11 @@ public class TestInteractionPipeline : MonoBehaviour
     private InteractionPipeline<TestData> pipeline;
     private List<Generator> gens;
     private int count;
+    private TestData data = new TestData();
 
     void Start()
     {
-        pipeline = new InteractionPipeline<TestData>(new TestData());
+        pipeline = new InteractionPipeline<TestData>();
         gens = new List<Generator>();
 
         Generator gen0 = new Generator
@@ -61,8 +62,7 @@ public class TestInteractionPipeline : MonoBehaviour
     {
         LogFrames();
 
-        pipeline.ClearData();
-        pipeline.Execute();
+        pipeline.Execute(ref data);
 
         if (count == lengthOfTest)
         {

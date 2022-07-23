@@ -4,30 +4,27 @@ using UnityEngine;
 
 namespace DataPipeline
 {
+    [System.Serializable]
     public class InteractionPipeline<T> where T : IData
     {
         private List<IGenerator<T>> generators;
         private List<IHandler<T>> handlers;
 
-        [SerializeField]
-        private T data;
-
-        public InteractionPipeline(T data)
+        public InteractionPipeline()
         {
             generators = new List<IGenerator<T>>();
             handlers = new List<IHandler<T>>();
-            this.data = data;
         }
 
-        public void Execute()
+        public void Execute(ref T data)
         {
             if (generators.Count > 0)
             {
-                ExecuteEvenWithNoGenerators();
+                ExecuteEvenWithNoGenerators(ref data);
             }
         }
 
-        public void ExecuteEvenWithNoGenerators()
+        public void ExecuteEvenWithNoGenerators(ref T data)
         {
             if (handlers.Count > 0)
             {
@@ -36,7 +33,7 @@ namespace DataPipeline
             }
         }
 
-        private void WriteData(ref T data)
+        public void WriteData(ref T data)
         {
             int writeCount = 0;
 
@@ -72,12 +69,8 @@ namespace DataPipeline
             }
         }
 
-        public void ClearData()
-        {
-            data.Clear();
-        }
 
-        private void HandleData(in T data)
+        public void HandleData(in T data)
         {
             foreach (IHandler<T> handler in handlers)
             {

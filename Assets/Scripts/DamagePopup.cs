@@ -37,7 +37,10 @@ public class DamagePopup : MonoBehaviour
             objectPool.Release(this.gameObject);
             return;
         }
+
         transform.localPosition += new Vector3(0, 0, moveUpSpeed * Time.deltaTime);
         transform.localScale = Vector3.one * remainingDuration / duration;
+
+        text.color = new Color(text.color.r, text.color.g, text.color.b, remainingDuration / duration);
     }
 }

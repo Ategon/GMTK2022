@@ -103,10 +103,6 @@ public class StatusEffects : MonoBehaviour
         {
             RemoveStatusEffect(index);
         }
-        else
-        {
-            Debug.Log("Status effect: " + type.ToString() + " doesn't exists");
-        }
     }
 
     // parameter: index is the index in statusEffect

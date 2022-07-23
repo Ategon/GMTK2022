@@ -6,7 +6,7 @@ public class Dice : MonoBehaviour
 {
     DiceAttackSettings diceSettings;
     float remainingLifetime;
-    DiceEffectSettings[] equippedDiceEffects;
+    PowerupSettings[] equippedPowerups;
 
     ObjectPool dicePool; // To return itself to the pool 
 
@@ -50,10 +50,10 @@ public class Dice : MonoBehaviour
         rb.angularVelocity = Vector3.zero;
     }
 
-    public void Init(DiceAttackSettings _diceSettings, DiceEffectSettings[] _equippedDiceEffects, ObjectPool _dicePool, Vector3 throwDirection)
+    public void Init(DiceAttackSettings _diceSettings, PowerupSettings[] _equippedPowerups, ObjectPool _dicePool, Vector3 throwDirection)
     {
         diceSettings = _diceSettings;
-        equippedDiceEffects = _equippedDiceEffects;
+        equippedPowerups = _equippedPowerups;
 
         remainingLifetime = diceSettings.Lifetime;
 
@@ -103,20 +103,20 @@ public class Dice : MonoBehaviour
         return numRolled;
     }
 
-    private void SpawnEffect(int numberRolled)
+    private void SpawnPowerup(int numberRolled)
     {
-        DiceEffectSettings diceEffectSetting = equippedDiceEffects[numberRolled - 1];
+        PowerupSettings powerupSetting = equippedPowerups[numberRolled - 1];
 
-        if (diceEffectSetting == null || !diceEffectSetting.ifEnabled)
+        if (powerupSetting == null || !powerupSetting.ifEnabled)
             return;
 
         Vector3 spawnPos = transform.position;
         spawnPos.y = 0.01f;
 
         // TODO (GnoxNahte): Replace with pool
-        GameObject diceEffectObj = GameObject.Instantiate(diceEffectSetting.diceEffectPrefab, spawnPos, Quaternion.identity);
-        DiceEffect diceEffect = diceEffectObj.GetComponent<DiceEffect>();
-        diceEffect.Init(diceEffectSetting);
+        GameObject powerupObj = GameObject.Instantiate(powerupSetting.powerupPrefab, spawnPos, Quaternion.identity);
+        PowerupGameObject powerup = powerupObj.GetComponent<PowerupGameObject>();
+        powerup.Init(powerupSetting);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -136,10 +136,10 @@ public class Dice : MonoBehaviour
             }
             else
             {
-                enemy.TakeDamage(diceSettings.AttackDamge);
+                enemy.TakeDamageWithKnockback(diceSettings.AttackDamge, rb.velocity, diceSettings.KnockbackForce);
 
                 int chosenSide = GetRolledNumber();
-                SpawnEffect(chosenSide);
+                SpawnPowerup(chosenSide);
 
                 dicePool.Release(this.gameObject);
             }

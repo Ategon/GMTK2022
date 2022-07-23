@@ -1,10 +1,14 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using System.Collections;
 using UnityEngine.UI;
 
-public class Health : MonoBehaviour
+using DataPipeline;
+
+public class Health : MonoBehaviour, IGenerator<PlayerInteractionState>
 {
+    [SerializeField] ScreenShakeController ssc;
     [SerializeField] SpriteRenderer playerSR;
     [SerializeField] SpriteRenderer playerSR2;
     [SerializeField] GameObject powerUpCanvas;
@@ -13,6 +17,9 @@ public class Health : MonoBehaviour
     private float flashingTimer;
     private bool dashFlash;
     private int collidingEnemies;
+    private float knockbackAmount = 40;
+    private float knockbackDamage = 25;
+    private float knockbackRadius = 15;
 
     [SerializeField] private Image chipbar;
 
@@ -26,7 +33,7 @@ public class Health : MonoBehaviour
 
     [SerializeField]
     private Image[] hearts;
-    
+
     public int chosenCharacterIndex = 0;
 
     [SerializeField]
@@ -45,18 +52,26 @@ public class Health : MonoBehaviour
 
     private float healthBlinkMult = 2;
 
+    private void Start()
+    {
+        gameObject.GetComponent<PlayerInteractionPipline>().AddGenerator(this);
+    }
+
     private void FixedUpdate()
     {
+        if (stunBoostTime > 0) stunBoostTime -= Time.deltaTime * 2;
+        else if (stunBoostTime < 0) stunBoostTime = 0;
+
         healthBlinkTimer += Time.deltaTime * healthBlinkMult;
-        healthBlinkIndex = (int) Math.Floor(healthBlinkTimer) % 4;
-        if((int) Math.Round(healthBlinkTimer) % 4 == healthBlinkIndex) hearts[healthBlinkIndex].rectTransform.sizeDelta = new Vector2(120, 120);
+        healthBlinkIndex = (int)Math.Floor(healthBlinkTimer) % 4;
+        if ((int)Math.Round(healthBlinkTimer) % 4 == healthBlinkIndex) hearts[healthBlinkIndex].rectTransform.sizeDelta = new Vector2(120, 120);
         else hearts[healthBlinkIndex].rectTransform.sizeDelta = new Vector2(80, 80);
         hearts[(healthBlinkIndex + 3) % 4].rectTransform.sizeDelta = new Vector2(100, 100);
         hearts[(healthBlinkIndex + 2) % 4].rectTransform.sizeDelta = new Vector2(100, 100);
         hearts[(healthBlinkIndex + 1) % 4].rectTransform.sizeDelta = new Vector2(100, 100);
 
-        chipbar.rectTransform.sizeDelta = new Vector2(640 * (float) exp / (100 + (20 * (level + 1))), 16);
-        chipbar.transform.localPosition = new Vector3((float) exp / (100 + 20 * (level + 1)) * 320 - 320, 0, 0);
+        chipbar.rectTransform.sizeDelta = new Vector2(640 * (float)exp / (100 + (20 * (level + 1))), 16);
+        chipbar.transform.localPosition = new Vector3((float)exp / (100 + 20 * (level + 1)) * 320 - 320, 0, 0);
 
         if (flashingTimer > 0)
         {
@@ -106,7 +121,7 @@ public class Health : MonoBehaviour
 
         for (int i = 0; i < hearts.Length; i++)
         {
-            if(i < health)
+            if (i < health)
             {
                 hearts[i].sprite = fullHearts[chosenCharacterIndex];
             } else {
@@ -132,6 +147,8 @@ public class Health : MonoBehaviour
             {
                 health--;
                 invulnerableTimer = invulnerableTime;
+                KnockbackOnDamage();
+                StartCoroutine(HitStun());
             }
         }
     }
@@ -144,6 +161,8 @@ public class Health : MonoBehaviour
             {
                 health--;
                 invulnerableTimer = invulnerableTime;
+                KnockbackOnDamage();
+                StartCoroutine(HitStun());
             }
         }
         else if (hit.gameObject.tag == "EXP")
@@ -158,7 +177,41 @@ public class Health : MonoBehaviour
                 Time.timeScale = 0f;
                 powerUpCanvas.GetComponent<PowerUpPool>().FillTextWithPowerUps();
                 level++;
+
+                KnockbackOnDamage();
             }
         }
+    }
+
+    private void KnockbackOnDamage()
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, knockbackRadius);
+        foreach (var hitCollider in hitColliders)
+        {
+            Enemy enemy = hitCollider.GetComponent<Enemy>();
+            if (enemy != null)
+            {
+                Vector3 distance = hitCollider.transform.position - transform.position;
+                float magnitude = distance.magnitude;
+                if (magnitude < 2) magnitude = 2;
+                enemy.TakeDamageWithKnockback(knockbackDamage, distance, knockbackAmount / magnitude);
+            }
+        }
+    }
+
+    float stunBoostTime;
+
+    IEnumerator HitStun()
+    {
+        Time.timeScale = 0;
+        yield return new WaitForSecondsRealtime(0.5f);
+        stunBoostTime = 2f;
+        Time.timeScale = 1;
+        ssc.StartShake(0.1f, 30f);
+    }
+
+    public void Write(ref PlayerInteractionState state)
+    {
+        state.stunBoostTime = stunBoostTime;
     }
 }

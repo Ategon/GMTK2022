@@ -4,17 +4,24 @@ using UnityEngine;
 
 public class DamagePopupManager : MonoBehaviour
 {
+    [SerializeField] Transform playerTransform;
     [SerializeField] GameObject damagePopupPrefab;
 
     [SerializeField] StatusEffectColor[] statusEffectColors;
 
-    [SerializeField] float minPopupSize;
-    [SerializeField] float maxPopupSize;
+    // Makes higher damage be bigger
+    [SerializeField] Vector2 minMaxPopupSize;
     // TODO (GnoxNahte): Rename
-    // any damage above maxDamagePopupSize will set the text size to maxPopupSize
+    // any damage >= maxDamagePopupSize will set the text size to minMaxPopupSize.y
     [SerializeField] float maxDamagePopupSize;
 
-    [SerializeField] float duration;
+    // Makes higher damage be last longer
+    [SerializeField] Vector2 minMaxPopupDuration;
+    // TODO (GnoxNahte): Rename
+    // any damage >= maxDurationPopupDuration will set the duration to minMaxPopupDuration.y
+    [SerializeField] float maxDamagePopupDuration;
+
+    [SerializeField] float damagePopupOffset;
 
     [System.Serializable]
     public class StatusEffectColor
@@ -65,10 +72,11 @@ public class DamagePopupManager : MonoBehaviour
             color = statusEffectColors_Dictionary[StatusEffectType.NoEffect];
 
         GameObject damagePopupObj = damagePopupPool.Get();
-        damagePopupObj.transform.position = position;
+        damagePopupObj.transform.position = position + (position - instance.playerTransform.position).normalized * instance.damagePopupOffset;
         damagePopupObj.GetComponent<DamagePopup>().Init(
-            damagePopupPool, damageAmount, instance.duration, 
-            Mathf.Lerp(instance.minPopupSize, instance.maxPopupSize, damageAmount / instance.maxDamagePopupSize), 
+            damagePopupPool, damageAmount, 
+            Mathf.Lerp(instance.minMaxPopupDuration.x, instance.minMaxPopupDuration.y, damageAmount / instance.maxDamagePopupDuration), 
+            Mathf.Lerp(instance.minMaxPopupSize.x, instance.minMaxPopupSize.y, damageAmount / instance.maxDamagePopupSize), 
             in color);
     }
 }

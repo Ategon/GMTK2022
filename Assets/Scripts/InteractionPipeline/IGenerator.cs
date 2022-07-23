@@ -5,9 +5,9 @@ namespace DataPipeline
 {
     public interface IGenerator<T> where T : IData
     {
-        void Start();
-        void StartRound();
+        void Start() { }
+        void StartRound() { }
         void Write(ref T data);
-        bool IsNotDoneWriting();
+        bool IsNotDoneWriting() => false;
     }
 }

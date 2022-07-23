@@ -7,7 +7,7 @@ using Cinemachine;
 public class PlayerInteractionPipline : MonoBehaviour
 {
     [SerializeField]
-    PlayerInteractionState initialPlayerState;
+    PlayerInteractionState playerState;
 
     [SerializeField]
     private InteractionPipeline<PlayerInteractionState> pipeline;
@@ -15,37 +15,41 @@ public class PlayerInteractionPipline : MonoBehaviour
     [SerializeField]
     private CinemachineVirtualCamera virtualCamera;
 
+    [SerializeField]
+    private GameAudio gameAudio;
+
     private void Awake()
     {
         // TOOD (GnoxNahte?): quick fixfor now, might do something different.
         // maybe for some variables just assign directly in inspector
-        initialPlayerState.EntityMovementSettings.RigidBody = GetComponent<Rigidbody>();
+        playerState.EntityMovementSettings.RigidBody = GetComponent<Rigidbody>();
 
-        initialPlayerState.PlayerCameraState.VirtualCamera = GetComponentInChildren<Cinemachine.CinemachineVirtualCamera>();
-        initialPlayerState.PlayerCameraState.CameraFollow = initialPlayerState.PlayerCameraState.VirtualCamera.Follow;
-        initialPlayerState.PlayerCameraState.ScreenSize = new Vector2(Screen.width, Screen.height);
+        playerState.PlayerCameraState.VirtualCamera = GetComponentInChildren<Cinemachine.CinemachineVirtualCamera>();
+        playerState.PlayerCameraState.CameraFollow = playerState.PlayerCameraState.VirtualCamera.Follow;
+        playerState.PlayerCameraState.ScreenSize = new Vector2(Screen.width, Screen.height);
 
-        initialPlayerState.PlayerAttackState.dicePool = new ObjectPool();
-        initialPlayerState.PlayerAttackState.dicePool.InitPool("DicePool", initialPlayerState.PlayerAttackSettings.DicePrefab, 30);
+        playerState.PlayerAttackState.dicePool = new ObjectPool();
+        playerState.PlayerAttackState.dicePool.InitPool("DicePool", playerState.PlayerAttackSettings.DicePrefab, 30);
 
-        //initialPlayerState.PlayerAttackState.equippedEffects = new DiceEffectSettings[DiceAttackSettings.numOfSides];
-        //initialPlayerState.PlayerAttackState.equippedEffects[0] =
-        //    initialPlayerState.PlayerAttackSettings.DiceEffects[initialPlayerState.PlayerAttackSettings.StartingDiceEffectIndex];
+        //initialPlayerState.PlayerAttackState.equippedPowerups = new PowerupSettings[DiceAttackSettings.numOfSides];
+        //initialPlayerState.PlayerAttackState.equippedPowerups[0] =
+        //    initialPlayerState.PlayerAttackSettings.Powerups[initialPlayerState.PlayerAttackSettings.StartingPowerupIndex];
 
-        foreach (DiceEffectSettings effectSettings in initialPlayerState.PlayerAttackState.equippedEffects)
-            effectSettings.ifEnabled = false;
+        foreach (PowerupSettings powerupSetting in playerState.PlayerAttackState.equippedPowerups)
+            powerupSetting.ifEnabled = false;
 
-        initialPlayerState.sharedData.PlayerTransform = transform;
-        initialPlayerState.sharedData.MainCamera = Camera.main;
-        initialPlayerState.sharedData.VirtualCamera = virtualCamera;
+        playerState.sharedData.PlayerTransform = transform;
+        playerState.sharedData.MainCamera = Camera.main;
+        playerState.sharedData.VirtualCamera = virtualCamera;
+        playerState.sharedData.GameAudio = gameAudio;
     }
 
     public void Start()
     {
-        pipeline = new InteractionPipeline<PlayerInteractionState>(initialPlayerState);
+        pipeline = new InteractionPipeline<PlayerInteractionState>();
 
         InputReader inputReader = GetComponent<InputReader>();
-        PlayerAttackDiceEffectGenerator playerAttackDiceEffectGenerator = GetComponentInChildren<PlayerAttackDiceEffectGenerator>();
+        PlayerStatsModifierGenerator playerAttackPowerupGenerator = GetComponentInChildren<PlayerStatsModifierGenerator>();
 
         PlayerVisuals playerVisuals = transform.Find("Visuals").GetComponent<PlayerVisuals>();
 
@@ -53,7 +57,7 @@ public class PlayerInteractionPipline : MonoBehaviour
         pipeline.AddGenerator(new GravityMovments());
         pipeline.AddGenerator(new PlayerMovementGenerator());
         pipeline.AddGenerator(new PlayerAttackGenerator());
-        pipeline.AddGenerator(playerAttackDiceEffectGenerator);
+        pipeline.AddGenerator(playerAttackPowerupGenerator);
 
         pipeline.AddHandler(new PlayerMovementHandler());
         pipeline.AddHandler(new PlayerCameraHandler());
@@ -63,6 +67,13 @@ public class PlayerInteractionPipline : MonoBehaviour
 
     public void FixedUpdate()
     {
-        pipeline.Execute();
+        playerState.deltaTime = Time.deltaTime;
+        pipeline.HandleData(in playerState);
+        pipeline.WriteData(ref playerState);
+    }
+
+    public void AddGenerator(IGenerator<PlayerInteractionState> generator)
+    {
+        pipeline.AddGenerator(generator);
     }
 }

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3211274726829564545}
   - component: {fileID: 5489331313107492570}
   - component: {fileID: 3230402667283426548}
+  - component: {fileID: 2550877827675865184}
   m_Layer: 8
   m_Name: DiceEnemy
   m_TagString: Enemy
@@ -33,7 +34,7 @@ Transform:
   m_Children:
   - {fileID: 369786936499231949}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &3211274726829564545
 BoxCollider:
@@ -121,14 +122,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2278755971934365168}
-  m_LocalRotation: {x: 0.3420201, y: 0, z: 0, w: 0.9396927}
+  m_LocalRotation: {x: 0.6427876, y: 0, z: 0, w: 0.7660445}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 4, y: 4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7292397168703613865}
   m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 40, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 80, y: 0, z: 0}
 --- !u!212 &1243119636730644548
 SpriteRenderer:
   m_ObjectHideFlags: 0

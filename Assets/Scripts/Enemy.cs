@@ -84,6 +84,15 @@ public class Enemy : MonoBehaviour
         LoopMap();
     }
 
+    
+    public void TakeDamageWithKnockback(float damage, Vector3 velocityDir, float knockbackForce, StatusEffectType statusEffectType = StatusEffectType.NoEffect)
+    {
+        velocityDir.y = 0f;
+        rb.AddForce(velocityDir.normalized * knockbackForce, ForceMode.Impulse);
+
+        TakeDamage(damage, statusEffectType);
+    }
+
     public void TakeDamage(float damage, StatusEffectType statusEffectType = StatusEffectType.NoEffect)
     {
         health -= damage;
