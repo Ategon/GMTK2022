@@ -7,23 +7,24 @@ using TMPro;
 
 public class EnemySpawner : MonoBehaviour
 {
-    public WaveInfo[] waves;
-    [SerializeField] private float hordeChanceBase;
-    [SerializeField] private float hordeChanceDecrease;
-    [SerializeField] private float enemySpawnChanceBase;
-    [SerializeField] private float enemySpawnChanceDecrease;
-    [SerializeField] private int hordeSize;
+    // Public Properties
+    public double GameTimer { get { return gameTimer; } private set {; } }
+
+    // Set in editor
+    [SerializeField] private MinuteWaves[] minutes;
+
+    // References
     [SerializeField] private GameObject player;
     [SerializeField] private TextMeshProUGUI timerText;
-
     [SerializeField] private GameObject winScreen;
-
     [SerializeField] private GameObject kingDice;
 
-    public double gameTimer;
-    private double enemyTimer = 0;
-
+    // Private variables
+    private double gameTimer;
+    private double enemyTimer;
     private int kings;
+
+
 
     private void FixedUpdate()
     {
@@ -71,14 +72,14 @@ public class EnemySpawner : MonoBehaviour
 
     public void SpawnEnemy()
     {
-        int waveNum = (int)Math.Floor(gameTimer / 60);
+        /*int waveNum = (int)Math.Floor(gameTimer / 60);
         int totalPriority = waves[waveNum].enemies.Sum(enemy => enemy.weight);
         int randomSide = UnityEngine.Random.Range(0, 4);
         int enemyType = UnityEngine.Random.Range(0, totalPriority);
         float enemySpawned = UnityEngine.Random.Range(0, enemySpawnChanceBase + enemySpawnChanceDecrease * (float) gameTimer);
-        float hordeSpawned = UnityEngine.Random.Range(0, hordeChanceBase + hordeChanceDecrease * (float) gameTimer);
+        float hordeSpawned = UnityEngine.Random.Range(0, hordeChanceBase + hordeChanceDecrease * (float) gameTimer);*/
 
-        if(enemySpawned < 1)
+        /*if(enemySpawned < 1)
         {
             GameObject enemy;
 
@@ -91,11 +92,11 @@ public class EnemySpawner : MonoBehaviour
 
             if (j != 0) j -= 1;
 
-            enemy = waves[waveNum].enemies[j].gameObject;
+            enemy = minutes[waveNum].enemies[j].gameObject;
 
             int enemyAmount = hordeSpawned < 1 ? hordeSize : 1;
             SpawnHelper(randomSide, enemy, enemyAmount);
-        }
+        }*/
     }
 
     private void SpawnHelper(int side, GameObject spawnedThing, int enemyAmount)
@@ -128,9 +129,15 @@ public class EnemySpawner : MonoBehaviour
     }
 
     [System.Serializable]
+    public class MinuteWaves
+    {
+        public WaveInfo[] waves;
+    }
+
+    [System.Serializable]
     public class WaveInfo
     {
-        public string waveName;
+        public float spawnRate;
         public EnemyInfo[] enemies;
     }
 
