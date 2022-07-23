@@ -1,5 +1,6 @@
 using System;
 using DataPipeline;
+using UnityEngine;
 
 [Serializable]
 public struct PlayerInteractionState : IData
@@ -28,5 +29,7 @@ public struct PlayerInteractionState : IData
         public UnityEngine.Transform PlayerTransform;
         public UnityEngine.Camera MainCamera;
         public Cinemachine.CinemachineVirtualCamera VirtualCamera;
+        public GameAudio GameAudio;
+        public double deltaTime;
     }
 }

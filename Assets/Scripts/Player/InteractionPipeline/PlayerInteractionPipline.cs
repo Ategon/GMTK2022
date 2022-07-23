@@ -15,6 +15,9 @@ public class PlayerInteractionPipline : MonoBehaviour
     [SerializeField]
     private CinemachineVirtualCamera virtualCamera;
 
+    [SerializeField]
+    private GameAudio gameAudio;
+
     private void Awake()
     {
         // TOOD (GnoxNahte?): quick fixfor now, might do something different.
@@ -38,6 +41,7 @@ public class PlayerInteractionPipline : MonoBehaviour
         initialPlayerState.sharedData.PlayerTransform = transform;
         initialPlayerState.sharedData.MainCamera = Camera.main;
         initialPlayerState.sharedData.VirtualCamera = virtualCamera;
+        initialPlayerState.sharedData.GameAudio = gameAudio;
     }
 
     public void Start()

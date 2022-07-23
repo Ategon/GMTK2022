@@ -135,6 +135,7 @@ public class Health : MonoBehaviour
             {
                 health--;
                 invulnerableTimer = invulnerableTime;
+                KnockbackOnDamage();
             }
         }
     }
