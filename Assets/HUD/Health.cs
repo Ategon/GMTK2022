@@ -172,6 +172,9 @@ public class Health : MonoBehaviour, IGenerator<PlayerInteractionState>
 
             if (exp >= (100 + (20 * (level + 1))))
             {
+                chipbar.rectTransform.sizeDelta = new Vector2(640 * (float)exp / (100 + (20 * (level + 1))), 16);
+                chipbar.transform.localPosition = new Vector3((float)exp / (100 + 20 * (level + 1)) * 320 - 320, 0, 0);
+
                 exp -= (100 + (20 * (level + 1)));
                 powerUpCanvas.SetActive(true);
                 Time.timeScale = 0f;
