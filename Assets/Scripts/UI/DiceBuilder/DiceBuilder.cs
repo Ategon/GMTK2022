@@ -181,7 +181,7 @@ public class DiceBuilder : MonoBehaviour
         }
     }
 
-    private void UpdateEquippedPowerups()
+    public void UpdateEquippedPowerups()
     {
         for (int i = 0; i < equippedPowerupSlots.Length; i++)
         {
@@ -211,7 +211,7 @@ public class DiceBuilder : MonoBehaviour
         }
     }
 
-    private void UpdateAvailablePowerups()
+    public void UpdateAvailablePowerups()
     {
         for (int i = 0; i < availablePowerupItems.Length; i++)
         {

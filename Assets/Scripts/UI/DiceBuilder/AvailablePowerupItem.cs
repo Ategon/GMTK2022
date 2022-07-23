@@ -2,15 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 public class AvailablePowerupItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
+    [SerializeField]
+    GameObject lockedImage;
+
     private RectTransform rectTransform;
     private Transform originalParent;
     private DiceBuilder diceBuilder;
     private Canvas canvas;
-    private UnityEngine.UI.Image image;
+    private Image image;
+    private Button button;
     public DicePowerupDataUI dicePowerupDataUI { get; private set; }
 
     private void Awake()
@@ -19,7 +24,8 @@ public class AvailablePowerupItem : MonoBehaviour, IBeginDragHandler, IDragHandl
         diceBuilder = GetComponentInParent<DiceBuilder>();
         canvas = GetComponentInParent<Canvas>();
         originalParent = transform.parent;
-        image = GetComponent<UnityEngine.UI.Image>();
+        image = GetComponent<Image>();
+        button = GetComponent<Button>();
         dicePowerupDataUI = GetComponent<DicePowerupDataUI>();
     }
 
@@ -54,6 +60,11 @@ public class AvailablePowerupItem : MonoBehaviour, IBeginDragHandler, IDragHandl
     public void Init(PowerupSettings powerupSettings)
     {
         image.sprite = powerupSettings.powerupGlyph;
+
+        button.interactable = powerupSettings.ifEnabled;
+        image.raycastTarget = powerupSettings.ifEnabled;
+        lockedImage.SetActive(!powerupSettings.ifEnabled);
+
         dicePowerupDataUI.powerupSettings = powerupSettings;
     }
 
