@@ -4,8 +4,11 @@ using System;
 using System.Collections;
 using UnityEngine.UI;
 
-public class Health : MonoBehaviour
+using DataPipeline;
+
+public class Health : MonoBehaviour, IGenerator<PlayerInteractionState>
 {
+    [SerializeField] ScreenShakeController ssc;
     [SerializeField] SpriteRenderer playerSR;
     [SerializeField] SpriteRenderer playerSR2;
     [SerializeField] GameObject powerUpCanvas;
@@ -49,8 +52,16 @@ public class Health : MonoBehaviour
 
     private float healthBlinkMult = 2;
 
+    private void Start()
+    {
+        gameObject.GetComponent<PlayerInteractionPipline>().AddGenerator(this);
+    }
+
     private void FixedUpdate()
     {
+        if (stunBoostTime > 0) stunBoostTime -= Time.deltaTime * 2;
+        else if (stunBoostTime < 0) stunBoostTime = 0;
+
         healthBlinkTimer += Time.deltaTime * healthBlinkMult;
         healthBlinkIndex = (int)Math.Floor(healthBlinkTimer) % 4;
         if ((int)Math.Round(healthBlinkTimer) % 4 == healthBlinkIndex) hearts[healthBlinkIndex].rectTransform.sizeDelta = new Vector2(120, 120);
@@ -137,6 +148,7 @@ public class Health : MonoBehaviour
                 health--;
                 invulnerableTimer = invulnerableTime;
                 KnockbackOnDamage();
+                StartCoroutine(HitStun());
             }
         }
     }
@@ -187,10 +199,19 @@ public class Health : MonoBehaviour
         }
     }
 
+    float stunBoostTime;
+
     IEnumerator HitStun()
     {
         Time.timeScale = 0;
         yield return new WaitForSecondsRealtime(0.5f);
+        stunBoostTime = 2f;
         Time.timeScale = 1;
+        ssc.StartShake(0.1f, 30f);
+    }
+
+    public void Write(ref PlayerInteractionState state)
+    {
+        state.stunBoostTime = stunBoostTime;
     }
 }

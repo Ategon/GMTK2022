@@ -41,6 +41,7 @@ public class PlayerMovementGenerator : IGenerator<PlayerInteractionState>
             case MoveState.Dodging:
                 moveSpeed = data.EntityMovementSettings.DodgeSpeed;
                 moveDirection = data.PlayerState.dodgeDirection;
+                data.sharedData.VirtualCamera.GetComponent<ScreenShakeController>().StartShake(0.05f, 5f);
                 break;
             case MoveState.Crouch:
                 moveSpeed = data.EntityMovementSettings.CrouchSpeed;

@@ -6,6 +6,7 @@ using UnityEngine;
 public struct PlayerInteractionState : IData
 {
     public double deltaTime;
+    public float stunBoostTime;
     [ReadOnly] public PlayerState PlayerState;
     public EntityMovementSettings EntityMovementSettings;
     [ReadOnly] public PlayerMovementStatsModifier PlayerMovementStatsModifier;

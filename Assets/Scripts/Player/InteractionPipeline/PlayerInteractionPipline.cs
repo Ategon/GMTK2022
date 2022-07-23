@@ -71,4 +71,9 @@ public class PlayerInteractionPipline : MonoBehaviour
         pipeline.HandleData(in playerState);
         pipeline.WriteData(ref playerState);
     }
+
+    public void AddGenerator(IGenerator<PlayerInteractionState> generator)
+    {
+        pipeline.AddGenerator(generator);
+    }
 }
