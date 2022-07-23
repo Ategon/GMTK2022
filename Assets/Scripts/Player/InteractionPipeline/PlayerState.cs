@@ -33,7 +33,6 @@ public struct PlayerState : IData
 
     public void SetDirty(in PlayerState state, in Dirty dirty)
     {
-<<<<<<< HEAD
         if (dirty.Move) Move = state.Move;
         if (dirty.Aim) Aim = state.Aim;
         if (dirty.CursorPos) CursorPos = state.CursorPos;
@@ -42,6 +41,7 @@ public struct PlayerState : IData
         if (dirty.Crouch) Crouch = state.Crouch;
         if (dirty.Fire) Fire = state.Fire;
         if (dirty.Pause) Pause = state.Pause;
+        if (DiceBuilder != state.DiceBuilder) DiceBuilder = state.DiceBuilder;
         if (dirty.IsGrounded) IsGrounded = state.IsGrounded;
         if (dirty.MoveDirection) MoveDirection = state.MoveDirection;
         if (dirty.MoveState) MoveState = state.MoveState;
@@ -49,24 +49,6 @@ public struct PlayerState : IData
         if (dirty.LastDodgedTime) LastDodgedTime = state.LastDodgedTime;
         if (dirty.Velocity) Velocity = state.Velocity;
         if (dirty.MoveSpeed) MoveSpeed = state.MoveSpeed;
-=======
-        if (Move != state.Move) Move = state.Move;
-        if (Aim != state.Aim) Aim = state.Aim;
-        if (CursorPos != state.CursorPos) CursorPos = state.CursorPos;
-        if (Dodge != state.Dodge) Dodge = state.Dodge;
-        if (Reload != state.Reload) Reload = state.Reload;
-        if (Crouch != state.Crouch) Crouch = state.Crouch;
-        if (Fire != state.Fire) Fire = state.Fire;
-        if (Pause != state.Pause) Pause = state.Pause;
-        if (DiceBuilder != state.DiceBuilder) DiceBuilder = state.DiceBuilder;
-        if (IsGrounded != state.IsGrounded) IsGrounded = state.IsGrounded;
-        if (MoveDirection != state.MoveDirection) MoveDirection = state.MoveDirection;
-        //if (MoveState != state.MoveState) MoveState = state.MoveState;
-        //if (TimeLeftInCurrState != state.TimeLeftInCurrState) TimeLeftInCurrState = state.TimeLeftInCurrState;
-        //if (LastDodgedTime != state.LastDodgedTime) LastDodgedTime = state.LastDodgedTime;
-        if (Velocity != state.Velocity) Velocity = state.Velocity;
-        if (MoveSpeed != state.MoveSpeed) MoveSpeed = state.MoveSpeed;
->>>>>>> DiceBuilding
     }
 
     public void Clear()
