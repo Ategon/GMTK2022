@@ -13,6 +13,8 @@ public struct PlayerState : IData
     public bool Crouch;
     public bool Fire;
     public bool Pause;
+    public bool DiceBuilder;
+
     public bool IsGrounded;
 
     public Vector3 MoveDirection;
@@ -39,6 +41,7 @@ public struct PlayerState : IData
         if (Crouch != state.Crouch) Crouch = state.Crouch;
         if (Fire != state.Fire) Fire = state.Fire;
         if (Pause != state.Pause) Pause = state.Pause;
+        if (DiceBuilder != state.DiceBuilder) DiceBuilder = state.DiceBuilder;
         if (IsGrounded != state.IsGrounded) IsGrounded = state.IsGrounded;
         if (MoveDirection != state.MoveDirection) MoveDirection = state.MoveDirection;
         //if (MoveState != state.MoveState) MoveState = state.MoveState;

@@ -34,5 +34,8 @@ public class PlayerDiceBuilderGenerator : MonoBehaviour, DataPipeline.IGenerator
     public void Handle(ref PlayerInteractionState data)
     {
         data.PlayerAttackState.equippedPowerups = diceBuilder.selectedDice.equippedPowerups;
+
+        if (data.PlayerState.DiceBuilder)
+            diceBuilder.gameObject.SetActive(true);
     }
 }

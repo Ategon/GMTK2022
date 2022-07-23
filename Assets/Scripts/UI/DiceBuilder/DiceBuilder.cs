@@ -79,13 +79,6 @@ public class DiceBuilder : MonoBehaviour
         UpdateEquippedPowerups();
         UpdateAvailablePowerups();
 
-        // Force rebuild vertical layout group
-        VerticalLayoutGroup equippedPowerupsLayout = equippedPowerupsParent.GetComponent<VerticalLayoutGroup>();
-        equippedPowerupsLayout.CalculateLayoutInputVertical();
-        equippedPowerupsLayout.CalculateLayoutInputHorizontal();
-        equippedPowerupsLayout.SetLayoutVertical();
-        equippedPowerupsLayout.SetLayoutHorizontal();
-
         // Select the equipped powerup from the new equipped powerups generated from UpdateEquippedPowerups()
         foreach (RectTransform rectTransform in equippedPowerupsParent)
         {

@@ -66,6 +66,10 @@ public class InputReader : PlayerInput, IGenerator<PlayerInteractionState>
             case "Pause":
                 ReadBool(context, ref playerState.Pause);
                 break;
+            case "DiceBuilder":
+                ReadBool(context, ref playerState.DiceBuilder);
+                break;
+
             default:
                 break;
         }

@@ -89,6 +89,15 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DiceBuilder"",
+                    ""type"": ""Button"",
+                    ""id"": ""d235b12a-3e4e-41e8-9b9c-b844486da002"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -397,6 +406,28 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Crouch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""dbc42d89-1088-45e2-91f1-6d27a7bf586e"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""DiceBuilder"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ff15a8b1-4cf0-482e-bdcf-cc47c50d74a1"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""DiceBuilder"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -991,6 +1022,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         m_Player_Dodge = m_Player.FindAction("Dodge", throwIfNotFound: true);
         m_Player_Reload = m_Player.FindAction("Reload", throwIfNotFound: true);
         m_Player_Crouch = m_Player.FindAction("Crouch", throwIfNotFound: true);
+        m_Player_DiceBuilder = m_Player.FindAction("DiceBuilder", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1069,6 +1101,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Dodge;
     private readonly InputAction m_Player_Reload;
     private readonly InputAction m_Player_Crouch;
+    private readonly InputAction m_Player_DiceBuilder;
     public struct PlayerActions
     {
         private @Controls m_Wrapper;
@@ -1080,6 +1113,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         public InputAction @Dodge => m_Wrapper.m_Player_Dodge;
         public InputAction @Reload => m_Wrapper.m_Player_Reload;
         public InputAction @Crouch => m_Wrapper.m_Player_Crouch;
+        public InputAction @DiceBuilder => m_Wrapper.m_Player_DiceBuilder;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1110,6 +1144,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Crouch.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCrouch;
                 @Crouch.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCrouch;
                 @Crouch.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCrouch;
+                @DiceBuilder.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDiceBuilder;
+                @DiceBuilder.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDiceBuilder;
+                @DiceBuilder.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDiceBuilder;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -1135,6 +1172,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Crouch.started += instance.OnCrouch;
                 @Crouch.performed += instance.OnCrouch;
                 @Crouch.canceled += instance.OnCrouch;
+                @DiceBuilder.started += instance.OnDiceBuilder;
+                @DiceBuilder.performed += instance.OnDiceBuilder;
+                @DiceBuilder.canceled += instance.OnDiceBuilder;
             }
         }
     }
@@ -1298,6 +1338,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         void OnDodge(InputAction.CallbackContext context);
         void OnReload(InputAction.CallbackContext context);
         void OnCrouch(InputAction.CallbackContext context);
+        void OnDiceBuilder(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
