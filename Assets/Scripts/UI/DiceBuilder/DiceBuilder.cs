@@ -37,7 +37,8 @@ public class DiceBuilder : MonoBehaviour
     [SerializeField] RectTransform selectedEquippedPowerupIndicator;
     [SerializeField] RectTransform selectedAvailablePowerupIndicator;
 
-    [SerializeField] [ReadOnly] DiceData selectedDice;
+    [SerializeField] [ReadOnly]
+    public DiceData selectedDice;
     [SerializeField] [ReadOnly] PowerupSettings selectedDicePowerup;
 
     private EquippedPowerupSlot[] equippedPowerupSlots;
@@ -62,7 +63,6 @@ public class DiceBuilder : MonoBehaviour
 
     private void Start()
     {
-        print("InitDIceSelection");
         Init(); // For debug only now (GnoxNahte)
     }
 
@@ -153,12 +153,10 @@ public class DiceBuilder : MonoBehaviour
 
     private void InitDiceSelection()
     {
-        DestroyAllChildren(diceSelectionParent, selectedDiceIndicator.gameObject);
-
-        foreach (DiceData diceData in diceSelection)
+        for (int i = 0; i < diceSelection.Length; i++)
         {
             GameObject diceGameObj = Instantiate(diceSelectionItemPrefab, diceSelectionParent);
-            diceGameObj.GetComponent<DiceSelectionItem>().Init(diceData);
+            diceGameObj.GetComponent<DiceSelectionItem>().Init(diceSelection[i]);
         }
     }
 
@@ -176,10 +174,13 @@ public class DiceBuilder : MonoBehaviour
 
         for (int i = 0; i < highestDiceSides; i++)
         {
+            GameObject diceGameObj = Instantiate(equippedPowerupItemPrefab, equippedPowerupsParent);
+
             PowerupSettings powerupSettings = null;
             if (i < selectedDice.numSides)
                 powerupSettings = selectedDice.equippedPowerups[i];
-            GameObject diceGameObj = Instantiate(equippedPowerupItemPrefab, equippedPowerupsParent);
+            else
+                diceGameObj.SetActive(false);
 
             EquippedPowerupSlot equippedPowerupSlot = diceGameObj.GetComponent<EquippedPowerupSlot>();
             equippedPowerupSlot.Init(i, powerupSettings);
@@ -231,16 +232,6 @@ public class DiceBuilder : MonoBehaviour
                 availablePowerupItems[i].Init(availablePowerups[i]);
                 availablePowerupItems[i].gameObject.SetActive(true);
             }
-        }
-    }
-
-    private void DestroyAllChildren(Transform parentTransform, GameObject ignoreObj = null)
-    {
-        for (int i = parentTransform.childCount - 1; i >= 0; i--)
-        {
-            GameObject objToDestroy = parentTransform.GetChild(i).gameObject;
-            if (objToDestroy != ignoreObj)
-                Destroy(objToDestroy);
         }
     }
 
