@@ -5,6 +5,7 @@ using UnityEngine;
 [Serializable]
 public struct PlayerInteractionState : IData
 {
+    public double deltaTime;
     [ReadOnly] public PlayerState PlayerState;
     public EntityMovementSettings EntityMovementSettings;
     [ReadOnly] public PlayerMovementStatsModifier PlayerMovementStatsModifier;
