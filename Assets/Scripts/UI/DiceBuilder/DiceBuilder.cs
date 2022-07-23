@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class DiceBuilder : MonoBehaviour
 {
@@ -31,11 +31,17 @@ public class DiceBuilder : MonoBehaviour
 
     [SerializeField] PowerupInfoUI powerupInfo;
 
+    [SerializeField] RectTransform selectedDiceIndicator;
+    [SerializeField] RectTransform selectedDiceConnector;
+
     [SerializeField] RectTransform selectedEquippedPowerupIndicator;
     [SerializeField] RectTransform selectedAvailablePowerupIndicator;
 
     [SerializeField] [ReadOnly] DiceData selectedDice;
     [SerializeField] [ReadOnly] PowerupSettings selectedDicePowerup;
+
+    private EquippedPowerupSlot[] equippedPowerupSlots;
+    private AvailablePowerupItem[] availablePowerupItems;
 
     // Singleton
     public static DiceBuilder instance { get; private set; }
@@ -65,20 +71,42 @@ public class DiceBuilder : MonoBehaviour
         ResetDice();
     }
 
+    // When drag and dropped a powerup into one of the equipped powerup slots
     public void ChangeEquippedPowerup(int dicePip, PowerupSettings powerup)
     {
         selectedDice.equippedPowerups[dicePip] = powerup;
+
         UpdateEquippedPowerups();
         UpdateAvailablePowerups();
+
+        // Force rebuild vertical layout group
+        VerticalLayoutGroup equippedPowerupsLayout = equippedPowerupsParent.GetComponent<VerticalLayoutGroup>();
+        equippedPowerupsLayout.CalculateLayoutInputVertical();
+        equippedPowerupsLayout.CalculateLayoutInputHorizontal();
+        equippedPowerupsLayout.SetLayoutVertical();
+        equippedPowerupsLayout.SetLayoutHorizontal();
+
+        // Select the equipped powerup from the new equipped powerups generated from UpdateEquippedPowerups()
+        foreach (RectTransform rectTransform in equippedPowerupsParent)
+        {
+            DicePowerupDataUI dicePowerupDataUI = rectTransform.GetComponent<DicePowerupDataUI>();
+            if (dicePowerupDataUI != null && dicePowerupDataUI.powerupSettings == powerup)
+                dicePowerupDataUI.OnSelect(null);
+        }
     }
 
-    public void ChangeSelectedDice(DiceData selectedDice)
+    public void ChangeSelectedDice(DiceData selectedDice, RectTransform rectTransform)
     {
         this.selectedDice = selectedDice;
 
-        UpdateDiceSelection();
         UpdateEquippedPowerups();
         UpdateAvailablePowerups();
+
+        selectedDiceIndicator.anchoredPosition = rectTransform.anchoredPosition;
+        selectedDiceConnector.position = new Vector3(
+            selectedDiceConnector.position.x, 
+            rectTransform.position.y,
+            selectedDiceConnector.position.z);
     }
 
     public void OnSelectPowerup(PowerupSettings powerupSettings, Vector2 anchoredPos, bool ifEquippedPowerup)
@@ -89,36 +117,43 @@ public class DiceBuilder : MonoBehaviour
         {
             selectedEquippedPowerupIndicator.gameObject.SetActive(true);
             selectedEquippedPowerupIndicator.anchoredPosition = anchoredPos;
+
+            selectedAvailablePowerupIndicator.gameObject.SetActive(false);
         }
         else
         {
             selectedAvailablePowerupIndicator.gameObject.SetActive(true);
             selectedAvailablePowerupIndicator.anchoredPosition = anchoredPos;
+
+            selectedEquippedPowerupIndicator.gameObject.SetActive(false);
         }
     }
 
-    public void OnDeselectPowerup(bool ifEquippedPowerup)
+    public void OnDeselectPowerup()
     {
         powerupInfo.OnDeselectPowerupSettings();
 
-        if (ifEquippedPowerup)
-            selectedEquippedPowerupIndicator.gameObject.SetActive(false);
-        else
-            selectedAvailablePowerupIndicator.gameObject.SetActive(false);
+        DisablePowerupSelectionIndicators();
+    }
+
+    public void DisablePowerupSelectionIndicators()
+    {
+        selectedEquippedPowerupIndicator.gameObject.SetActive(false);
+        selectedAvailablePowerupIndicator.gameObject.SetActive(false);
     }
 
     private void Init()
     {
         selectedDice = diceSelection[0];
 
-        UpdateDiceSelection();
-        UpdateEquippedPowerups();
-        UpdateAvailablePowerups();
+        InitDiceSelection();
+        InitEquippedPowerups();
+        InitAvailablePowerups();
     }
 
-    private void UpdateDiceSelection()
+    private void InitDiceSelection()
     {
-        DestroyAllChildren(diceSelectionParent);
+        DestroyAllChildren(diceSelectionParent, selectedDiceIndicator.gameObject);
 
         foreach (DiceData diceData in diceSelection)
         {
@@ -127,31 +162,75 @@ public class DiceBuilder : MonoBehaviour
         }
     }
 
+    private void InitEquippedPowerups()
+    {
+        int highestDiceSides = -1;
+
+        foreach (DiceData diceData in diceSelection)
+        {
+            if (diceData.numSides > highestDiceSides)
+                highestDiceSides = diceData.numSides;
+        }
+
+        equippedPowerupSlots = new EquippedPowerupSlot[highestDiceSides];
+
+        for (int i = 0; i < highestDiceSides; i++)
+        {
+            PowerupSettings powerupSettings = null;
+            if (i < selectedDice.numSides)
+                powerupSettings = selectedDice.equippedPowerups[i];
+            GameObject diceGameObj = Instantiate(equippedPowerupItemPrefab, equippedPowerupsParent);
+
+            EquippedPowerupSlot equippedPowerupSlot = diceGameObj.GetComponent<EquippedPowerupSlot>();
+            equippedPowerupSlot.Init(i, powerupSettings);
+            equippedPowerupSlots[i] = equippedPowerupSlot;
+        }
+    }
+
     private void UpdateEquippedPowerups()
     {
-        DestroyAllChildren(equippedPowerupsParent, selectedEquippedPowerupIndicator.gameObject);
-        
-        for (int i = 0; i < selectedDice.equippedPowerups.Length; i++)
+        for (int i = 0; i < equippedPowerupSlots.Length; i++)
         {
-            PowerupSettings powerupSettings = selectedDice.equippedPowerups[i];
-            GameObject diceGameObj = Instantiate(equippedPowerupItemPrefab, equippedPowerupsParent);
-            diceGameObj.GetComponent<DicePowerupDataUI>().powerupSettings = powerupSettings;
-            diceGameObj.GetComponent<EquippedPowerupSlot>().Init(i, powerupSettings);
+            if (i < selectedDice.numSides)
+            {
+                equippedPowerupSlots[i].Init(i, selectedDice.equippedPowerups[i]);
+                equippedPowerupSlots[i].gameObject.SetActive(true);
+            }
+            else
+            {
+                equippedPowerupSlots[i].dicePowerupDataUI.powerupSettings = null;
+                equippedPowerupSlots[i].gameObject.SetActive(false);
+            }
+        }
+    }
+
+    private void InitAvailablePowerups()
+    {
+        availablePowerupItems = new AvailablePowerupItem[availablePowerups.Length];
+
+        for (int i = 0; i < availablePowerups.Length; i++)
+        {
+            GameObject diceGameObj = Instantiate(availablePowerupItemPrefab, availablePowerupsParent);
+            AvailablePowerupItem availablePowerupItem = diceGameObj.GetComponent<AvailablePowerupItem>();
+            availablePowerupItem.Init(availablePowerups[i]);
+            availablePowerupItems[i] = availablePowerupItem;
         }
     }
 
     private void UpdateAvailablePowerups()
     {
-        DestroyAllChildren(availablePowerupsParent, selectedAvailablePowerupIndicator.gameObject);
-
-        foreach (PowerupSettings powerup in availablePowerups)
+        for (int i = 0; i < availablePowerupItems.Length; i++)
         {
-            if (System.Array.Exists(selectedDice.equippedPowerups, x => x == powerup))
-                continue;
-
-            GameObject diceGameObj = Instantiate(availablePowerupItemPrefab, availablePowerupsParent);
-            diceGameObj.GetComponent<DicePowerupDataUI>().powerupSettings = powerup;
-            diceGameObj.GetComponent<AvailablePowerupItem>().Init(powerup);
+            // If the player is already equipped with the powerup, don't show it
+            if (System.Array.Exists(selectedDice.equippedPowerups, x => x == availablePowerups[i]))
+            {
+                availablePowerupItems[i].gameObject.SetActive(false);
+            }
+            else
+            {
+                availablePowerupItems[i].Init(availablePowerups[i]);
+                availablePowerupItems[i].gameObject.SetActive(true);
+            }
         }
     }
 
@@ -172,5 +251,4 @@ public class DiceBuilder : MonoBehaviour
             diceData.equippedPowerups = new PowerupSettings[diceData.numSides];
         }
     }
-
 }

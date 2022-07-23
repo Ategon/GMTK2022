@@ -32,6 +32,6 @@ public class DicePowerupDataUI : MonoBehaviour, ISelectHandler, IDeselectHandler
 
     public void OnDeselect(BaseEventData eventData)
     {
-        DiceBuilder.instance.OnDeselectPowerup(ifEquippedPowerupSlot);
+        DiceBuilder.instance.OnDeselectPowerup();
     }
 }

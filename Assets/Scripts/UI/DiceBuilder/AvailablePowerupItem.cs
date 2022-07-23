@@ -6,11 +6,12 @@ using UnityEngine.EventSystems;
 
 public class AvailablePowerupItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-    RectTransform rectTransform;
-    Transform originalParent;
-    DiceBuilder diceBuilder;
-    Canvas canvas;
-    UnityEngine.UI.Image image;
+    private RectTransform rectTransform;
+    private Transform originalParent;
+    private DiceBuilder diceBuilder;
+    private Canvas canvas;
+    private UnityEngine.UI.Image image;
+    public DicePowerupDataUI dicePowerupDataUI { get; private set; }
 
     private void Awake()
     {
@@ -19,10 +20,12 @@ public class AvailablePowerupItem : MonoBehaviour, IBeginDragHandler, IDragHandl
         canvas = GetComponentInParent<Canvas>();
         originalParent = transform.parent;
         image = GetComponent<UnityEngine.UI.Image>();
+        dicePowerupDataUI = GetComponent<DicePowerupDataUI>();
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        diceBuilder.DisablePowerupSelectionIndicators();
         image.raycastTarget = false;
         rectTransform.SetParent(diceBuilder.transform, true);
     }
@@ -34,12 +37,29 @@ public class AvailablePowerupItem : MonoBehaviour, IBeginDragHandler, IDragHandl
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        image.raycastTarget = false;
+        image.raycastTarget = true;
         rectTransform.SetParent(originalParent.transform);
+
+        // If eventData == null, means the player put the powerup item into one of the equipped slots
+        // Else, it means the player dropped it in a place with no IDropHandler, so select the dice 
+        if (eventData != null)
+        {
+            // Wait for next frame when the layout group refreshes
+            StartCoroutine(WaitForNextFrame(()=>dicePowerupDataUI.OnSelect(null)));
+        }
+
+        gameObject.SetActive(eventData != null);
     }
 
     public void Init(PowerupSettings powerupSettings)
     {
         image.sprite = powerupSettings.powerupGlyph;
+        dicePowerupDataUI.powerupSettings = powerupSettings;
+    }
+
+    private IEnumerator WaitForNextFrame(System.Action action)
+    {
+        yield return null;
+        action.Invoke();
     }
 }
