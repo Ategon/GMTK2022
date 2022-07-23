@@ -115,6 +115,7 @@ public class PowerUpPool : MonoBehaviour
         UpdatePowerUps();
 
         Time.timeScale = 1;
+        UnityEngine.Cursor.visible = false;
         gameObject.SetActive(false);
     }
 

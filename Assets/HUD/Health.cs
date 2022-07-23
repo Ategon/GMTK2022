@@ -177,6 +177,7 @@ public class Health : MonoBehaviour, IGenerator<PlayerInteractionState>
 
                 exp -= (100 + (20 * (level + 1)));
                 powerUpCanvas.SetActive(true);
+                UnityEngine.Cursor.visible = true;
                 Time.timeScale = 0f;
                 powerUpCanvas.GetComponent<PowerUpPool>().FillTextWithPowerUps();
                 level++;
