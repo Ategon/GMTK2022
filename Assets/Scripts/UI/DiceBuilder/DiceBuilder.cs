@@ -29,6 +29,11 @@ public class DiceBuilder : MonoBehaviour
     [Header("Others")]
     public PowerupInfoUI powerupDescription;
 
+    [SerializeField] PowerupInfoUI powerupInfo;
+
+    [SerializeField] RectTransform selectedEquippedPowerupIndicator;
+    [SerializeField] RectTransform selectedAvailablePowerupIndicator;
+
     [SerializeField] [ReadOnly] DiceData selectedDice;
     [SerializeField] [ReadOnly] PowerupSettings selectedDicePowerup;
 
@@ -51,8 +56,6 @@ public class DiceBuilder : MonoBehaviour
 
     private void Start()
     {
-        powerupDescription = PowerupInfoUI.instance;
-
         print("InitDIceSelection");
         Init(); // For debug only now (GnoxNahte)
     }
@@ -78,6 +81,32 @@ public class DiceBuilder : MonoBehaviour
         UpdateAvailablePowerups();
     }
 
+    public void OnSelectPowerup(PowerupSettings powerupSettings, Vector2 anchoredPos, bool ifEquippedPowerup)
+    {
+        powerupInfo.OnSelectPowerupSettings(powerupSettings);
+
+        if (ifEquippedPowerup)
+        {
+            selectedEquippedPowerupIndicator.gameObject.SetActive(true);
+            selectedEquippedPowerupIndicator.anchoredPosition = anchoredPos;
+        }
+        else
+        {
+            selectedAvailablePowerupIndicator.gameObject.SetActive(true);
+            selectedAvailablePowerupIndicator.anchoredPosition = anchoredPos;
+        }
+    }
+
+    public void OnDeselectPowerup(bool ifEquippedPowerup)
+    {
+        powerupInfo.OnDeselectPowerupSettings();
+
+        if (ifEquippedPowerup)
+            selectedEquippedPowerupIndicator.gameObject.SetActive(false);
+        else
+            selectedAvailablePowerupIndicator.gameObject.SetActive(false);
+    }
+
     private void Init()
     {
         selectedDice = diceSelection[0];
@@ -100,7 +129,7 @@ public class DiceBuilder : MonoBehaviour
 
     private void UpdateEquippedPowerups()
     {
-        DestroyAllChildren(equippedPowerupsParent);
+        DestroyAllChildren(equippedPowerupsParent, selectedEquippedPowerupIndicator.gameObject);
         
         for (int i = 0; i < selectedDice.equippedPowerups.Length; i++)
         {
@@ -113,7 +142,7 @@ public class DiceBuilder : MonoBehaviour
 
     private void UpdateAvailablePowerups()
     {
-        DestroyAllChildren(availablePowerupsParent);
+        DestroyAllChildren(availablePowerupsParent, selectedAvailablePowerupIndicator.gameObject);
 
         foreach (PowerupSettings powerup in availablePowerups)
         {
@@ -126,11 +155,13 @@ public class DiceBuilder : MonoBehaviour
         }
     }
 
-    private void DestroyAllChildren(Transform parentTransform)
+    private void DestroyAllChildren(Transform parentTransform, GameObject ignoreObj = null)
     {
         for (int i = parentTransform.childCount - 1; i >= 0; i--)
         {
-            Destroy(parentTransform.GetChild(i).gameObject);
+            GameObject objToDestroy = parentTransform.GetChild(i).gameObject;
+            if (objToDestroy != ignoreObj)
+                Destroy(objToDestroy);
         }
     }
 

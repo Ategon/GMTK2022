@@ -13,21 +13,6 @@ public class PowerupInfoUI : MonoBehaviour
 
     private PowerupSettings currPowerupSettings;
 
-    // Singleton
-    public static PowerupInfoUI instance { get; private set; }
-
-    private void Awake()
-    {
-        if (instance == null)
-            instance = this;
-        else
-        {
-            Destroy(gameObject);
-            Debug.LogWarning("More than 1 PowerupInfoUI. Destroying this. Name: " + name);
-            return;
-        }
-    }
-
     public void OnSelectPowerupSettings(PowerupSettings powerupSettings)
     {
         if (powerupSettings == null)
@@ -35,7 +20,6 @@ public class PowerupInfoUI : MonoBehaviour
             OnDeselectPowerupSettings();
             return;
         }
-
 
         currPowerupSettings = powerupSettings;
 
