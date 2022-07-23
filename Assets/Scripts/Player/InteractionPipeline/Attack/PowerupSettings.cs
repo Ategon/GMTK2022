@@ -21,6 +21,8 @@ public class PowerupSettings : ScriptableObject
 
     public PowerupType powerupType;
     public string effectName;
+    public string powerupDescription;
+    public string powerupUpgradeDescription;
     public GameObject powerupPrefab;
     public Sprite powerupGlyph;
     public float damage;
@@ -28,6 +30,8 @@ public class PowerupSettings : ScriptableObject
     public float duration;
 
     public bool ifRemoveEffectOnLeaveCollider;
+
+    public int level;
 
     // TODO (GnoxNahte): Refactor
     // For Level scaling

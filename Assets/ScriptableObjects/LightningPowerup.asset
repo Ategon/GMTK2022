@@ -15,12 +15,17 @@ MonoBehaviour:
   ifEnabled: 0
   powerupType: 3
   effectName: Lightning
+  powerupDescription: Lightning strikes down on random enemies dealing damage to
+    all those around.
+  powerupUpgradeDescription: +1 Projectile
   powerupPrefab: {fileID: 5167845823713707213, guid: 82cb59d983fcc1748937fac6ca7dc708,
     type: 3}
-  powerupGlyph: {fileID: 0}
+  powerupGlyph: {fileID: -1661143991, guid: ca03bbd482082d34b994ea17ec390a85, type: 3}
   damage: 20
+  knockbackForce: 0
   duration: 0
   ifRemoveEffectOnLeaveCollider: 0
+  level: 0
   floatMultiplier: 0
   intValue: 3
   statusEffect:

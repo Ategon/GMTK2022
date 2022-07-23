@@ -148,6 +148,7 @@ GameObject:
   - component: {fileID: 1256670479769957687}
   - component: {fileID: 7148111599125918844}
   - component: {fileID: 2153736540374406334}
+  - component: {fileID: -8898577740205216986}
   m_Layer: 5
   m_Name: DiceSelectionUI
   m_TagString: Untagged
@@ -272,3 +273,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AspectMode: 1
   m_AspectRatio: 1
+--- !u!114 &-8898577740205216986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7179883644178049461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7888cb1233a1a9d4cb58ee6c30dc3780, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  diceData:
+    numSides: 0
+    equippedPowerups: []

@@ -141,7 +141,7 @@ public class PowerUpPool : MonoBehaviour
                         default: Debug.LogError("PowerUpPool.UpdatePowerUps(): Can't find name"); break;
                     }
 
-
+                    effectSetting.level = powerUp.level;
                     effectSetting.ifEnabled = powerUp.level != 0;
                 }
 
