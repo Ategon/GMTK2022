@@ -57,13 +57,11 @@ public class DiceBuilder : MonoBehaviour
             Debug.LogWarning("More than 1 DiceBuilder. Destroying this. Name: " + name);
             return;
         }
-
-        ResetDice();
     }
 
     private void Start()
     {
-        Init(); // For debug only now (GnoxNahte)
+        Init();
     }
 
     private void OnDestroy()
@@ -139,9 +137,13 @@ public class DiceBuilder : MonoBehaviour
     {
         selectedDice = diceSelection[0];
 
+        ResetDice();
+
         InitDiceSelection();
         InitEquippedPowerups();
         InitAvailablePowerups();
+
+        gameObject.SetActive(false);
     }
 
     private void InitDiceSelection()

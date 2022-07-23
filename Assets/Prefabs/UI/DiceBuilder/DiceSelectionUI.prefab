@@ -175,7 +175,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 40.5}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4417621777821408900
 CanvasRenderer:
@@ -285,6 +285,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7888cb1233a1a9d4cb58ee6c30dc3780, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  diceData:
-    numSides: 0
-    equippedPowerups: []
+  text: {fileID: 5501163394153474886}

@@ -13,9 +13,9 @@ public class PowerupUpgrade : MonoBehaviour
     [SerializeField] Image ifLockImage;
     [SerializeField] TextMeshProUGUI upgradeText;
 
-    public void Init(bool ifLocked, string text)
+    public void Init(bool ifUnlocked, string text)
     {
-        ifLockImage.color = ifLocked ? lockColor : unlockedColor;
+        ifLockImage.color = ifUnlocked ? unlockedColor : lockColor;
         upgradeText.text = text;
     }
 }
