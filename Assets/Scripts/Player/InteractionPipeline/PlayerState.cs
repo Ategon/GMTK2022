@@ -29,28 +29,66 @@ public struct PlayerState : IData
 
     public float MoveSpeed;
 
-    public void SetDifference(in PlayerState state)
+    public void SetDirty(in PlayerState state, in Dirty dirty)
     {
-        if (Move != state.Move) Move = state.Move;
-        if (Aim != state.Aim) Aim = state.Aim;
-        if (CursorPos != state.CursorPos) CursorPos = state.CursorPos;
-        if (Dodge != state.Dodge) Dodge = state.Dodge;
-        if (Reload != state.Reload) Reload = state.Reload;
-        if (Crouch != state.Crouch) Crouch = state.Crouch;
-        if (Fire != state.Fire) Fire = state.Fire;
-        if (Pause != state.Pause) Pause = state.Pause;
-        if (IsGrounded != state.IsGrounded) IsGrounded = state.IsGrounded;
-        if (MoveDirection != state.MoveDirection) MoveDirection = state.MoveDirection;
-        //if (MoveState != state.MoveState) MoveState = state.MoveState;
-        //if (TimeLeftInCurrState != state.TimeLeftInCurrState) TimeLeftInCurrState = state.TimeLeftInCurrState;
-        //if (LastDodgedTime != state.LastDodgedTime) LastDodgedTime = state.LastDodgedTime;
-        if (Velocity != state.Velocity) Velocity = state.Velocity;
-        if (MoveSpeed != state.MoveSpeed) MoveSpeed = state.MoveSpeed;
+        if (dirty.Move) Move = state.Move;
+        if (dirty.Aim) Aim = state.Aim;
+        if (dirty.CursorPos) CursorPos = state.CursorPos;
+        if (dirty.Dodge) Dodge = state.Dodge;
+        if (dirty.Reload) Reload = state.Reload;
+        if (dirty.Crouch) Crouch = state.Crouch;
+        if (dirty.Fire) Fire = state.Fire;
+        if (dirty.Pause) Pause = state.Pause;
+        if (dirty.IsGrounded) IsGrounded = state.IsGrounded;
+        if (dirty.MoveDirection) MoveDirection = state.MoveDirection;
+        if (dirty.MoveState) MoveState = state.MoveState;
+        if (dirty.TimeLeftInCurrState) TimeLeftInCurrState = state.TimeLeftInCurrState;
+        if (dirty.LastDodgedTime) LastDodgedTime = state.LastDodgedTime;
+        if (dirty.Velocity) Velocity = state.Velocity;
+        if (dirty.MoveSpeed) MoveSpeed = state.MoveSpeed;
     }
 
     public void Clear()
     {
 
+    }
+
+    public struct Dirty
+    {
+        public bool Fire;
+        public bool Reload;
+        public bool Crouch;
+        public bool Dodge;
+        public bool Move;
+        public bool Aim;
+        public bool CursorPos;
+        public bool Pause;
+        public bool IsGrounded;
+        public bool MoveDirection;
+        public bool MoveState;
+        public bool TimeLeftInCurrState;
+        public bool LastDodgedTime;
+        public bool Velocity;
+        public bool MoveSpeed;
+
+        public void Reset()
+        {
+            Fire = false;
+            Reload = false;
+            Crouch = false;
+            Dodge = false;
+            Move = false;
+            Aim = false;
+            CursorPos = false;
+            Pause = false;
+            IsGrounded = false;
+            MoveDirection = false;
+            MoveState = false;
+            TimeLeftInCurrState = false;
+            LastDodgedTime = false;
+            Velocity = false;
+            MoveSpeed = false;
+        }
     }
 }
 

@@ -6,10 +6,13 @@ public class InputReader : PlayerInput, IGenerator<PlayerInteractionState>
 {
     [HideInInspector]
     public PlayerState playerState;
+    public PlayerState.Dirty dirtyFields;
 
     public InputReader()
     {
         playerState = new PlayerState();
+        dirtyFields = new PlayerState.Dirty();
+        dirtyFields.Reset();
     }
 
     public void Start()
@@ -24,7 +27,8 @@ public class InputReader : PlayerInput, IGenerator<PlayerInteractionState>
 
     public void Write(ref PlayerInteractionState data)
     {
-        data.PlayerState.SetDifference(in playerState);
+        data.PlayerState.SetDirty(in playerState, in dirtyFields);
+        dirtyFields.Reset();
     }
 
     public bool IsNotDoneWriting()
@@ -38,18 +42,23 @@ public class InputReader : PlayerInput, IGenerator<PlayerInteractionState>
         {
             case "Fire":
                 ReadBool(context, ref playerState.Fire);
+                dirtyFields.Fire = true;
                 break;
             case "Reload":
                 ReadBool(context, ref playerState.Reload);
+                dirtyFields.Reload = true;
                 break;
             case "Crouch":
                 ReadBool(context, ref playerState.Crouch);
+                dirtyFields.Crouch = true;
                 break;
             case "Dodge":
                 ReadBool(context, ref playerState.Dodge);
+                dirtyFields.Dodge = true;
                 break;
             case "Move":
                 ReadVector2(context, ref playerState.Move);
+                dirtyFields.Move = true;
                 break;
             case "Aim":
                 if (currentControlScheme == "Keyboard&Mouse")
@@ -60,11 +69,14 @@ public class InputReader : PlayerInput, IGenerator<PlayerInteractionState>
                 {
                     ReadVector2(context, ref playerState.Aim);
                 }
+                dirtyFields.Aim = true;
 
                 ReadVector2(context, ref playerState.CursorPos);
+                dirtyFields.CursorPos = true;
                 break;
             case "Pause":
                 ReadBool(context, ref playerState.Pause);
+                dirtyFields.Pause = true;
                 break;
             default:
                 break;
