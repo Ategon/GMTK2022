@@ -14,11 +14,14 @@ public class ScreenShakeController : MonoBehaviour
     #region Public functions
     public void StartShake(float time, float power, ShakeType type = ShakeType.Random)
     {
-        shakeTimer = time;
-        shakePower = power;
-        shakeType = type;
+        if(power > shakePower)
+        {
+            shakeTimer = time;
+            shakePower = power;
+            shakeType = type;
 
-        shakeFadeTimer = power / time;
+            shakeFadeTimer = power / time;
+        }
     }
 
     public void StopShake()

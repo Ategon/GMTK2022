@@ -38,14 +38,21 @@ public class GameAudio : MonoBehaviour
             newSource.transform.SetParent(transform);
             newSource.name = Enum.GetName(typeof(AudioTrackType), i);
 
+            Volume volume = (Volume)newSource.AddComponent(typeof(Volume));
+            volume.volume = 0.5f;
+            volume.editAudioVolume = true;
+
             if (newSource.name == "Soundtrack")
             {
                 source.loop = true;
+                volume.soundType = Volume.type.Music;
             }
             else
             {
-
+                volume.soundType = Volume.type.SoundEffect;
             }
+
+            
 
             AudioTrack track = new AudioTrack(i, source);
             audioTracks.Add(track);

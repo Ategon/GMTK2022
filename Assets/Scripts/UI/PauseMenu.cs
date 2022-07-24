@@ -12,18 +12,21 @@ public class PauseMenu : MonoBehaviour
 
     public void Pause()
     {
+        UnityEngine.Cursor.visible = true;
         pauseMenu.SetActive(true);
         Time.timeScale = 0f;
     }
 
     public void Defeat()
     {
+        UnityEngine.Cursor.visible = true;
         defeatMenu.SetActive(true);
         Time.timeScale = 0f;
     }
 
     public void Resume()
     {
+        UnityEngine.Cursor.visible = false;
         pauseMenu.SetActive(false);
         powerUpChoiceMenu.SetActive(false);
         Time.timeScale = 1f;

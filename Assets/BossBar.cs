@@ -6,6 +6,8 @@ using Spellbound.Managers;
 
 public class BossBar : MonoBehaviour, IHandler<PlayerInteractionState>
 {
+    [SerializeField] private GameObject text;
+    [SerializeField] private GameObject bar;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,10 +19,12 @@ public class BossBar : MonoBehaviour, IHandler<PlayerInteractionState>
         switch (data.GameState.roundPhase)
         {
             case RoundPhase.Wave:
-                gameObject.SetActive(false);
+                text.SetActive(false);
+                bar.SetActive(false);
                 break;
             case RoundPhase.Boss:
-                gameObject.SetActive(true);
+                text.SetActive(true);
+                bar.SetActive(true);
                 break;
             default:
                 break;

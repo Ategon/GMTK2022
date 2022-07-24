@@ -14,6 +14,7 @@ public class VictoryScreen : MonoBehaviour, IHandler<PlayerInteractionState>
     {
         if(data.GameState.numRounds == data.GameState.roundsElapsed)
         {
+            UnityEngine.Cursor.visible = true;
             gameObject.SetActive(true);
             Time.timeScale = 0;
         }

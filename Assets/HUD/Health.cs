@@ -211,7 +211,7 @@ public class Health : MonoBehaviour, IGenerator<PlayerInteractionState>
         yield return new WaitForSecondsRealtime(0.5f);
         stunBoostTime = 2f;
         Time.timeScale = 1;
-        ssc.StartShake(0.1f, 30f);
+        ssc.StartShake(0.15f, 30f);
     }
 
     public void Write(ref PlayerInteractionState state)
