@@ -39,23 +39,7 @@ public class DiceFaces : MonoBehaviour
             if (powerupSettings[i] == null)
                 diceFaceQuads[i].material = unequippedDiceFace;
             else
-            {
-
-                if (diceFaceQuads == null)
-                    print("Error");
-                if (diceFaceQuads[i] == null)
-                    print("Error");
-                if (diceFaces_Dictionary == null)
-                    print("Error");
-                if (powerupSettings == null)
-                    print("Error");
-                if (powerupSettings[i] == null)
-                    print("Error");
-                if (diceFaces_Dictionary[powerupSettings[i].powerupType] == null)
-                    print("Error");
-
                 diceFaceQuads[i].material = diceFaces_Dictionary[powerupSettings[i].powerupType];
-            }
         }
     }
 }

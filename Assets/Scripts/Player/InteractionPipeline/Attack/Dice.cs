@@ -78,10 +78,11 @@ public class Dice : MonoBehaviour
         diceFaces = new DiceFace[numOfSides];
         if (numOfSides == 4)
         {
-            diceFaces[0] = new DiceFace(1, Vector3.up);
-            diceFaces[1] = new DiceFace(2, Vector3.right);
-            diceFaces[2] = new DiceFace(3, Vector3.back);
-            diceFaces[3] = new DiceFace(4, Vector3.forward);
+            // Get by using a script to output the normal using transform.forward
+            diceFaces[0] = new DiceFace(1, new Vector3(0.00f, 0.33f, 0.94f));
+            diceFaces[1] = new DiceFace(2, new Vector3(-0.81f, 0.34f, -0.47f));
+            diceFaces[2] = new DiceFace(3, new Vector3(0.81f, 0.34f, -0.47f));
+            diceFaces[3] = new DiceFace(4, new Vector3(0.00f, -1.00f, 0.00f));
         }
         else if (numOfSides == 6)
         {
