@@ -26,7 +26,7 @@ public class IceProjectile : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Enemy enemy = other.GetComponent<Enemy>();
-        if (enemy != null)
+        if (enemy != null && enemy.gameObject != null)
             enemy.TakeDamageWithKnockback(damage, rb.velocity, knockbackForce, StatusEffectType.Slow);
     }
 }

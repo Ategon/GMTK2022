@@ -15,10 +15,10 @@ public class LightningPowerup : MonoBehaviour
 
         List<Collider> colliders = mainCamera.transform.GetComponentInChildren<StoreColliders>().colliders;
 
-        int[] randomIndexOfColliders = new int[NumOfStrikes];
-
         // Limit the number of strikes if there isn't enough enemies
-        NumOfStrikes = Mathf.Min(NumOfStrikes, colliders.Count);
+        int WorkingNumOfStrikes = Mathf.Min(NumOfStrikes, colliders.Count);
+
+        int[] randomIndexOfColliders = new int[WorkingNumOfStrikes];
 
         for (int i = 0; i < NumOfStrikes; )
         {

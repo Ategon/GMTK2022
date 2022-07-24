@@ -125,10 +125,10 @@ public class Enemy : MonoBehaviour
 
     private void OnCollisionEnter(Collision hit)
     {
-        if (hit.gameObject.tag == "EXP")
+        /*if (hit.gameObject.tag == "EXP")
         {
             Destroy(hit.gameObject);
             heldOrbs++;
-        }
+        }*/
     }
 }
