@@ -33,7 +33,7 @@ public class PlayerInteractionPipline : MonoBehaviour
         foreach (DiceBuilder.DiceData dice in diceBuilder.diceSelection)
         {
             ObjectPool objectPool = new ObjectPool();
-            objectPool.InitPool("DicePool_D" + dice.numSides, dice.dicePrefab, 30);
+            objectPool.InitPool("DicePool_D" + dice.numSides, dice.dicePrefab, 20);
             playerState.PlayerAttackState.dicePools.Add(dice.numSides, objectPool);
         }
 
