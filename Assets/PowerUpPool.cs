@@ -33,6 +33,8 @@ public class PowerUpPool : MonoBehaviour
 
     [SerializeField] List<PowerupSettings> powerupSettings;
 
+    [SerializeField] DiceBuilder diceBuilder;
+
     // Start is called before the first frame update
     private void Awake()
     {
@@ -114,9 +116,11 @@ public class PowerUpPool : MonoBehaviour
 
         UpdatePowerUps();
 
-        Time.timeScale = 1;
-        UnityEngine.Cursor.visible = false;
+        //Time.timeScale = 1;
+        //UnityEngine.Cursor.visible = false;
         gameObject.SetActive(false);
+
+        diceBuilder.OpenDiceBuilder();
     }
 
     [ContextMenu("Reset Powerups")]
