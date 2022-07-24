@@ -22,6 +22,8 @@ public class Enemy : MonoBehaviour
 
     protected float health;
 
+    protected GameObject healthBar;
+
     [SerializeField] public GameObject exp;
 
     // Start is called before the first frame update
@@ -39,6 +41,8 @@ public class Enemy : MonoBehaviour
         health = maxHealth;
         animator = transform.Find("Sprite").GetComponent<Animator>();
         statusEffects = GetComponent<StatusEffects>();
+        Transform tempHealth = transform.Find("Health Bar");
+        if(tempHealth) healthBar = tempHealth.gameObject;
     }
 
     protected void FlipDirection(Vector3 direction)
@@ -82,12 +86,23 @@ public class Enemy : MonoBehaviour
     {
         Vector3 direction = player.transform.position - transform.position;
         float angle = Mathf.Atan2(direction.z, direction.x) * Mathf.Rad2Deg;
-        float distance = (float) Math.Sqrt(Math.Pow(player.transform.position.x - transform.position.x, 2) + Math.Pow(player.transform.position.z - transform.position.z, 2));
+        float distance = (float)Math.Sqrt(Math.Pow(player.transform.position.x - transform.position.x, 2) + Math.Pow(player.transform.position.z - transform.position.z, 2));
 
         direction.Normalize();
 
         FlipDirection(direction);
         Movement(direction, Time.deltaTime, distance);
+        if (healthBar)
+        {
+            if(health != maxHealth)
+            {
+                healthBar.transform.localScale = new Vector3(health / maxHealth, 0.1f, 1);
+            }
+            else
+            {
+                healthBar.transform.localScale = new Vector3(0, 0.1f, 1);
+            }
+        }
         LoopMap();
     }
 

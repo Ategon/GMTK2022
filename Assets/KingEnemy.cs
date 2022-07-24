@@ -23,7 +23,7 @@ public class KingEnemy : Enemy, DataPipeline.IGenerator<PlayerInteractionState>
 
     private void FixedUpdate()
     {
-        bossBar.transform.localScale = new Vector3(health / maxHealth, 1, 1);
+        if(bossBar) bossBar.transform.localScale = new Vector3(health / maxHealth, 1, 1);
 
         Vector3 direction = player.transform.position - transform.position;
         float angle = Mathf.Atan2(direction.z, direction.x) * Mathf.Rad2Deg;
