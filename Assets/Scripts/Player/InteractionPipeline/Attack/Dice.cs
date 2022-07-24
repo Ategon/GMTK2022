@@ -127,11 +127,11 @@ public class Dice : MonoBehaviour
         }
         
         // Shouldn't happen, just checking
-        if (numRolled == 0)
+        /*if (numRolled == 0)
         {
             Debug.LogError("Dice number rolled == 0. Should be between 1-6");
             numRolled = 1;
-        }
+        }*/
 
         return numRolled;
     }
@@ -172,7 +172,7 @@ public class Dice : MonoBehaviour
                 enemy.TakeDamageWithKnockback(diceSettings.AttackDamge, rb.velocity, diceSettings.KnockbackForce);
 
                 int chosenSide = GetRolledNumber();
-                SpawnPowerup(chosenSide);
+                if(chosenSide != 0) SpawnPowerup(chosenSide);
 
                 dicePool.Release(this.gameObject);
             }

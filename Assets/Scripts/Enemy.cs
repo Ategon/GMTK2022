@@ -20,12 +20,17 @@ public class Enemy : MonoBehaviour
 
     protected float moveSpeed { get { return walkingSpeed * statusEffects.walkingSpeedMultiplier; } }
 
-    private float health;
+    protected float health;
 
     [SerializeField] public GameObject exp;
 
     // Start is called before the first frame update
     void Start()
+    {
+        EnemyStart();
+    }
+
+    protected void EnemyStart()
     {
         player = GameObject.Find("Player");
         //controller = GetComponent<CharacterController>();
@@ -95,7 +100,7 @@ public class Enemy : MonoBehaviour
         TakeDamage(damage, statusEffectType);
     }
 
-    public void TakeDamage(float damage, StatusEffectType statusEffectType = StatusEffectType.NoEffect)
+    public virtual void TakeDamage(float damage, StatusEffectType statusEffectType = StatusEffectType.NoEffect)
     {
         health -= damage;
 
