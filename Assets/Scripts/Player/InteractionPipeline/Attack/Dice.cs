@@ -145,7 +145,6 @@ public class Dice : MonoBehaviour
         spawnPos.y = 0.01f;
 
         // TODO (GnoxNahte): Replace with pool
-        print("Instantiate: " + powerupSetting.effectName);
         GameObject powerupObj = GameObject.Instantiate(powerupSetting.powerupPrefab, spawnPos, Quaternion.identity);
         PowerupGameObject powerup = powerupObj.GetComponent<PowerupGameObject>();
         powerup.Init(powerupSetting);

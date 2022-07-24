@@ -15,6 +15,8 @@ public class PowerupGameObject : MonoBehaviour
     {
         this.powerupSettings = powerupSettings;
 
+        PowerupPopupManager.OnSpawnPowerup(powerupSettings.powerupType, transform.position);
+
         LightningPowerup lightningPowerup = GetComponent<LightningPowerup>();
         if (lightningPowerup != null)
         {
