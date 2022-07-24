@@ -114,18 +114,18 @@ public class PowerUpPool : MonoBehaviour
                 break;
         }
 
-        UpdatePowerUps();
-
-        //Time.timeScale = 1;
-        //UnityEngine.Cursor.visible = false;
+        Time.timeScale = 1;
+        UnityEngine.Cursor.visible = false;
         gameObject.SetActive(false);
 
-        diceBuilder.OpenDiceBuilder();
+        UpdatePowerUps();
     }
 
     [ContextMenu("Reset Powerups")]
     public void UpdatePowerUps()
     {
+        bool ifOpenDiceBuilder = false;
+
         foreach (PowerupSettings effectSetting in powerupSettings)
         {
             foreach (PowerUp powerUp in powerups)
@@ -151,11 +151,19 @@ public class PowerUpPool : MonoBehaviour
                         default: Debug.LogError("PowerUpPool.UpdatePowerUps(): Can't find name"); break;
                     }
 
+                    // Check if just unlocked the powerup
+                    if (!effectSetting.ifEnabled && powerUp.level != 0)
+                        ifOpenDiceBuilder = true;
+
                     effectSetting.ifEnabled = powerUp.level != 0;
                 }
 
             }
         }
+
+        // Put outside the loop to let it finish updating
+        if (ifOpenDiceBuilder)
+            diceBuilder.OpenDiceBuilder();
     }
 
     public void hoverOption(int buttonId)
