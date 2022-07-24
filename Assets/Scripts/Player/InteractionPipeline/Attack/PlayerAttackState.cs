@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
@@ -7,7 +8,8 @@ public struct PlayerAttackState
     public float lastAttackedTime;
     public Vector3 ShootDir;
 
-    public ObjectPool dicePool;
+    // Format: NumOfFaces, ObjectPool
+    public Dictionary<int, ObjectPool> dicePools;
 
     public bool throwTriggered;
 

@@ -33,8 +33,10 @@ public class PlayerDiceBuilderGenerator : MonoBehaviour, DataPipeline.IGenerator
 
     public void Handle(ref PlayerInteractionState data)
     {
+        data.PlayerAttackSettings.DicePrefab = diceBuilder.selectedDice.dicePrefab;
         data.PlayerAttackState.equippedPowerups = diceBuilder.selectedDice.equippedPowerups;
 
+        // Should be in handler
         if (data.PlayerState.DiceBuilder)
         {
             diceBuilder.OpenDiceBuilder();

@@ -28,12 +28,14 @@ public class PlayerInteractionPipline : MonoBehaviour
         playerState.PlayerCameraState.CameraFollow = playerState.PlayerCameraState.VirtualCamera.Follow;
         playerState.PlayerCameraState.ScreenSize = new Vector2(Screen.width, Screen.height);
 
-        playerState.PlayerAttackState.dicePool = new ObjectPool();
-        playerState.PlayerAttackState.dicePool.InitPool("DicePool", playerState.PlayerAttackSettings.DicePrefab, 30);
-
-        //initialPlayerState.PlayerAttackState.equippedPowerups = new PowerupSettings[DiceAttackSettings.numOfSides];
-        //initialPlayerState.PlayerAttackState.equippedPowerups[0] =
-        //    initialPlayerState.PlayerAttackSettings.Powerups[initialPlayerState.PlayerAttackSettings.StartingPowerupIndex];
+        playerState.PlayerAttackState.dicePools = new Dictionary<int, ObjectPool>();
+        DiceBuilder diceBuilder = FindObjectOfType<DiceBuilder>();
+        foreach (DiceBuilder.DiceData dice in diceBuilder.diceSelection)
+        {
+            ObjectPool objectPool = new ObjectPool();
+            objectPool.InitPool("DicePool_D" + dice.numSides, dice.dicePrefab, 30);
+            playerState.PlayerAttackState.dicePools.Add(dice.numSides, objectPool);
+        }
 
         foreach (PowerupSettings powerupSetting in playerState.PlayerAttackState.equippedPowerups)
             powerupSetting.ifEnabled = false;

@@ -9,6 +9,7 @@ public class DiceBuilder : MonoBehaviour
     [System.Serializable]
     public class DiceData {
         public int numSides;
+        public GameObject dicePrefab;
         [ReadOnly]
         public PowerupSettings[] equippedPowerups;
     }
