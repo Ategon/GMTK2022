@@ -37,10 +37,7 @@ public class PlayerDiceBuilderGenerator : MonoBehaviour, DataPipeline.IGenerator
 
         if (data.PlayerState.DiceBuilder)
         {
-            diceBuilder.gameObject.SetActive(true);
-
-            diceBuilder.UpdateEquippedPowerups();
-            diceBuilder.UpdateAvailablePowerups();
+            diceBuilder.OpenDiceBuilder();
         }
     }
 }

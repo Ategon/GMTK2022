@@ -12,9 +12,13 @@ public class PowerupPopup : MonoBehaviour
 
     ObjectPool objectPool;
 
+    private float baseScale;
+
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+
+        baseScale = transform.localScale.x;
     }
 
     public void Init(ObjectPool objectPool, Sprite glyph, float duration)
@@ -34,9 +38,9 @@ public class PowerupPopup : MonoBehaviour
             objectPool.Release(this.gameObject);
             return;
         }
-
+        
         transform.localPosition += new Vector3(0, 0, moveUpSpeed * Time.deltaTime);
-        transform.localScale = Vector3.one * remainingDuration / duration;
+        transform.localScale = Vector3.one * baseScale * ((remainingDuration / duration) * 0.5f + 0.5f);
 
         spriteRenderer.color = new Color(1f, 1f, 1f, remainingDuration / duration);
     }

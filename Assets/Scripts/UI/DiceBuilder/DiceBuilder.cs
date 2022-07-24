@@ -69,6 +69,27 @@ public class DiceBuilder : MonoBehaviour
         ResetDice();
     }
 
+    public void OpenDiceBuilder()
+    {
+        gameObject.SetActive(true);
+
+        UpdateEquippedPowerups();
+        UpdateAvailablePowerups();
+
+        UnityEngine.Cursor.visible = true;
+
+        Time.timeScale = 0f;
+    }
+
+    public void CloseDiceBuilder()
+    {
+        gameObject.SetActive(false);
+
+        UnityEngine.Cursor.visible = false;
+
+        Time.timeScale = 1f;
+    }
+
     // When drag and dropped a powerup into one of the equipped powerup slots
     public void ChangeEquippedPowerup(int dicePip, PowerupSettings powerup)
     {
@@ -183,7 +204,7 @@ public class DiceBuilder : MonoBehaviour
         }
     }
 
-    public void UpdateEquippedPowerups()
+    private void UpdateEquippedPowerups()
     {
         for (int i = 0; i < equippedPowerupSlots.Length; i++)
         {
@@ -213,7 +234,7 @@ public class DiceBuilder : MonoBehaviour
         }
     }
 
-    public void UpdateAvailablePowerups()
+    private void UpdateAvailablePowerups()
     {
         for (int i = 0; i < availablePowerupItems.Length; i++)
         {
