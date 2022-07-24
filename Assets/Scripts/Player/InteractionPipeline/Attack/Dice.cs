@@ -57,6 +57,8 @@ public class Dice : MonoBehaviour
 
         if (diceFaces.Length != _equippedPowerups.Length)
             SetDiceFaces(equippedPowerups.Length);
+
+        GetComponent<DiceFaces>().SetDiceFaces(_equippedPowerups);
     }
 
     private void Update()
