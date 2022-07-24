@@ -24,12 +24,15 @@ namespace Spellbound.Managers
 
         [SerializeField] private bool spawnBosses;
 
+        private GameAudio gameAudio;
+
         bool refreshKilled;
 
         private void Start()
         {
             GameObject.Find("Player").GetComponent<PlayerInteractionPipline>().AddHandler(this);
             GameObject.Find("Player").GetComponent<PlayerInteractionPipline>().AddGenerator(this);
+            gameAudio = GameObject.Find("Game Audio").GetComponent<GameAudio>();
         }
 
         private void FixedUpdate()
@@ -54,6 +57,7 @@ namespace Spellbound.Managers
                     if (spawnBosses)
                     {
                         roundPhase = RoundPhase.Boss;
+                        gameAudio.PlaySound("King Die", AudioTrackType.Soundtrack);
                     }
                     else
                     {
@@ -93,6 +97,7 @@ namespace Spellbound.Managers
                 roundTimer = 0;
                 waveTimer = 0;
                 refreshKilled = true;
+                data.sharedData.GameAudio.PlaySound("Level Theme", AudioTrackType.Soundtrack);
             }
         }
     }

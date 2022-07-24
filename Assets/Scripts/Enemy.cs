@@ -5,15 +5,15 @@ using System;
 
 public class Enemy : MonoBehaviour
 {
-    GameObject player;
+    protected GameObject player;
     protected Rigidbody rb;
-    SpriteRenderer sr;
+    protected SpriteRenderer sr;
     //protected CharacterController controller;
     protected Animator animator;
     protected StatusEffects statusEffects;
 
     [SerializeField] protected float walkingSpeed = 1f;
-    [SerializeField] private float maxHealth = 100;
+    [SerializeField] protected float maxHealth = 100;
     public float expAmount = 20;
 
     public float heldOrbs = 0;
@@ -41,7 +41,7 @@ public class Enemy : MonoBehaviour
         statusEffects = GetComponent<StatusEffects>();
     }
 
-    void FlipDirection(Vector3 direction)
+    protected void FlipDirection(Vector3 direction)
     {
         if (direction.x < 0)
         {
@@ -58,7 +58,7 @@ public class Enemy : MonoBehaviour
         rb.MovePosition(transform.position + direction * 2f * moveSpeed * deltaTime);
     }
 
-    void LoopMap()
+    protected void LoopMap()
     {
         if (player.transform.position.x - transform.position.x > 40)
         {

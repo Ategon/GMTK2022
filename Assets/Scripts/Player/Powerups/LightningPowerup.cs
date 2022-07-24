@@ -20,7 +20,7 @@ public class LightningPowerup : MonoBehaviour
 
         int[] randomIndexOfColliders = new int[WorkingNumOfStrikes];
 
-        for (int i = 0; i < NumOfStrikes; )
+        /*for (int i = 0; i < NumOfStrikes; )
         {
             int randomIndex = Random.Range(0, colliders.Count);
 
@@ -54,6 +54,6 @@ public class LightningPowerup : MonoBehaviour
                 Instantiate(lightningPrefab, enemy.transform.position, Quaternion.identity);
                 enemy.TakeDamage(Damage);
             }
-        }
+        }*/
     }
 }

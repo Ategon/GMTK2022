@@ -77,8 +77,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   walkingSpeed: 0.75
-  maxHealth: 500
+  maxHealth: 2500
   expAmount: 20
+  heldOrbs: 0
   exp: {fileID: 2524370295893443994, guid: 9a0ce85ec1294864c9cd8597b8a501fb, type: 3}
   summons: {fileID: 1622322677565801872, guid: ca31282f5631e2944add6c2bdb9f229e, type: 3}
 --- !u!1 &2278755971934365168

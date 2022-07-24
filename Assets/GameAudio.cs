@@ -37,9 +37,24 @@ public class GameAudio : MonoBehaviour
             AudioSource source = (AudioSource) newSource.AddComponent(typeof(AudioSource));
             newSource.transform.SetParent(transform);
             newSource.name = Enum.GetName(typeof(AudioTrackType), i);
+
+            if (newSource.name == "Soundtrack")
+            {
+                source.loop = true;
+            }
+            else
+            {
+
+            }
+
             AudioTrack track = new AudioTrack(i, source);
             audioTracks.Add(track);
         }
+    }
+
+    private void Start()
+    {
+        PlaySound("Level Theme", AudioTrackType.Soundtrack);
     }
 
     public void PlaySound(string sound, AudioTrackType trackType)
@@ -64,5 +79,6 @@ public enum AudioTrackType
 {
     PlayerDice,
     EnemyDie,
-    Footsteps
+    Footsteps,
+    Soundtrack
 }

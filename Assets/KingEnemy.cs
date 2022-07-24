@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class KingEnemy : Enemy, DataPipeline.IGenerator<PlayerInteractionState>
 {
@@ -11,10 +12,28 @@ public class KingEnemy : Enemy, DataPipeline.IGenerator<PlayerInteractionState>
     bool summoning;
     public GameObject summons;
 
+    private GameObject bossBar;
+
     private void Start()
     {
         EnemyStart();
         GameObject.Find("Player").GetComponent<PlayerInteractionPipline>().AddGenerator(this);
+        bossBar = GameObject.Find("Boss Bar").transform.Find("Image").gameObject;
+    }
+
+    private void FixedUpdate()
+    {
+        bossBar.transform.localScale = new Vector3(health / maxHealth, 1, 1);
+
+        Vector3 direction = player.transform.position - transform.position;
+        float angle = Mathf.Atan2(direction.z, direction.x) * Mathf.Rad2Deg;
+        float distance = (float)Math.Sqrt(Math.Pow(player.transform.position.x - transform.position.x, 2) + Math.Pow(player.transform.position.z - transform.position.z, 2));
+
+        direction.Normalize();
+
+        FlipDirection(direction);
+        Movement(direction, Time.deltaTime, distance);
+        LoopMap();
     }
 
     public void Write(ref PlayerInteractionState data)

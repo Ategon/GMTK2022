@@ -44,7 +44,7 @@ public class EnemySpawner : MonoBehaviour, IHandler<PlayerInteractionState>
     private void SpawnBoss(PlayerInteractionState data)
     {
         GameObject spawned;
-        spawned = Instantiate(boss, new Vector3(UnityEngine.Random.Range(5f + player.transform.position.x, -5f + player.transform.position.x), 0, 5f + player.transform.position.z), Quaternion.identity);
+        spawned = Instantiate(boss, new Vector3(UnityEngine.Random.Range(10f + player.transform.position.x, -10f + player.transform.position.x), 10, 10f + player.transform.position.z), Quaternion.identity);
         spawned.transform.SetParent(transform);
         StartCoroutine(ScreenShakeBoss(data.sharedData.VirtualCamera));
     }
