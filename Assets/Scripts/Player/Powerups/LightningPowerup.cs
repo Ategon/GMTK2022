@@ -16,11 +16,12 @@ public class LightningPowerup : MonoBehaviour
         List<Collider> colliders = mainCamera.transform.GetComponentInChildren<StoreColliders>().colliders;
 
         // Limit the number of strikes if there isn't enough enemies
-        int WorkingNumOfStrikes = Mathf.Min(NumOfStrikes, colliders.Count);
+        NumOfStrikes = Mathf.Min(NumOfStrikes, colliders.Count);
 
-        int[] randomIndexOfColliders = new int[WorkingNumOfStrikes];
+        int[] randomIndexOfColliders = new int[NumOfStrikes];
+        System.Array.Fill<int>(randomIndexOfColliders, -1);
 
-        /*for (int i = 0; i < NumOfStrikes; )
+        for (int i = 0; i < NumOfStrikes;)
         {
             int randomIndex = Random.Range(0, colliders.Count);
 
@@ -54,6 +55,6 @@ public class LightningPowerup : MonoBehaviour
                 Instantiate(lightningPrefab, enemy.transform.position, Quaternion.identity);
                 enemy.TakeDamage(Damage);
             }
-        }*/
+        }
     }
 }
