@@ -17,7 +17,8 @@ public class StatusEffect
     public StatusEffectType type;
 
     // Amount of damage over time / Slow effect
-    public float value; 
+    public float value;
+    public float altValue;
     // Remaining duration the effect is active
     public float duration; 
     public float timeBetweenApplyEffect;
@@ -37,6 +38,7 @@ public class StatusEffect
         type = copy.type;
 
         value = copy.value;
+        altValue = copy.altValue;
         floatMultiplier = damageMultiplier;
         duration = copy.duration;
         timeBetweenApplyEffect = copy.timeBetweenApplyEffect;

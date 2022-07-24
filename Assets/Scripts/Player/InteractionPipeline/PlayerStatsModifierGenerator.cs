@@ -77,7 +77,7 @@ public class PlayerStatsModifierGenerator : MonoBehaviour, IGenerator<PlayerInte
         switch (powerupGameObject.PowerupSettings.powerupType)
         {
             case PowerupType.MagicCircle:
-                modifierAmt = (1 / powerupSettings.statusEffect.value) * powerupSettings.floatMultiplier;
+                modifierAmt = powerupSettings.statusEffect.altValue * powerupSettings.floatMultiplier;
                 break;
             default:
                 // Do nothing for now
