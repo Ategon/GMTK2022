@@ -96,6 +96,7 @@ namespace Spellbound.Managers
                 roundPhase = RoundPhase.Wave;
                 roundTimer = 0;
                 waveTimer = 0;
+                wavesElapsed = 0;
                 refreshKilled = true;
                 data.sharedData.GameAudio.PlaySound("Level Theme", AudioTrackType.Soundtrack);
             }
