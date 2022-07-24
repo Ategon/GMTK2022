@@ -24,6 +24,8 @@ namespace Spellbound.Managers
 
         [SerializeField] private bool spawnBosses;
 
+        bool refreshKilled;
+
         private void Start()
         {
             GameObject.Find("Player").GetComponent<PlayerInteractionPipline>().AddHandler(this);
@@ -36,24 +38,27 @@ namespace Spellbound.Managers
             roundTimer += Time.deltaTime;
             waveTimer += Time.deltaTime;
 
-            if (waveTimer > waveLength)
+            if(roundPhase == RoundPhase.Wave)
             {
-                waveTimer -= waveLength;
-                wavesElapsed++;
-            }
-
-            if (roundTimer > roundLength * 60)
-            {
-                roundTimer -= roundLength;
-                waveTimer = roundTimer;
-                wavesElapsed++;
-                if (spawnBosses)
+                if (waveTimer > waveLength)
                 {
-                    roundPhase = RoundPhase.Boss;
+                    waveTimer -= waveLength;
+                    wavesElapsed++;
                 }
-                else
+
+                if (roundTimer > roundLength * 60)
                 {
-                    roundsElapsed++;
+                    roundTimer -= roundLength;
+                    waveTimer = roundTimer;
+                    wavesElapsed++;
+                    if (spawnBosses)
+                    {
+                        roundPhase = RoundPhase.Boss;
+                    }
+                    else
+                    {
+                        roundsElapsed++;
+                    }
                 }
             }
         }
@@ -71,6 +76,12 @@ namespace Spellbound.Managers
             data.GameState.wavesElapsed = wavesElapsed;
             data.GameState.roundPhase = roundPhase;
             data.GameState.spawnBosses = spawnBosses;
+
+            if (refreshKilled)
+            {
+                data.GameState.bossKilled = false;
+                refreshKilled = false;
+            }
         }
 
         public void Handle(in PlayerInteractionState data)
@@ -81,6 +92,7 @@ namespace Spellbound.Managers
                 roundPhase = RoundPhase.Wave;
                 roundTimer = 0;
                 waveTimer = 0;
+                refreshKilled = true;
             }
         }
     }

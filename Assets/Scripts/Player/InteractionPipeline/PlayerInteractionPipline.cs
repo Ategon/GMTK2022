@@ -81,6 +81,11 @@ public class PlayerInteractionPipline : MonoBehaviour
         pipeline.AddGenerator(generator);
     }
 
+    public void RemoveGenerator(IGenerator<PlayerInteractionState> generator)
+    {
+        pipeline.RemoveGenerator(generator);
+    }
+
     public void AddHandler(IHandler<PlayerInteractionState> handler)
     {
         pipeline.AddHandler(handler);

@@ -4,12 +4,7 @@ using UnityEngine;
 
 public class PlayerDiceBuilderGenerator : MonoBehaviour, DataPipeline.IGenerator<PlayerInteractionState>
 {
-    DiceBuilder diceBuilder;
-
-    private void Awake()
-    {
-        diceBuilder = GameObject.FindObjectOfType<DiceBuilder>();
-    }
+    [SerializeField] DiceBuilder diceBuilder;
 
     public void Start()
     {
