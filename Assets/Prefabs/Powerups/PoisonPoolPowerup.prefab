@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2899509701842465787}
   - component: {fileID: 4097335937306846228}
   - component: {fileID: 5576685187200155229}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 1913421034030306695}
   - component: {fileID: 8365392996426305592}
   - component: {fileID: 3660424997747606999}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4968,7 +4968,7 @@ PrefabInstance:
     - target: {fileID: 6492574343278049308, guid: b7536ca9f2af04449911022ca44d5c72,
         type: 3}
       propertyPath: m_Name
-      value: PoisonPoolEffect
+      value: PoisonPoolPowerup
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects:
