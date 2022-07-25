@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 240bb0df535b4fd4bb688e088f5aff71, type: 3}
   m_Name: GravityPowerup
   m_EditorClassIdentifier: 
-  ifEnabled: 0
+  ifEnabled: 1
   powerupType: 5
   effectName: Gravity
   powerupDescription: Creates a black hole, pulling all enemies near inside.
@@ -30,6 +30,7 @@ MonoBehaviour:
   statusEffect:
     type: 0
     value: 0
+    altValue: 0
     duration: 0
     timeBetweenApplyEffect: 0
     lastTimeEffectWasApplied: 0
