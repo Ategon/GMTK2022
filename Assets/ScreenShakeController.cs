@@ -7,13 +7,14 @@ using Cinemachine;
 public class ScreenShakeController : MonoBehaviour
 {
     public enum ShakeType { Random }
-    private float shakeTimer, shakePower, shakeFadeTimer;
+    private float shakeTimer = 0, shakePower = 0, shakeFadeTimer = 0;
     private ShakeType shakeType;
     private CinemachineVirtualCamera cinemachineVirtualCamera;
 
     #region Public functions
     public void StartShake(float time, float power, ShakeType type = ShakeType.Random)
     {
+        Debug.Log(time + " " + power);
         if(power > shakePower)
         {
             shakeTimer = time;

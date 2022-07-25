@@ -57,11 +57,13 @@ public class PlayerVisuals : MonoBehaviour
         {
             if (paused)
             {
+                UnityEngine.Cursor.visible = false;
                 Time.timeScale = 1;
                 pauseMenu.SetActive(false);
                 pauseBreakTimer = pauseBreak;
             } else
             {
+                UnityEngine.Cursor.visible = true;
                 Time.timeScale = 0;
                 pauseMenu.SetActive(true);
                 pauseBreakTimer = pauseBreak;

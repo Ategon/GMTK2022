@@ -13,13 +13,13 @@ public class DashIndicator : MonoBehaviour, IHandler<PlayerInteractionState>
 
     public void Handle(in PlayerInteractionState data)
     {
-        if (Time.time - data.PlayerState.LastDodgedTime < data.EntityMovementSettings.DodgeCooldown)
+        if (data.PlayerState.LastDodgedTime == 0 || Time.time - data.PlayerState.LastDodgedTime < data.EntityMovementSettings.DodgeCooldown)
         {
-            transform.localScale = new Vector3(1 - ((Time.time - data.PlayerState.LastDodgedTime) / data.EntityMovementSettings.DodgeCooldown), 0.1f, 0.1f);
+            transform.localScale = new Vector3(1 - ((Time.time - data.PlayerState.LastDodgedTime) / data.EntityMovementSettings.DodgeCooldown), 0.2f, 0.1f);
         }
         else
         {
-            transform.localScale = new Vector3(0f, 0.1f, 0.1f);
+            transform.localScale = new Vector3(0f, 0.2f, 0.1f);
         }
     }
 }
