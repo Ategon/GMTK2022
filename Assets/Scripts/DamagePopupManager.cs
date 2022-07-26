@@ -5,6 +5,7 @@ using UnityEngine;
 public class DamagePopupManager : MonoBehaviour
 {
     [SerializeField] Transform playerTransform;
+    [SerializeField] Transform cameraTransform;
     [SerializeField] GameObject damagePopupPrefab;
 
     [SerializeField] StatusEffectColor[] statusEffectColors;
@@ -41,15 +42,15 @@ public class DamagePopupManager : MonoBehaviour
     {
         if (instance == null)
         {
+            cameraTransform = Camera.main.transform;
+
             damagePopupPool = new ObjectPool();
             damagePopupPool.InitPool(transform, damagePopupPrefab, 30);
 
             statusEffectColors_Dictionary = new Dictionary<StatusEffectType, Color>();
             foreach (StatusEffectColor statusEffectColor in statusEffectColors)
-            {
-
                 statusEffectColors_Dictionary.Add(statusEffectColor.type, statusEffectColor.color);
-            }
+
             instance = this;
         }
         else

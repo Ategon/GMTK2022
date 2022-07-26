@@ -16,6 +16,7 @@ public class DamagePopup : MonoBehaviour
     private void Awake()
     {
         text = GetComponent<TextMeshPro>();
+        transform.forward = Camera.main.transform.forward;
     }
 
     public void Init(ObjectPool objectPool, float damageAmount, float duration, float fontSize, in Color color)

@@ -52,7 +52,7 @@ public class LightningPowerup : MonoBehaviour
             Enemy enemy = collider.GetComponent<Enemy>();
             if (enemy != null)
             {
-                Instantiate(lightningPrefab, enemy.transform.position, Quaternion.identity);
+                Instantiate(lightningPrefab, enemy.transform.position, Quaternion.LookRotation(mainCamera.transform.forward));
                 enemy.TakeDamage(Damage);
             }
         }
