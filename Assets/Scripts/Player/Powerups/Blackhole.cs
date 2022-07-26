@@ -15,7 +15,7 @@ public class Blackhole : MonoBehaviour
         foreach (Rigidbody rb in entitiesToPullIn)
         {
             if (rb != null)
-                rb.AddForce((transform.position - rb.position).normalized * blackholeStrength);
+                rb.AddForce(blackholeStrength * Time.deltaTime * (transform.position - rb.position).normalized);
         }
     }
 
