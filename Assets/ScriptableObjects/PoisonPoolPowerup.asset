@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 240bb0df535b4fd4bb688e088f5aff71, type: 3}
   m_Name: PoisonPoolPowerup
   m_EditorClassIdentifier: 
-  ifEnabled: 0
+  ifEnabled: 1
   powerupType: 2
   effectName: Poison
   powerupDescription: Spawns a pool of poison which poisons enemies trapped inside.
@@ -24,12 +24,13 @@ MonoBehaviour:
   knockbackForce: 0
   duration: 5
   ifRemoveEffectOnLeaveCollider: 0
-  level: 0
+  level: 1
   floatMultiplier: 1.2
   intValue: 0
   statusEffect:
     type: 2
-    value: 2
+    value: 10
+    altValue: 0
     duration: 10
     timeBetweenApplyEffect: 1
     lastTimeEffectWasApplied: 0

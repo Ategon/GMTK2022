@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 240bb0df535b4fd4bb688e088f5aff71, type: 3}
   m_Name: LightningPowerup
   m_EditorClassIdentifier: 
-  ifEnabled: 1
+  ifEnabled: 0
   powerupType: 3
   effectName: Lightning
   powerupDescription: Lightning strikes down on random enemies dealing damage to
@@ -21,16 +21,17 @@ MonoBehaviour:
   powerupPrefab: {fileID: 5167845823713707213, guid: 82cb59d983fcc1748937fac6ca7dc708,
     type: 3}
   powerupGlyph: {fileID: -1661143991, guid: ca03bbd482082d34b994ea17ec390a85, type: 3}
-  damage: 20
+  damage: 25
   knockbackForce: 0
   duration: 0
   ifRemoveEffectOnLeaveCollider: 0
-  level: 0
+  level: -1
   floatMultiplier: 1
-  intValue: 5
+  intValue: 2
   statusEffect:
     type: 0
     value: 0
+    altValue: 0
     duration: 0
     timeBetweenApplyEffect: 0
     lastTimeEffectWasApplied: 0
