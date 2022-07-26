@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour
     protected GameObject player;
     protected Rigidbody rb;
     protected SpriteRenderer sr;
+    protected Material sm;
     //protected CharacterController controller;
     protected Animator animator;
     protected StatusEffects statusEffects;
@@ -38,11 +39,12 @@ public class Enemy : MonoBehaviour
         //controller = GetComponent<CharacterController>();
         rb = GetComponent<Rigidbody>();
         sr = transform.Find("Sprite").GetComponent<SpriteRenderer>();
+        sm = transform.Find("Sprite").GetComponent<Renderer>().material;
         health = maxHealth;
         animator = transform.Find("Sprite").GetComponent<Animator>();
         statusEffects = GetComponent<StatusEffects>();
         Transform tempHealth = transform.Find("Health Bar");
-        if(tempHealth) healthBar = tempHealth.gameObject;
+        if (tempHealth) healthBar = tempHealth.gameObject;
     }
 
     protected void FlipDirection(Vector3 direction)
@@ -94,7 +96,7 @@ public class Enemy : MonoBehaviour
         Movement(direction, Time.deltaTime, distance);
         if (healthBar)
         {
-            if(health != maxHealth)
+            if (health != maxHealth)
             {
                 healthBar.transform.localScale = new Vector3(health / maxHealth, 0.1f, 1);
             }
@@ -106,7 +108,7 @@ public class Enemy : MonoBehaviour
         LoopMap();
     }
 
-    
+
     public void TakeDamageWithKnockback(float damage, Vector3 velocityDir, float knockbackForce, StatusEffectType statusEffectType = StatusEffectType.NoEffect)
     {
         velocityDir.y = 0f;
@@ -122,7 +124,7 @@ public class Enemy : MonoBehaviour
         if (health <= 0)
         {
             Instantiate(exp, transform.position, Quaternion.identity);
-            for(int i = 0; i < (int) heldOrbs; ++i)
+            for (int i = 0; i < (int)heldOrbs; ++i)
             {
                 Instantiate(exp, transform.position, Quaternion.identity);
             }
@@ -136,6 +138,10 @@ public class Enemy : MonoBehaviour
     {
         if (sr != null)
             sr.color = color;
+        if (sm != null && sm.HasColor("_BaseColor"))
+        {
+            sm.SetColor("_BaseColor", color);
+        }
     }
 
     private void OnCollisionEnter(Collision hit)

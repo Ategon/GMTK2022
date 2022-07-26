@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2899509701842465787}
   - component: {fileID: 4097335937306846228}
   - component: {fileID: 5576685187200155229}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a4db16191e93f764fa071f640b01218d, type: 2}
+  - {fileID: 2100000, guid: c8b3902a793aae6489dfde596ed507b8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 1913421034030306695}
   - component: {fileID: 8365392996426305592}
   - component: {fileID: 3660424997747606999}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4846,7 +4846,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9dd58ba6f71102745b742448876a722d, type: 2}
+  - {fileID: 2100000, guid: c8b3902a793aae6489dfde596ed507b8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

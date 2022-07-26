@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7544118987737200754}
   - component: {fileID: 4128885408263565418}
   - component: {fileID: 6186932203602419118}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: DiceFace
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 297605186048389822}
   - component: {fileID: 6159321083692816302}
   - component: {fileID: 7874612589478649592}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: DiceFace
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -376,7 +376,7 @@ GameObject:
   - component: {fileID: 5974230530504379011}
   - component: {fileID: 1272555076767660165}
   - component: {fileID: 899796742720339584}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: DiceFace
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -523,7 +523,7 @@ GameObject:
   - component: {fileID: 7534022610832828953}
   - component: {fileID: 5853517486018381450}
   - component: {fileID: 8211057366163379822}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: DiceFace
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -638,7 +638,7 @@ GameObject:
   - component: {fileID: 3794829188677444519}
   - component: {fileID: 8987871650909642848}
   - component: {fileID: 8403559828111367692}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: DiceFace
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -721,7 +721,7 @@ GameObject:
   - component: {fileID: 1302001388504084675}
   - component: {fileID: 27794058025909753}
   - component: {fileID: 8400463037069707558}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: DiceFace
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -804,7 +804,7 @@ GameObject:
   - component: {fileID: 6977432882729144528}
   - component: {fileID: 1815797484862163713}
   - component: {fileID: 7152473423251167686}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: DiceFace
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -887,7 +887,7 @@ GameObject:
   - component: {fileID: 5000500835620802388}
   - component: {fileID: 6105699094348288878}
   - component: {fileID: 8597094689430910912}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: DiceFace
   m_TagString: Untagged
   m_Icon: {fileID: 0}
