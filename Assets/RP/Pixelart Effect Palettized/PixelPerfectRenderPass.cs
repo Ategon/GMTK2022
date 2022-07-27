@@ -23,26 +23,29 @@ public class PixelPerfectRenderPass : ScriptableRenderPass
     static int ZTestID = Shader.PropertyToID("_ZTest");
     static int cameraID = Shader.PropertyToID("_CameraColorTexture");
 
-    RTHandle oldColorTarget;
-    RTHandle oldDepthTarget;
     RTHandle colorPixels;
     RTHandle depthPixels;
     float pixelPerTaxel;
     Material blitMaterial;
     static Material m_CopyDepthMaterial;
+    static Material m_CopyColorMaterial;
 
 
     public PixelPerfectRenderPass(PixelPerfectRender.PixelPerfectRenderSettings settings)
     {
-        profilingSampler = new ProfilingSampler("PixelPerfectRender");
         this.renderPassEvent = settings.Event;
 
-        oldColorTarget = colorAttachmentHandle;
-        oldDepthTarget = depthAttachmentHandle;
+
         blitMaterial = settings.BlitMaterial;
         if (m_CopyDepthMaterial == null)
         {
+            profilingSampler = new ProfilingSampler("PixelPerfectRender");
             m_CopyDepthMaterial = CoreUtils.CreateEngineMaterial("Hidden/Universal Render Pipeline/CopyDepth");
+        }
+        if (m_CopyColorMaterial == null)
+        {
+            profilingSampler = new ProfilingSampler("PixelPerfectTransparentRender");
+            m_CopyColorMaterial = CoreUtils.CreateEngineMaterial("Hidden/SimpleBlit");
         }
         pixelPerTaxel = settings.PixelPerTaxel;
 
@@ -93,14 +96,15 @@ public class PixelPerfectRenderPass : ScriptableRenderPass
         }
         else
         {
-            ExecuteTransparent(context, ref renderingData);
+            // ExecuteTransparent(context, ref renderingData);
+            ExecuteTransparentFullResThenDownScale(context, ref renderingData);
         }
         // ExecuteOpaque(context, ref renderingData);
     }
 
     public void ExecuteOpaque(ScriptableRenderContext context, ref RenderingData renderingData)
     {
-        SortingCriteria sortingCriteria = SortingCriteria.CommonTransparent;
+        SortingCriteria sortingCriteria = SortingCriteria.CommonOpaque;
         DrawingSettings drawingSettings = CreateDrawingSettings(m_ShaderTagIdList, ref renderingData, sortingCriteria);
         ref CameraData cameraData = ref renderingData.cameraData;
         Camera camera = cameraData.camera;
@@ -117,7 +121,7 @@ public class PixelPerfectRenderPass : ScriptableRenderPass
             cmd.ClearRenderTarget(true, true, Color.clear);
             context.ExecuteCommandBuffer(cmd);
             cmd.Clear();
-            context.DrawRenderers(renderingData.cullResults, ref drawingSettings, ref m_FilteringSettings, ref m_RenderStateBlock);
+            context.DrawRenderers(renderingData.cullResults, ref drawingSettings, ref m_FilteringSettings);
 
             ScriptableRenderer cameraRenderer = renderingData.cameraData.renderer;
             // ConfigureTarget(cameraRenderer.cameraColorTargetHandle, cameraRenderer.cameraDepthTargetHandle);
@@ -136,6 +140,48 @@ public class PixelPerfectRenderPass : ScriptableRenderPass
         CommandBufferPool.Release(cmd);
     }
 
+    public void ExecuteTransparentFullResThenDownScale(ScriptableRenderContext context, ref RenderingData renderingData)
+    {
+        SortingCriteria sortingCriteria = SortingCriteria.CommonTransparent;
+        DrawingSettings drawingSettings = CreateDrawingSettings(m_ShaderTagIdList, ref renderingData, sortingCriteria);
+        ScriptableRenderer cameraRenderer = renderingData.cameraData.renderer;
+        ref CameraData cameraData = ref renderingData.cameraData;
+        Camera camera = cameraData.camera;
+        Rect pixelRect = camera.pixelRect;
+        int pixelWidth = (int)(camera.pixelWidth / pixelPerTaxel);
+        int pixelHeight = (int)(camera.pixelHeight / pixelPerTaxel);
+        CommandBuffer cmd = CommandBufferPool.Get("PixelPerfectTransparentRender");
+        using (new ProfilingScope(cmd, profilingSampler))
+        {
+            cmd.GetTemporaryRT(fullTexID, camera.pixelWidth, camera.pixelHeight, 0, FilterMode.Point);
+            cmd.GetTemporaryRT(pixelTexID, pixelWidth, pixelHeight, 0, FilterMode.Point);
+
+            cmd.SetRenderTarget(pixelTexID, RenderBufferLoadAction.DontCare, RenderBufferStoreAction.Store);
+            cmd.ClearRenderTarget(false, true, Color.clear);
+
+            cmd.SetRenderTarget(fullTexID, RenderBufferLoadAction.DontCare, RenderBufferStoreAction.Store,
+                                cameraRenderer.cameraDepthTargetHandle, RenderBufferLoadAction.DontCare, RenderBufferStoreAction.Store);
+            cmd.ClearRenderTarget(false, true, Color.clear);
+            context.ExecuteCommandBuffer(cmd);
+            cmd.Clear();
+            context.DrawRenderers(renderingData.cullResults, ref drawingSettings, ref m_FilteringSettings);
+
+            cmd.Blit(fullTexID, pixelTexID, blitMaterial, 0);
+
+            // cmd.SetGlobalTexture("_BlitTexture", pixelTexID);
+            cmd.SetRenderTarget(cameraRenderer.cameraColorTargetHandle, RenderBufferLoadAction.Load, RenderBufferStoreAction.Store,
+                                cameraRenderer.cameraDepthTargetHandle, RenderBufferLoadAction.Load, RenderBufferStoreAction.Store);
+            cmd.Blit(pixelTexID, cameraRenderer.cameraColorTargetHandle, m_CopyColorMaterial);
+
+            cmd.ReleaseTemporaryRT(pixelTexID);
+            cmd.ReleaseTemporaryRT(fullTexID);
+            context.ExecuteCommandBuffer(cmd);
+            cmd.Clear();
+        }
+        context.ExecuteCommandBuffer(cmd);
+        CommandBufferPool.Release(cmd);
+    }
+
     public void ExecuteTransparent(ScriptableRenderContext context, ref RenderingData renderingData)
     {
         SortingCriteria sortingCriteria = SortingCriteria.CommonTransparent;
@@ -146,7 +192,7 @@ public class PixelPerfectRenderPass : ScriptableRenderPass
         Rect pixelRect = camera.pixelRect;
         int pixelWidth = (int)(camera.pixelWidth / pixelPerTaxel);
         int pixelHeight = (int)(camera.pixelHeight / pixelPerTaxel);
-        CommandBuffer cmd = CommandBufferPool.Get("PixelPerfectRender");
+        CommandBuffer cmd = CommandBufferPool.Get("PixelPerfectTransparentRender");
         using (new ProfilingScope(cmd, profilingSampler))
         {
             cmd.GetTemporaryRT(pixelInitDepthTexID, pixelWidth, pixelHeight, 32, FilterMode.Point, RenderTextureFormat.Depth);

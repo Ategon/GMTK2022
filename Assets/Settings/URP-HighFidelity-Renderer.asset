@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Active: 1
   settings:
-    Event: 450
+    Event: 300
     FilterSettings:
       RenderQueueType: 0
       LayerMask:
@@ -36,14 +36,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Active: 1
   settings:
-    Event: 450
+    Event: 500
     FilterSettings:
       RenderQueueType: 1
       LayerMask:
         serializedVersion: 2
         m_Bits: 4096
     PixelPerTaxel: 2
-    BlitMaterial: {fileID: 2100000, guid: 955b143301421ab48986aad45b43a7b0, type: 2}
+    BlitMaterial: {fileID: 2100000, guid: 8147caeb00563b74eaaa80a49ea0fece, type: 2}
 --- !u!114 &-1878332245247344467
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -107,7 +107,8 @@ MonoBehaviour:
   - {fileID: -3499666371557448252}
   - {fileID: 814689163108902603}
   - {fileID: -2139580222273972342}
-  m_RendererFeatureMap: adc0de57c6d2eee5c425f022faaf6ecfcb6677397a5b4e0b8a97e8b21faf4ee2
+  - {fileID: 8349224396770851569}
+  m_RendererFeatureMap: adc0de57c6d2eee5c425f022faaf6ecfcb6677397a5b4e0b8a97e8b21faf4ee2f13a8d4f5a67de73
   m_UseNativeRenderPass: 0
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
   xrSystemData: {fileID: 11400000, guid: 60e1133243b97e347b653163a8c01b64, type: 2}
@@ -162,9 +163,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Active: 1
   settings:
-    Event: 450
+    Event: 300
     FilterSettings:
       RenderQueueType: 0
+      LayerMask:
+        serializedVersion: 2
+        m_Bits: 2048
+    PixelPerTaxel: 2
+    BlitMaterial: {fileID: 2100000, guid: faf8b9eaaba134b44872989fd9ab8ec7, type: 2}
+--- !u!114 &8349224396770851569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61c5aa700d8a11a41827359972816856, type: 3}
+  m_Name: PixelPerfectRender
+  m_EditorClassIdentifier: 
+  m_Active: 1
+  settings:
+    Event: 500
+    FilterSettings:
+      RenderQueueType: 1
       LayerMask:
         serializedVersion: 2
         m_Bits: 2048
