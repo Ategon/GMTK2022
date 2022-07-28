@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4894006400484027090}
   - component: {fileID: 8324335977678236522}
   - component: {fileID: 4031902811611729448}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Explosion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73,7 +73,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -1185001295, guid: c3be19833ac4fd5438f3f0f2e806baf5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -176,7 +176,7 @@ PrefabInstance:
     - target: {fileID: 6492574343278049308, guid: b7536ca9f2af04449911022ca44d5c72,
         type: 3}
       propertyPath: m_Name
-      value: ExplosionEffect
+      value: FirePowerup
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects:
